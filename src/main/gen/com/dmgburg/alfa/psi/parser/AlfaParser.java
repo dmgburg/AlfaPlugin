@@ -140,6 +140,9 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     else if (t == POLICY_NAME) {
       r = policyName(b, 0);
     }
+    else if (t == POLICY_OR_POLICY_SET_REF) {
+      r = policyOrPolicySetRef(b, 0);
+    }
     else if (t == POLICY_SET_BODY) {
       r = policySetBody(b, 0);
     }
@@ -902,10 +905,22 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // ref
+  public static boolean policyOrPolicySetRef(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "policyOrPolicySetRef")) return false;
+    if (!nextTokenIs(b, LETTERS)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = ref(b, l + 1);
+    exit_section_(b, m, POLICY_OR_POLICY_SET_REF, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // combinationAlgorithmRef|
   //         targetEntry|
   //         onEffect|
-  //         ref|
+  //         policyOrPolicySetRef|
   //         policyEntry|
   //         policySetEntry
   public static boolean policySetBody(PsiBuilder b, int l) {
@@ -915,7 +930,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     r = combinationAlgorithmRef(b, l + 1);
     if (!r) r = targetEntry(b, l + 1);
     if (!r) r = onEffect(b, l + 1);
-    if (!r) r = ref(b, l + 1);
+    if (!r) r = policyOrPolicySetRef(b, l + 1);
     if (!r) r = policyEntry(b, l + 1);
     if (!r) r = policySetEntry(b, l + 1);
     exit_section_(b, l, m, r, false, null);

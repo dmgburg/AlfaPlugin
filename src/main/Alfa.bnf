@@ -13,8 +13,6 @@
   elementTypeClass="com.dmgburg.alfa.psi.AlfaElementType"
   tokenTypeClass="com.dmgburg.alfa.psi.AlfaTokenType"
 
-  psiImplUtilClass="com.dmgburg.alfa.psi.AlfaPsiImplUtil"
-
   tokens = [
       space='regexp:\s+'
       letters = "regexp:[a-zA-Z]+"
@@ -76,7 +74,7 @@ policySetName ::= qualifiedName
 policySetBody ::= combinationAlgorithmRef|
         targetEntry|
         onEffect|
-        ref|
+        policyOrPolicySetRef|
         policyEntry|
         policySetEntry
 
@@ -125,6 +123,8 @@ attributeDesignator ::= '[' attributeDesignatorMustBePresent? attributeDesignato
 attributeDesignatorMustBePresent ::= 'musteepresent'
 
 attributeDesignatorIssuer ::= 'issuer' '=' StringLiteral
+
+policyOrPolicySetRef ::= ref
 
 ref ::= qualifiedName
 

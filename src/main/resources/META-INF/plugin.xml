@@ -14,7 +14,13 @@
     <extensions defaultExtensionNs="com.intellij">
         <fileTypeFactory implementation="com.dmgburg.alfa.AlfaFileTypeFactory"/>
         <lang.parserDefinition language="Alfa" implementationClass="com.dmgburg.alfa.AlfaParserDefinition"/>
-        <lang.syntaxHighlighterFactory language="Alfa" implementationClass="com.dmgburg.alfa.AlfaSyntaxHighlighterFactory"/>
+
+        <!--coloring-->
+        <lang.syntaxHighlighterFactory language="Alfa" implementationClass="com.dmgburg.alfa.coloring.AlfaSyntaxHighlighterFactory"/>
+        <colorSettingsPage implementation="com.dmgburg.alfa.coloring.AlfaColorSettingsPage"/>
+
+        <!--annotators-->
+        <annotator language="Alfa" implementationClass="com.dmgburg.alfa.annotators.PolicyEntryAnnotator"/>
     </extensions>
 
 </idea-plugin>

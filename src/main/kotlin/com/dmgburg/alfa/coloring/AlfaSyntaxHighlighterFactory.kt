@@ -1,4 +1,4 @@
-package com.dmgburg.alfa
+package com.dmgburg.alfa.coloring
 
 import com.intellij.openapi.fileTypes.*
 import com.intellij.openapi.project.Project

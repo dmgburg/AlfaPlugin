@@ -45,6 +45,7 @@ public interface AlfaTypes {
   IElementType POLICY_BODY = new AlfaElementType("POLICY_BODY");
   IElementType POLICY_ENTRY = new AlfaElementType("POLICY_ENTRY");
   IElementType POLICY_NAME = new AlfaElementType("POLICY_NAME");
+  IElementType POLICY_OR_POLICY_SET_REF = new AlfaElementType("POLICY_OR_POLICY_SET_REF");
   IElementType POLICY_SET_BODY = new AlfaElementType("POLICY_SET_BODY");
   IElementType POLICY_SET_ENTRY = new AlfaElementType("POLICY_SET_ENTRY");
   IElementType POLICY_SET_NAME = new AlfaElementType("POLICY_SET_NAME");
@@ -210,6 +211,9 @@ public interface AlfaTypes {
       }
       else if (type == POLICY_NAME) {
         return new AlfaPolicyNameImpl(node);
+      }
+      else if (type == POLICY_OR_POLICY_SET_REF) {
+        return new AlfaPolicyOrPolicySetRefImpl(node);
       }
       else if (type == POLICY_SET_BODY) {
         return new AlfaPolicySetBodyImpl(node);

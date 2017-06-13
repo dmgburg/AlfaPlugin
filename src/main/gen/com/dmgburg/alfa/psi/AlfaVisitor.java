@@ -163,6 +163,10 @@ public class AlfaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPolicyOrPolicySetRef(@NotNull AlfaPolicyOrPolicySetRef o) {
+    visitPsiElement(o);
+  }
+
   public void visitPolicySetBody(@NotNull AlfaPolicySetBody o) {
     visitPsiElement(o);
   }
