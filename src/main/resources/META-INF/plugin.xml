@@ -1,0 +1,20 @@
+<!-- url="" specifies the URL of the plugin homepage (displayed in the Welcome Screen and in "Plugins" settings dialog) -->
+<idea-plugin url="http://www.jetbrains.com/idea">
+
+    <name>AlfaPlugin</name>
+    <id>AlfaPlugin</id>
+
+    <description>Alfa integration plugin</description>
+
+    <change-notes>Initial release of the plugin.</change-notes>
+
+    <!-- Plugin version -->
+    <version>1.0</version>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileTypeFactory implementation="com.dmgburg.alfa.AlfaFileTypeFactory"/>
+        <lang.parserDefinition language="Alfa" implementationClass="com.dmgburg.alfa.AlfaParserDefinition"/>
+        <lang.syntaxHighlighterFactory language="Alfa" implementationClass="com.dmgburg.alfa.AlfaSyntaxHighlighterFactory"/>
+    </extensions>
+
+</idea-plugin>

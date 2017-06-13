@@ -1,0 +1,184 @@
+{
+  parserClass="com.dmgburg.alfa.psi.parser.AlfaParser"
+  parserUtilClass="com.dmgburg.alfa.psi.parser.AlfaParserUtil"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Alfa"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.dmgburg.alfa.psi"
+  psiImplPackage="com.dmgburg.alfa.psi.impl"
+
+  elementTypeHolderClass="com.dmgburg.alfa.psi.AlfaTypes"
+  elementTypeClass="com.dmgburg.alfa.psi.AlfaElementType"
+  tokenTypeClass="com.dmgburg.alfa.psi.AlfaTokenType"
+
+  psiImplUtilClass="com.dmgburg.alfa.psi.AlfaPsiImplUtil"
+
+  tokens = [
+      space='regexp:\s+'
+      letters = "regexp:[a-zA-Z]+"
+      stringDQ = "regexp:\"[^\"]*\"|'[^']*'"
+      stringSQ = "regexp:'[^']*\'|'[^']*'"
+      digit = "regexp:[0-9]"
+      line_comment='regexp://.*'
+      block_comment='regexp:/\*[\s\S]*?\*/'
+      dot='.'
+      curve1='{'
+      curve2='}'
+      and='&&'
+      or='||'
+      lessOrEqual='<='
+      moreOrEqual='>='
+      less='<'
+      more='>'
+      plus='+'
+      munus='-'
+      multiply='*'
+      divide='/'
+      equal='=='
+    ]
+}
+
+root ::= namespaceEntry+
+
+namespaceEntry ::= namespace namespaceName '{' namespaceBody* '}'
+
+namespaceName ::= qualifiedName
+
+qualifiedName ::= Identifier ['.' Identifier]
+
+Identifier ::=  letters
+
+//letters ::= letter+
+
+namespaceBody ::= (
+//    importDeclaration|
+    namespaceEntry|
+//    attributeDeclaration|
+//    obligationDeclaration|
+//    adviceDeclaration|
+//    ruleCombinatorDeclaration|
+//    policyCombinatorDeclaration|
+//    categoryDeclaration|
+//    operatorDeclaration|
+//    functionDeclaration|
+//    typeDeclaration|
+    policySetEntry|
+    policyEntry|
+    ruleEntry
+    )
+
+policySetEntry ::= policyset policySetName? description? '{' policySetBody* '}'
+
+policySetName ::= qualifiedName
+
+policySetBody ::= combinationAlgorithmRef|
+        targetEntry|
+        onEffect|
+        ref|
+        policyEntry|
+        policySetEntry
+
+policyEntry ::= policy policyName? description? '{' policyBody* '}'
+
+policyBody ::= targetEntry|
+        combinationAlgorithmRef|
+        onEffect|
+        ruleRef|
+        ruleEntry
+
+policyName ::= idDeclaration
+
+idDeclaration ::= Identifier ('=' xacmlDeclaration)?
+
+xacmlDeclaration ::= StringLiteral
+
+targetEntry ::= target clauseEntry+
+
+clauseEntry ::= clause clauseExpression clauseAddin*
+
+clauseAddin ::= clauseOperator clauseExpression
+
+clauseExpression ::= singleClauseExpression | functionClause
+
+functionClause ::= functionRefName '(' functionClauseArgument (',' functionClauseArgument)* ')'
+
+functionClauseArgument ::= attributeRef | constant
+
+singleClauseExpression ::= leftClauseOperand operator rightClauseOperand
+
+operator ::= '&&' | '||' | '<=' | '>=' | '<' | '>' | '+' | '-' | '*' | '/' | '=='
+
+leftClauseOperand ::= clauseOperand
+
+rightClauseOperand ::= clauseOperand
+
+clauseOperator ::= Identifier
+
+clauseOperand ::= attributeRef | constant
+
+attributeRef ::= ref attributeDesignator?
+
+attributeDesignator ::= '[' attributeDesignatorMustBePresent? attributeDesignatorIssuer? ']'
+
+attributeDesignatorMustBePresent ::= 'musteepresent'
+
+attributeDesignatorIssuer ::= 'issuer' '=' StringLiteral
+
+ref ::= qualifiedName
+
+combinationAlgorithmRef ::= apply ref
+
+ruleRef ::= ref
+
+ruleEntry ::= rule ruleName? description? '{' effect ruleBody* '}'
+
+description ::= StringLiteral
+
+ruleBody ::= target | conditionEntry | onEffect
+
+conditionEntry ::= condition conditionBody
+
+conditionBody ::= wrappedExpressions | expressions
+
+wrappedExpressions ::= '(' expressions ')'
+
+expressions ::= expression expressionAddin*
+
+expressionAddin ::= operator expression
+
+expression ::= operand | wrappedExpressions
+
+operand ::= functionEntry | attributeRef | constant | wrappedExpressions
+
+functionEntry ::= functionRefName '(' functionArgument (',' functionArgument)* ')'
+
+functionRefName ::= ref
+
+functionArgument ::= functionRef | operand | expressions | wrappedExpressions
+
+functionRef ::= function '[' functionRefName ']'
+
+ruleName ::= idDeclaration
+
+effect ::= permit|deny
+
+constant ::= integerLiteral|
+    StringLiteral
+//    booleanLiteral|
+//    floatingPointLiteral|
+//    ipAddressLiteral
+    
+
+onEffect ::= on effect '{' oblegationOrAdviceBody+ '}'
+
+StringLiteral ::=
+    StringDQ |
+    StringSQ
+
+integerLiteral ::= Sign? DecimalIntegerLiteral
+
+Sign ::= '+'|'-'
+
+// DecimalIntegerLiteral ::=
