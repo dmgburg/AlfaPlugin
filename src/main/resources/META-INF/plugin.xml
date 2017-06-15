@@ -21,6 +21,9 @@
 
         <!--annotators-->
         <annotator language="Alfa" implementationClass="com.dmgburg.alfa.annotators.PolicyEntryAnnotator"/>
+
+        <!--Completion-->
+        <completion.contributor language="Alfa" implementationClass="com.dmgburg.alfa.completion.AlfaCompletionContributor"/>
     </extensions>
 
 </idea-plugin>

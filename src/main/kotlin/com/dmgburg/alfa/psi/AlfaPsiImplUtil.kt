@@ -16,9 +16,10 @@ fun alfaFiles(project: Project): List<AlfaFile> {
             .map { PsiManager.getInstance(project).findFile(it) as AlfaFile }
 }
 
-// TODO: add proper relative namespace handling
 fun findPolicySet(project: Project, name: String): AlfaPolicySetEntry? {
-    return findAllPolicySet(project).find { name.split('.').last() == it.getIdentifier().name }
+    return findAllPolicySet(project).find { val identifier = it.getIdentifier()
+        return@find identifier != null && identifier.matches(name.split('.'))
+    }
 }
 
 fun findAllPolicySet(project: Project): Collection<AlfaPolicySetEntry> {
@@ -27,7 +28,10 @@ fun findAllPolicySet(project: Project): Collection<AlfaPolicySetEntry> {
 }
 
 fun findPolicy(project: Project, name: String) : AlfaPolicyEntry? {
-    return findAllPolicy(project).find { name.split('.').last() == it.getIdentifier().name }
+    return findAllPolicy(project).find {
+        val identifier = it.getIdentifier()
+        return@find identifier != null && identifier.matches(name.split('.'))
+    }
 }
 
 fun findAllPolicy(project: Project) : Collection<AlfaPolicyEntry> {

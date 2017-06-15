@@ -7,14 +7,20 @@ import com.dmgburg.alfa.psi.AlfaPolicyEntry
 import com.dmgburg.alfa.psi.AlfaPolicySetEntry
 import com.intellij.psi.PsiElement
 
-fun AlfaPolicySetEntry.getIdentifier() : Identifier {
-    val itemNamespace = this.getNamespace()
-    return Identifier(itemNamespace,this.policySetName!!.text)
+fun AlfaPolicySetEntry.getIdentifier() : Identifier? {
+    val name = this.policySetName ?: return null
+    val result = arrayListOf<String>()
+    result.addAll(this.getNamespace())
+    result.addAll(name.text.split('.'))
+    return Identifier(result)
 }
 
-fun AlfaPolicyEntry.getIdentifier() : Identifier{
-    val itemNamespace = this.getNamespace().flatMap { it.split('.') }
-    return Identifier(itemNamespace, this.policyName!!.text)
+fun AlfaPolicyEntry.getIdentifier() : Identifier?{
+    val name = this.policyName ?: return null
+    val result = arrayListOf<String>()
+    result.addAll(this.getNamespace())
+    result.addAll(name.text.split('.'))
+    return Identifier(result)
 }
 
 fun PsiElement.getNamespace(): List<String> {

@@ -21,7 +21,7 @@ class AlfaColorSettingsPage : ColorSettingsPage {
 
     override fun getDemoText(): String {
         return """
-namespace com.axiomatics{
+namespace com.acme{
 	namespace example{
 		/**
 		 * A policy about what managers can do. It is linked to from the
