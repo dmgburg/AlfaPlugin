@@ -13,4 +13,7 @@ public interface AlfaRuleBody extends PsiElement {
   @Nullable
   AlfaOnEffect getOnEffect();
 
+  @Nullable
+  AlfaTargetEntry getTargetEntry();
+
 }

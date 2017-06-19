@@ -1,10 +1,7 @@
 package com.dmgburg.alfa.utils
 
 import com.dmgburg.alfa.domain.Identifier
-import com.dmgburg.alfa.psi.AlfaFile
-import com.dmgburg.alfa.psi.AlfaNamespaceEntry
-import com.dmgburg.alfa.psi.AlfaPolicyEntry
-import com.dmgburg.alfa.psi.AlfaPolicySetEntry
+import com.dmgburg.alfa.psi.*
 import com.intellij.psi.PsiElement
 
 fun AlfaPolicySetEntry.getIdentifier() : Identifier? {
@@ -34,5 +31,21 @@ fun PsiElement.getNamespace(): List<String> {
     }
     result.reverse()
     return result.flatMap { it.split('.') }
+}
+
+fun PsiElement.closestBody() : PsiElement{
+    var current = this
+    while (!current.isIn(Util.wrapperClasses)){
+        current = current.parent;
+    }
+    return current
+}
+
+private fun PsiElement.isIn(wrapperClasses: List<Class<out PsiElement>>): Boolean {
+    return wrapperClasses.any {it.isInstance(this)}
+}
+
+object Util{
+    val wrapperClasses = listOf(AlfaNamespaceBody::class.java, AlfaPolicyBody::class.java, AlfaPolicySetBody::class.java, AlfaRuleBody::class.java, AlfaFile::class.java)
 }
 

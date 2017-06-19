@@ -4,7 +4,7 @@ package com.dmgburg.alfa.psi.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
 import static com.dmgburg.alfa.psi.AlfaTypes.*;
-import static com.dmgburg.alfa.psi.parser.AlfaParserUtil.*;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.TokenSet;
@@ -23,14 +23,41 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     boolean r;
     b = adapt_builder_(t, b, this, null);
     Marker m = enter_section_(b, 0, _COLLAPSE_, null);
-    if (t == IDENTIFIER) {
-      r = Identifier(b, 0);
-    }
-    else if (t == SIGN) {
+    if (t == SIGN) {
       r = Sign(b, 0);
     }
-    else if (t == STRING_LITERAL) {
-      r = StringLiteral(b, 0);
+    else if (t == ADVICE_BODY) {
+      r = adviceBody(b, 0);
+    }
+    else if (t == ADVICE_DECLARATION) {
+      r = adviceDeclaration(b, 0);
+    }
+    else if (t == ADVICE_REF) {
+      r = adviceRef(b, 0);
+    }
+    else if (t == ALGORITHM_NAME) {
+      r = algorithmName(b, 0);
+    }
+    else if (t == ANY_ATOMIC_OR_BAG_TYPE) {
+      r = anyAtomicOrBagType(b, 0);
+    }
+    else if (t == ANY_ATOMIC_TYPE) {
+      r = anyAtomicType(b, 0);
+    }
+    else if (t == ATTRIBUTE_ASSIGN) {
+      r = attributeAssign(b, 0);
+    }
+    else if (t == ATTRIBUTE_ASSIGN_BODY) {
+      r = attributeAssignBody(b, 0);
+    }
+    else if (t == ATTRIBUTE_BODY) {
+      r = attributeBody(b, 0);
+    }
+    else if (t == ATTRIBUTE_CATEGORY) {
+      r = attributeCategory(b, 0);
+    }
+    else if (t == ATTRIBUTE_DECLARATION) {
+      r = attributeDeclaration(b, 0);
     }
     else if (t == ATTRIBUTE_DESIGNATOR) {
       r = attributeDesignator(b, 0);
@@ -41,8 +68,23 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     else if (t == ATTRIBUTE_DESIGNATOR_MUST_BE_PRESENT) {
       r = attributeDesignatorMustBePresent(b, 0);
     }
+    else if (t == ATTRIBUTE_ID) {
+      r = attributeId(b, 0);
+    }
+    else if (t == ATTRIBUTE_NAME) {
+      r = attributeName(b, 0);
+    }
     else if (t == ATTRIBUTE_REF) {
       r = attributeRef(b, 0);
+    }
+    else if (t == ATTRIBUTE_TYPE) {
+      r = attributeType(b, 0);
+    }
+    else if (t == CATEGORY_DECLARATION) {
+      r = categoryDeclaration(b, 0);
+    }
+    else if (t == CATEGORY_NAME) {
+      r = categoryName(b, 0);
     }
     else if (t == CLAUSE_ADDIN) {
       r = clauseAddin(b, 0);
@@ -89,14 +131,29 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     else if (t == FUNCTION_ARGUMENT) {
       r = functionArgument(b, 0);
     }
+    else if (t == FUNCTION_BODY) {
+      r = functionBody(b, 0);
+    }
+    else if (t == FUNCTION_BODY_ARGUMENT) {
+      r = functionBodyArgument(b, 0);
+    }
+    else if (t == FUNCTION_BODY_RETURN) {
+      r = functionBodyReturn(b, 0);
+    }
     else if (t == FUNCTION_CLAUSE) {
       r = functionClause(b, 0);
     }
     else if (t == FUNCTION_CLAUSE_ARGUMENT) {
       r = functionClauseArgument(b, 0);
     }
+    else if (t == FUNCTION_DECLARATION) {
+      r = functionDeclaration(b, 0);
+    }
     else if (t == FUNCTION_ENTRY) {
       r = functionEntry(b, 0);
+    }
+    else if (t == FUNCTION_NAME) {
+      r = functionName(b, 0);
     }
     else if (t == FUNCTION_REF) {
       r = functionRef(b, 0);
@@ -104,8 +161,20 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     else if (t == FUNCTION_REF_NAME) {
       r = functionRefName(b, 0);
     }
+    else if (t == FUNCTION_TYPE) {
+      r = functionType(b, 0);
+    }
     else if (t == ID_DECLARATION) {
       r = idDeclaration(b, 0);
+    }
+    else if (t == IMPORT_DECLARATION) {
+      r = importDeclaration(b, 0);
+    }
+    else if (t == IMPORT_EVERYTHING) {
+      r = importEverything(b, 0);
+    }
+    else if (t == IMPORT_NAME) {
+      r = importName(b, 0);
     }
     else if (t == INTEGER_LITERAL) {
       r = integerLiteral(b, 0);
@@ -122,6 +191,18 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     else if (t == NAMESPACE_NAME) {
       r = namespaceName(b, 0);
     }
+    else if (t == OBLIGATION_BODY) {
+      r = obligationBody(b, 0);
+    }
+    else if (t == OBLIGATION_DECLARATION) {
+      r = obligationDeclaration(b, 0);
+    }
+    else if (t == OBLIGATION_OR_ADVICE_BODY) {
+      r = obligationOrAdviceBody(b, 0);
+    }
+    else if (t == OBLIGATION_REF) {
+      r = obligationRef(b, 0);
+    }
     else if (t == ON_EFFECT) {
       r = onEffect(b, 0);
     }
@@ -131,17 +212,29 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     else if (t == OPERATOR) {
       r = operator(b, 0);
     }
+    else if (t == OPERATOR_DECLARATION) {
+      r = operatorDeclaration(b, 0);
+    }
+    else if (t == OPERATOR_DECLARATION_BODY) {
+      r = operatorDeclarationBody(b, 0);
+    }
+    else if (t == OPERATOR_FEATURE) {
+      r = operatorFeature(b, 0);
+    }
+    else if (t == OPERATOR_INVRESE) {
+      r = operatorInvrese(b, 0);
+    }
     else if (t == POLICY_BODY) {
       r = policyBody(b, 0);
+    }
+    else if (t == POLICY_COMBINATOR_DECLARATION) {
+      r = policyCombinatorDeclaration(b, 0);
     }
     else if (t == POLICY_ENTRY) {
       r = policyEntry(b, 0);
     }
     else if (t == POLICY_NAME) {
       r = policyName(b, 0);
-    }
-    else if (t == POLICY_OR_POLICY_SET_REF) {
-      r = policyOrPolicySetRef(b, 0);
     }
     else if (t == POLICY_SET_BODY) {
       r = policySetBody(b, 0);
@@ -164,20 +257,35 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     else if (t == RULE_BODY) {
       r = ruleBody(b, 0);
     }
+    else if (t == RULE_COMBINATOR_DECLARATION) {
+      r = ruleCombinatorDeclaration(b, 0);
+    }
     else if (t == RULE_ENTRY) {
       r = ruleEntry(b, 0);
     }
     else if (t == RULE_NAME) {
       r = ruleName(b, 0);
     }
-    else if (t == RULE_REF) {
-      r = ruleRef(b, 0);
-    }
     else if (t == SINGLE_CLAUSE_EXPRESSION) {
       r = singleClauseExpression(b, 0);
     }
     else if (t == TARGET_ENTRY) {
       r = targetEntry(b, 0);
+    }
+    else if (t == TYPE_BAG) {
+      r = typeBag(b, 0);
+    }
+    else if (t == TYPE_DECLARATION) {
+      r = typeDeclaration(b, 0);
+    }
+    else if (t == TYPE_NAME) {
+      r = typeName(b, 0);
+    }
+    else if (t == TYPE_REF) {
+      r = typeRef(b, 0);
+    }
+    else if (t == VARIABLE_ARGUMENTS) {
+      r = variableArguments(b, 0);
     }
     else if (t == WRAPPED_EXPRESSIONS) {
       r = wrappedExpressions(b, 0);
@@ -196,18 +304,6 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // letters
-  public static boolean Identifier(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Identifier")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, LETTERS);
-    exit_section_(b, m, IDENTIFIER, r);
-    return r;
-  }
-
-  /* ********************************************************** */
   // '+'|'-'
   public static boolean Sign(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Sign")) return false;
@@ -221,16 +317,172 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // StringDQ |
-  //     StringSQ
-  public static boolean StringLiteral(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "StringLiteral")) return false;
-    if (!nextTokenIs(b, "<string literal>", STRINGDQ, STRINGSQ)) return false;
+  // advice adviceRef ('{' attributeAssignBody '}')?
+  public static boolean adviceBody(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adviceBody")) return false;
+    if (!nextTokenIs(b, ADVICE)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, STRING_LITERAL, "<string literal>");
-    r = consumeToken(b, STRINGDQ);
-    if (!r) r = consumeToken(b, STRINGSQ);
-    exit_section_(b, l, m, r, false, null);
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ADVICE);
+    r = r && adviceRef(b, l + 1);
+    r = r && adviceBody_2(b, l + 1);
+    exit_section_(b, m, ADVICE_BODY, r);
+    return r;
+  }
+
+  // ('{' attributeAssignBody '}')?
+  private static boolean adviceBody_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adviceBody_2")) return false;
+    adviceBody_2_0(b, l + 1);
+    return true;
+  }
+
+  // '{' attributeAssignBody '}'
+  private static boolean adviceBody_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adviceBody_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "{");
+    r = r && attributeAssignBody(b, l + 1);
+    r = r && consumeToken(b, "}");
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // advice idDeclaration
+  public static boolean adviceDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adviceDeclaration")) return false;
+    if (!nextTokenIs(b, ADVICE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ADVICE);
+    r = r && idDeclaration(b, l + 1);
+    exit_section_(b, m, ADVICE_DECLARATION, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // ref
+  public static boolean adviceRef(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adviceRef")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = ref(b, l + 1);
+    exit_section_(b, m, ADVICE_REF, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IDENTIFIER
+  public static boolean algorithmName(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "algorithmName")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENTIFIER);
+    exit_section_(b, m, ALGORITHM_NAME, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // anyAtomicOrBag
+  public static boolean anyAtomicOrBagType(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "anyAtomicOrBagType")) return false;
+    if (!nextTokenIs(b, ANYATOMICORBAG)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ANYATOMICORBAG);
+    exit_section_(b, m, ANY_ATOMIC_OR_BAG_TYPE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // anyAtomic
+  public static boolean anyAtomicType(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "anyAtomicType")) return false;
+    if (!nextTokenIs(b, ANYATOMIC)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ANYATOMIC);
+    exit_section_(b, m, ANY_ATOMIC_TYPE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // attributeRef '=' expression
+  public static boolean attributeAssign(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attributeAssign")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = attributeRef(b, l + 1);
+    r = r && consumeToken(b, "=");
+    r = r && expression(b, l + 1);
+    exit_section_(b, m, ATTRIBUTE_ASSIGN, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // attributeAssign+
+  public static boolean attributeAssignBody(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attributeAssignBody")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = attributeAssign(b, l + 1);
+    int c = current_position_(b);
+    while (r) {
+      if (!attributeAssign(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "attributeAssignBody", c)) break;
+      c = current_position_(b);
+    }
+    exit_section_(b, m, ATTRIBUTE_ASSIGN_BODY, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // attributeId attributeType attributeCategory
+  public static boolean attributeBody(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attributeBody")) return false;
+    if (!nextTokenIs(b, ID)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = attributeId(b, l + 1);
+    r = r && attributeType(b, l + 1);
+    r = r && attributeCategory(b, l + 1);
+    exit_section_(b, m, ATTRIBUTE_BODY, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // category '=' ref
+  public static boolean attributeCategory(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attributeCategory")) return false;
+    if (!nextTokenIs(b, CATEGORY)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, CATEGORY);
+    r = r && consumeToken(b, "=");
+    r = r && ref(b, l + 1);
+    exit_section_(b, m, ATTRIBUTE_CATEGORY, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // attribute attributeName '{' attributeBody '}'
+  public static boolean attributeDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attributeDeclaration")) return false;
+    if (!nextTokenIs(b, ATTRIBUTE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ATTRIBUTE);
+    r = r && attributeName(b, l + 1);
+    r = r && consumeToken(b, "{");
+    r = r && attributeBody(b, l + 1);
+    r = r && consumeToken(b, "}");
+    exit_section_(b, m, ATTRIBUTE_DECLARATION, r);
     return r;
   }
 
@@ -263,26 +515,54 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'issuer' '=' StringLiteral
+  // issuer '=' STRING_LITERAL
   public static boolean attributeDesignatorIssuer(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "attributeDesignatorIssuer")) return false;
+    if (!nextTokenIs(b, ISSUER)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ATTRIBUTE_DESIGNATOR_ISSUER, "<attribute designator issuer>");
-    r = consumeToken(b, "issuer");
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ISSUER);
     r = r && consumeToken(b, "=");
-    r = r && StringLiteral(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    r = r && consumeToken(b, STRING_LITERAL);
+    exit_section_(b, m, ATTRIBUTE_DESIGNATOR_ISSUER, r);
     return r;
   }
 
   /* ********************************************************** */
-  // 'musteepresent'
+  // musteepresent
   public static boolean attributeDesignatorMustBePresent(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "attributeDesignatorMustBePresent")) return false;
+    if (!nextTokenIs(b, MUSTEEPRESENT)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ATTRIBUTE_DESIGNATOR_MUST_BE_PRESENT, "<attribute designator must be present>");
-    r = consumeToken(b, "musteepresent");
-    exit_section_(b, l, m, r, false, null);
+    Marker m = enter_section_(b);
+    r = consumeToken(b, MUSTEEPRESENT);
+    exit_section_(b, m, ATTRIBUTE_DESIGNATOR_MUST_BE_PRESENT, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // id '=' xacmlDeclaration
+  public static boolean attributeId(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attributeId")) return false;
+    if (!nextTokenIs(b, ID)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ID);
+    r = r && consumeToken(b, "=");
+    r = r && xacmlDeclaration(b, l + 1);
+    exit_section_(b, m, ATTRIBUTE_ID, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IDENTIFIER
+  public static boolean attributeName(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attributeName")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENTIFIER);
+    exit_section_(b, m, ATTRIBUTE_NAME, r);
     return r;
   }
 
@@ -290,7 +570,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // ref attributeDesignator?
   public static boolean attributeRef(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "attributeRef")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = ref(b, l + 1);
@@ -307,10 +587,51 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // type '=' ref
+  public static boolean attributeType(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attributeType")) return false;
+    if (!nextTokenIs(b, TYPE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, TYPE);
+    r = r && consumeToken(b, "=");
+    r = r && ref(b, l + 1);
+    exit_section_(b, m, ATTRIBUTE_TYPE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // category categoryName '=' xacmlDeclaration
+  public static boolean categoryDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "categoryDeclaration")) return false;
+    if (!nextTokenIs(b, CATEGORY)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, CATEGORY);
+    r = r && categoryName(b, l + 1);
+    r = r && consumeToken(b, "=");
+    r = r && xacmlDeclaration(b, l + 1);
+    exit_section_(b, m, CATEGORY_DECLARATION, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IDENTIFIER
+  public static boolean categoryName(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "categoryName")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENTIFIER);
+    exit_section_(b, m, CATEGORY_NAME, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // clauseOperator clauseExpression
   public static boolean clauseAddin(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "clauseAddin")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = clauseOperator(b, l + 1);
@@ -370,27 +691,26 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // Identifier
+  // IDENTIFIER
   public static boolean clauseOperator(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "clauseOperator")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = Identifier(b, l + 1);
+    r = consumeToken(b, IDENTIFIER);
     exit_section_(b, m, CLAUSE_OPERATOR, r);
     return r;
   }
 
   /* ********************************************************** */
-  // apply ref
+  // 'apply' ref
   public static boolean combinationAlgorithmRef(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "combinationAlgorithmRef")) return false;
-    if (!nextTokenIs(b, APPLY)) return false;
     boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, APPLY);
+    Marker m = enter_section_(b, l, _NONE_, COMBINATION_ALGORITHM_REF, "<combination algorithm ref>");
+    r = consumeToken(b, "apply");
     r = r && ref(b, l + 1);
-    exit_section_(b, m, COMBINATION_ALGORITHM_REF, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -421,26 +741,26 @@ public class AlfaParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // integerLiteral|
-  //     StringLiteral
+  //     STRING_LITERAL
   public static boolean constant(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "constant")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, CONSTANT, "<constant>");
     r = integerLiteral(b, l + 1);
-    if (!r) r = StringLiteral(b, l + 1);
+    if (!r) r = consumeToken(b, STRING_LITERAL);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
-  // StringLiteral
+  // STRING_LITERAL
   public static boolean description(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "description")) return false;
-    if (!nextTokenIs(b, "<description>", STRINGDQ, STRINGSQ)) return false;
+    if (!nextTokenIs(b, STRING_LITERAL)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, DESCRIPTION, "<description>");
-    r = StringLiteral(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    Marker m = enter_section_(b);
+    r = consumeToken(b, STRING_LITERAL);
+    exit_section_(b, m, DESCRIPTION, r);
     return r;
   }
 
@@ -520,10 +840,78 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // xacmlDeclaration ':' functionBodyArgument+ variableArguments? '->' functionBodyReturn
+  public static boolean functionBody(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "functionBody")) return false;
+    if (!nextTokenIs(b, STRING_LITERAL)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = xacmlDeclaration(b, l + 1);
+    r = r && consumeToken(b, ":");
+    r = r && functionBody_2(b, l + 1);
+    r = r && functionBody_3(b, l + 1);
+    r = r && consumeToken(b, "->");
+    r = r && functionBodyReturn(b, l + 1);
+    exit_section_(b, m, FUNCTION_BODY, r);
+    return r;
+  }
+
+  // functionBodyArgument+
+  private static boolean functionBody_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "functionBody_2")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = functionBodyArgument(b, l + 1);
+    int c = current_position_(b);
+    while (r) {
+      if (!functionBodyArgument(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "functionBody_2", c)) break;
+      c = current_position_(b);
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // variableArguments?
+  private static boolean functionBody_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "functionBody_3")) return false;
+    variableArguments(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // typeRef | typeBag | anyAtomicType | anyAtomicOrBagType | functionType
+  public static boolean functionBodyArgument(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "functionBodyArgument")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, FUNCTION_BODY_ARGUMENT, "<function body argument>");
+    r = typeRef(b, l + 1);
+    if (!r) r = typeBag(b, l + 1);
+    if (!r) r = anyAtomicType(b, l + 1);
+    if (!r) r = anyAtomicOrBagType(b, l + 1);
+    if (!r) r = functionType(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // typeRef | typeBag | anyAtomicType
+  public static boolean functionBodyReturn(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "functionBodyReturn")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, FUNCTION_BODY_RETURN, "<function body return>");
+    r = typeRef(b, l + 1);
+    if (!r) r = typeBag(b, l + 1);
+    if (!r) r = anyAtomicType(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // functionRefName '(' functionClauseArgument (',' functionClauseArgument)* ')'
   public static boolean functionClause(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "functionClause")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = functionRefName(b, l + 1);
@@ -571,10 +959,25 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // function functionName '=' functionBody
+  public static boolean functionDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "functionDeclaration")) return false;
+    if (!nextTokenIs(b, FUNCTION)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, FUNCTION);
+    r = r && functionName(b, l + 1);
+    r = r && consumeToken(b, "=");
+    r = r && functionBody(b, l + 1);
+    exit_section_(b, m, FUNCTION_DECLARATION, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // functionRefName '(' functionArgument (',' functionArgument)* ')'
   public static boolean functionEntry(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "functionEntry")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = functionRefName(b, l + 1);
@@ -610,6 +1013,18 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // IDENTIFIER
+  public static boolean functionName(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "functionName")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENTIFIER);
+    exit_section_(b, m, FUNCTION_NAME, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // function '[' functionRefName ']'
   public static boolean functionRef(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "functionRef")) return false;
@@ -628,7 +1043,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // ref
   public static boolean functionRefName(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "functionRefName")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = ref(b, l + 1);
@@ -637,13 +1052,25 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // Identifier ('=' xacmlDeclaration)?
-  public static boolean idDeclaration(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "idDeclaration")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
+  // function
+  public static boolean functionType(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "functionType")) return false;
+    if (!nextTokenIs(b, FUNCTION)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = Identifier(b, l + 1);
+    r = consumeToken(b, FUNCTION);
+    exit_section_(b, m, FUNCTION_TYPE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IDENTIFIER ('=' xacmlDeclaration)?
+  public static boolean idDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "idDeclaration")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENTIFIER);
     r = r && idDeclaration_1(b, l + 1);
     exit_section_(b, m, ID_DECLARATION, r);
     return r;
@@ -665,6 +1092,51 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     r = r && xacmlDeclaration(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
+  }
+
+  /* ********************************************************** */
+  // import importName
+  public static boolean importDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "importDeclaration")) return false;
+    if (!nextTokenIs(b, IMPORT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IMPORT);
+    r = r && importName(b, l + 1);
+    exit_section_(b, m, IMPORT_DECLARATION, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // '.' '*'
+  public static boolean importEverything(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "importEverything")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, IMPORT_EVERYTHING, "<import everything>");
+    r = consumeToken(b, ".");
+    r = r && consumeToken(b, MULTIPLY);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // qualifiedName importEverything?
+  public static boolean importName(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "importName")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = qualifiedName(b, l + 1);
+    r = r && importName_1(b, l + 1);
+    exit_section_(b, m, IMPORT_NAME, r);
+    return r;
+  }
+
+  // importEverything?
+  private static boolean importName_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "importName_1")) return false;
+    importEverything(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -699,18 +1171,19 @@ public class AlfaParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // namespaceEntry|
-  // //    attributeDeclaration|
-  // //    obligationDeclaration|
-  // //    adviceDeclaration|
-  // //    ruleCombinatorDeclaration|
-  // //    policyCombinatorDeclaration|
-  // //    categoryDeclaration|
-  // //    operatorDeclaration|
-  // //    functionDeclaration|
-  // //    typeDeclaration|
   //     policySetEntry|
   //     policyEntry|
-  //     ruleEntry
+  //     ruleEntry|
+  //     obligationDeclaration|
+  //     adviceDeclaration|
+  //     attributeDeclaration|
+  //     policyCombinatorDeclaration|
+  //     ruleCombinatorDeclaration|
+  //     typeDeclaration|
+  //     operatorDeclaration|
+  //     functionDeclaration|
+  //     importDeclaration|
+  //     categoryDeclaration
   public static boolean namespaceBody(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "namespaceBody")) return false;
     boolean r;
@@ -719,7 +1192,31 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     if (!r) r = policySetEntry(b, l + 1);
     if (!r) r = policyEntry(b, l + 1);
     if (!r) r = ruleEntry(b, l + 1);
+    if (!r) r = obligationDeclaration(b, l + 1);
+    if (!r) r = adviceDeclaration(b, l + 1);
+    if (!r) r = attributeDeclaration(b, l + 1);
+    if (!r) r = policyCombinatorDeclaration(b, l + 1);
+    if (!r) r = ruleCombinatorDeclaration(b, l + 1);
+    if (!r) r = typeDeclaration(b, l + 1);
+    if (!r) r = operatorDeclaration(b, l + 1);
+    if (!r) r = functionDeclaration(b, l + 1);
+    if (!r) r = importDeclaration(b, l + 1);
+    if (!r) r = categoryDeclaration(b, l + 1);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // namespace|policy|policyset|rule
+  static boolean namespaceBodyStart(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "namespaceBodyStart")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, NAMESPACE);
+    if (!r) r = consumeToken(b, POLICY);
+    if (!r) r = consumeToken(b, POLICYSET);
+    if (!r) r = consumeToken(b, RULE);
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -727,16 +1224,16 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // namespace namespaceName '{' namespaceBody* '}'
   public static boolean namespaceEntry(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "namespaceEntry")) return false;
-    if (!nextTokenIs(b, NAMESPACE)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, NAMESPACE_ENTRY, "<namespace entry>");
     r = consumeToken(b, NAMESPACE);
     r = r && namespaceName(b, l + 1);
-    r = r && consumeToken(b, CURVE1);
-    r = r && namespaceEntry_3(b, l + 1);
-    r = r && consumeToken(b, CURVE2);
-    exit_section_(b, m, NAMESPACE_ENTRY, r);
-    return r;
+    r = r && consumeToken(b, "{");
+    p = r; // pin = 3
+    r = r && report_error_(b, namespaceEntry_3(b, l + 1));
+    r = p && consumeToken(b, "}") && r;
+    exit_section_(b, l, m, r, p, namespace_recover_parser_);
+    return r || p;
   }
 
   // namespaceBody*
@@ -755,7 +1252,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // qualifiedName
   public static boolean namespaceName(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "namespaceName")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = qualifiedName(b, l + 1);
@@ -764,30 +1261,124 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // on effect '{' oblegationOrAdviceBody+ '}'
-  public static boolean onEffect(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "onEffect")) return false;
-    if (!nextTokenIs(b, ON)) return false;
+  // !(namespaceBodyStart|'}')
+  static boolean namespace_recover(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "namespace_recover")) return false;
     boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, ON);
-    r = r && effect(b, l + 1);
-    r = r && consumeToken(b, CURVE1);
-    r = r && onEffect_3(b, l + 1);
-    r = r && consumeToken(b, CURVE2);
-    exit_section_(b, m, ON_EFFECT, r);
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !namespace_recover_0(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // oblegationOrAdviceBody+
+  // namespaceBodyStart|'}'
+  private static boolean namespace_recover_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "namespace_recover_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = namespaceBodyStart(b, l + 1);
+    if (!r) r = consumeToken(b, "}");
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // obligation obligationRef ('{' attributeAssignBody '}')?
+  public static boolean obligationBody(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "obligationBody")) return false;
+    if (!nextTokenIs(b, OBLIGATION)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, OBLIGATION);
+    r = r && obligationRef(b, l + 1);
+    r = r && obligationBody_2(b, l + 1);
+    exit_section_(b, m, OBLIGATION_BODY, r);
+    return r;
+  }
+
+  // ('{' attributeAssignBody '}')?
+  private static boolean obligationBody_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "obligationBody_2")) return false;
+    obligationBody_2_0(b, l + 1);
+    return true;
+  }
+
+  // '{' attributeAssignBody '}'
+  private static boolean obligationBody_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "obligationBody_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "{");
+    r = r && attributeAssignBody(b, l + 1);
+    r = r && consumeToken(b, "}");
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // obligation idDeclaration
+  public static boolean obligationDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "obligationDeclaration")) return false;
+    if (!nextTokenIs(b, OBLIGATION)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, OBLIGATION);
+    r = r && idDeclaration(b, l + 1);
+    exit_section_(b, m, OBLIGATION_DECLARATION, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // obligationBody | adviceBody
+  public static boolean obligationOrAdviceBody(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "obligationOrAdviceBody")) return false;
+    if (!nextTokenIs(b, "<obligation or advice body>", ADVICE, OBLIGATION)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, OBLIGATION_OR_ADVICE_BODY, "<obligation or advice body>");
+    r = obligationBody(b, l + 1);
+    if (!r) r = adviceBody(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // ref
+  public static boolean obligationRef(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "obligationRef")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = ref(b, l + 1);
+    exit_section_(b, m, OBLIGATION_REF, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // on effect '{' obligationOrAdviceBody+ '}'
+  public static boolean onEffect(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "onEffect")) return false;
+    if (!nextTokenIs(b, ON)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, ON_EFFECT, null);
+    r = consumeToken(b, ON);
+    r = r && effect(b, l + 1);
+    r = r && consumeToken(b, "{");
+    p = r; // pin = 3
+    r = r && report_error_(b, onEffect_3(b, l + 1));
+    r = p && consumeToken(b, "}") && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // obligationOrAdviceBody+
   private static boolean onEffect_3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "onEffect_3")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, OBLEGATIONORADVICEBODY);
+    r = obligationOrAdviceBody(b, l + 1);
     int c = current_position_(b);
     while (r) {
-      if (!consumeToken(b, OBLEGATIONORADVICEBODY)) break;
+      if (!obligationOrAdviceBody(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "onEffect_3", c)) break;
       c = current_position_(b);
     }
@@ -831,10 +1422,103 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // infix operatorFeature* '(' operator ')' '=' '{' operatorDeclarationBody+ '}' operatorInvrese?
+  public static boolean operatorDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "operatorDeclaration")) return false;
+    if (!nextTokenIs(b, INFIX)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, INFIX);
+    r = r && operatorDeclaration_1(b, l + 1);
+    r = r && consumeToken(b, "(");
+    r = r && operator(b, l + 1);
+    r = r && consumeToken(b, ")");
+    r = r && consumeToken(b, "=");
+    r = r && consumeToken(b, "{");
+    r = r && operatorDeclaration_7(b, l + 1);
+    r = r && consumeToken(b, "}");
+    r = r && operatorDeclaration_9(b, l + 1);
+    exit_section_(b, m, OPERATOR_DECLARATION, r);
+    return r;
+  }
+
+  // operatorFeature*
+  private static boolean operatorDeclaration_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "operatorDeclaration_1")) return false;
+    int c = current_position_(b);
+    while (true) {
+      if (!operatorFeature(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "operatorDeclaration_1", c)) break;
+      c = current_position_(b);
+    }
+    return true;
+  }
+
+  // operatorDeclarationBody+
+  private static boolean operatorDeclaration_7(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "operatorDeclaration_7")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = operatorDeclarationBody(b, l + 1);
+    int c = current_position_(b);
+    while (r) {
+      if (!operatorDeclarationBody(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "operatorDeclaration_7", c)) break;
+      c = current_position_(b);
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // operatorInvrese?
+  private static boolean operatorDeclaration_9(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "operatorDeclaration_9")) return false;
+    operatorInvrese(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // functionBody
+  public static boolean operatorDeclarationBody(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "operatorDeclarationBody")) return false;
+    if (!nextTokenIs(b, STRING_LITERAL)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = functionBody(b, l + 1);
+    exit_section_(b, m, OPERATOR_DECLARATION_BODY, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // OperatorFeature
+  public static boolean operatorFeature(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "operatorFeature")) return false;
+    if (!nextTokenIs(b, OPERATORFEATURE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, OPERATORFEATURE);
+    exit_section_(b, m, OPERATOR_FEATURE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // inv operator
+  public static boolean operatorInvrese(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "operatorInvrese")) return false;
+    if (!nextTokenIs(b, INV)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, INV);
+    r = r && operator(b, l + 1);
+    exit_section_(b, m, OPERATOR_INVRESE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // targetEntry|
   //         combinationAlgorithmRef|
   //         onEffect|
-  //         ruleRef|
+  //         ref|
   //         ruleEntry
   public static boolean policyBody(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "policyBody")) return false;
@@ -843,9 +1527,39 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     r = targetEntry(b, l + 1);
     if (!r) r = combinationAlgorithmRef(b, l + 1);
     if (!r) r = onEffect(b, l + 1);
-    if (!r) r = ruleRef(b, l + 1);
+    if (!r) r = ref(b, l + 1);
     if (!r) r = ruleEntry(b, l + 1);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // rule|apply|target|on|qualifiedName
+  static boolean policyBodyStart(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "policyBodyStart")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, RULE);
+    if (!r) r = consumeToken(b, APPLY);
+    if (!r) r = consumeToken(b, TARGET);
+    if (!r) r = consumeToken(b, ON);
+    if (!r) r = qualifiedName(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // policyCombinator algorithmName '=' xacmlDeclaration
+  public static boolean policyCombinatorDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "policyCombinatorDeclaration")) return false;
+    if (!nextTokenIs(b, POLICYCOMBINATOR)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, POLICYCOMBINATOR);
+    r = r && algorithmName(b, l + 1);
+    r = r && consumeToken(b, "=");
+    r = r && xacmlDeclaration(b, l + 1);
+    exit_section_(b, m, POLICY_COMBINATOR_DECLARATION, r);
     return r;
   }
 
@@ -853,17 +1567,17 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // policy policyName? description? '{' policyBody* '}'
   public static boolean policyEntry(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "policyEntry")) return false;
-    if (!nextTokenIs(b, POLICY)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, POLICY_ENTRY, "<policy entry>");
     r = consumeToken(b, POLICY);
     r = r && policyEntry_1(b, l + 1);
     r = r && policyEntry_2(b, l + 1);
-    r = r && consumeToken(b, CURVE1);
-    r = r && policyEntry_4(b, l + 1);
-    r = r && consumeToken(b, CURVE2);
-    exit_section_(b, m, POLICY_ENTRY, r);
-    return r;
+    r = r && consumeToken(b, "{");
+    p = r; // pin = 4
+    r = r && report_error_(b, policyEntry_4(b, l + 1));
+    r = p && consumeToken(b, "}") && r;
+    exit_section_(b, l, m, r, p, policy_recover_parser_);
+    return r || p;
   }
 
   // policyName?
@@ -896,7 +1610,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // idDeclaration
   public static boolean policyName(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "policyName")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = idDeclaration(b, l + 1);
@@ -905,22 +1619,10 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ref
-  public static boolean policyOrPolicySetRef(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "policyOrPolicySetRef")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = ref(b, l + 1);
-    exit_section_(b, m, POLICY_OR_POLICY_SET_REF, r);
-    return r;
-  }
-
-  /* ********************************************************** */
   // combinationAlgorithmRef|
   //         targetEntry|
   //         onEffect|
-  //         policyOrPolicySetRef|
+  //         ref|
   //         policyEntry|
   //         policySetEntry
   public static boolean policySetBody(PsiBuilder b, int l) {
@@ -930,7 +1632,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     r = combinationAlgorithmRef(b, l + 1);
     if (!r) r = targetEntry(b, l + 1);
     if (!r) r = onEffect(b, l + 1);
-    if (!r) r = policyOrPolicySetRef(b, l + 1);
+    if (!r) r = ref(b, l + 1);
     if (!r) r = policyEntry(b, l + 1);
     if (!r) r = policySetEntry(b, l + 1);
     exit_section_(b, l, m, r, false, null);
@@ -941,17 +1643,17 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // policyset policySetName? description? '{' policySetBody* '}'
   public static boolean policySetEntry(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "policySetEntry")) return false;
-    if (!nextTokenIs(b, POLICYSET)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, POLICY_SET_ENTRY, "<policy set entry>");
     r = consumeToken(b, POLICYSET);
     r = r && policySetEntry_1(b, l + 1);
     r = r && policySetEntry_2(b, l + 1);
-    r = r && consumeToken(b, CURVE1);
-    r = r && policySetEntry_4(b, l + 1);
-    r = r && consumeToken(b, CURVE2);
-    exit_section_(b, m, POLICY_SET_ENTRY, r);
-    return r;
+    r = r && consumeToken(b, "{");
+    p = r; // pin = 4
+    r = r && report_error_(b, policySetEntry_4(b, l + 1));
+    r = p && consumeToken(b, "}") && r;
+    exit_section_(b, l, m, r, p, policy_set_recover_parser_);
+    return r || p;
   }
 
   // policySetName?
@@ -984,7 +1686,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // qualifiedName
   public static boolean policySetName(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "policySetName")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = qualifiedName(b, l + 1);
@@ -993,32 +1695,93 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // Identifier ['.' Identifier]
-  public static boolean qualifiedName(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "qualifiedName")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
+  // !(policyBodyStart|'}')
+  static boolean policy_recover(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "policy_recover")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !policy_recover_0(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // policyBodyStart|'}'
+  private static boolean policy_recover_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "policy_recover_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = Identifier(b, l + 1);
+    r = policyBodyStart(b, l + 1);
+    if (!r) r = consumeToken(b, "}");
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // !(policysetBodyStart|'}')
+  static boolean policy_set_recover(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "policy_set_recover")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !policy_set_recover_0(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // policysetBodyStart|'}'
+  private static boolean policy_set_recover_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "policy_set_recover_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = policysetBodyStart(b, l + 1);
+    if (!r) r = consumeToken(b, "}");
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // policy|policyset|rule|apply|target|on|qualifiedName
+  static boolean policysetBodyStart(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "policysetBodyStart")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, POLICY);
+    if (!r) r = consumeToken(b, POLICYSET);
+    if (!r) r = consumeToken(b, RULE);
+    if (!r) r = consumeToken(b, APPLY);
+    if (!r) r = consumeToken(b, TARGET);
+    if (!r) r = consumeToken(b, ON);
+    if (!r) r = qualifiedName(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IDENTIFIER ['.' IDENTIFIER]
+  public static boolean qualifiedName(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "qualifiedName")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENTIFIER);
     r = r && qualifiedName_1(b, l + 1);
     exit_section_(b, m, QUALIFIED_NAME, r);
     return r;
   }
 
-  // ['.' Identifier]
+  // ['.' IDENTIFIER]
   private static boolean qualifiedName_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "qualifiedName_1")) return false;
     qualifiedName_1_0(b, l + 1);
     return true;
   }
 
-  // '.' Identifier
+  // '.' IDENTIFIER
   private static boolean qualifiedName_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "qualifiedName_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, DOT);
-    r = r && Identifier(b, l + 1);
+    r = consumeToken(b, ".");
+    r = r && consumeToken(b, IDENTIFIER);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1027,7 +1790,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // qualifiedName
   public static boolean ref(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ref")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = qualifiedName(b, l + 1);
@@ -1065,12 +1828,12 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // target | conditionEntry | onEffect
+  // targetEntry | conditionEntry | onEffect
   public static boolean ruleBody(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ruleBody")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, RULE_BODY, "<rule body>");
-    r = consumeToken(b, TARGET);
+    r = targetEntry(b, l + 1);
     if (!r) r = conditionEntry(b, l + 1);
     if (!r) r = onEffect(b, l + 1);
     exit_section_(b, l, m, r, false, null);
@@ -1078,21 +1841,36 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // ruleCombinator algorithmName '=' xacmlDeclaration
+  public static boolean ruleCombinatorDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ruleCombinatorDeclaration")) return false;
+    if (!nextTokenIs(b, RULECOMBINATOR)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, RULECOMBINATOR);
+    r = r && algorithmName(b, l + 1);
+    r = r && consumeToken(b, "=");
+    r = r && xacmlDeclaration(b, l + 1);
+    exit_section_(b, m, RULE_COMBINATOR_DECLARATION, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // rule ruleName? description? '{' effect ruleBody* '}'
   public static boolean ruleEntry(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ruleEntry")) return false;
-    if (!nextTokenIs(b, RULE)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, RULE_ENTRY, "<rule entry>");
     r = consumeToken(b, RULE);
     r = r && ruleEntry_1(b, l + 1);
     r = r && ruleEntry_2(b, l + 1);
-    r = r && consumeToken(b, CURVE1);
-    r = r && effect(b, l + 1);
-    r = r && ruleEntry_5(b, l + 1);
-    r = r && consumeToken(b, CURVE2);
-    exit_section_(b, m, RULE_ENTRY, r);
-    return r;
+    r = r && consumeToken(b, "{");
+    p = r; // pin = 4
+    r = r && report_error_(b, effect(b, l + 1));
+    r = p && report_error_(b, ruleEntry_5(b, l + 1)) && r;
+    r = p && consumeToken(b, "}") && r;
+    exit_section_(b, l, m, r, p, ruleRecover_parser_);
+    return r || p;
   }
 
   // ruleName?
@@ -1125,7 +1903,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // idDeclaration
   public static boolean ruleName(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ruleName")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = idDeclaration(b, l + 1);
@@ -1134,14 +1912,23 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ref
-  public static boolean ruleRef(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ruleRef")) return false;
-    if (!nextTokenIs(b, LETTERS)) return false;
+  // !('}')
+  static boolean ruleRecover(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ruleRecover")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !ruleRecover_0(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // ('}')
+  private static boolean ruleRecover_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ruleRecover_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = ref(b, l + 1);
-    exit_section_(b, m, RULE_REF, r);
+    r = consumeToken(b, "}");
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -1188,6 +1975,83 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // bag '[' (typeRef| anyAtomicType) ']'
+  public static boolean typeBag(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "typeBag")) return false;
+    if (!nextTokenIs(b, BAG)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, BAG);
+    r = r && consumeToken(b, "[");
+    r = r && typeBag_2(b, l + 1);
+    r = r && consumeToken(b, "]");
+    exit_section_(b, m, TYPE_BAG, r);
+    return r;
+  }
+
+  // typeRef| anyAtomicType
+  private static boolean typeBag_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "typeBag_2")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = typeRef(b, l + 1);
+    if (!r) r = anyAtomicType(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // type typeName '=' xacmlDeclaration
+  public static boolean typeDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "typeDeclaration")) return false;
+    if (!nextTokenIs(b, TYPE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, TYPE);
+    r = r && typeName(b, l + 1);
+    r = r && consumeToken(b, "=");
+    r = r && xacmlDeclaration(b, l + 1);
+    exit_section_(b, m, TYPE_DECLARATION, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IDENTIFIER
+  public static boolean typeName(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "typeName")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENTIFIER);
+    exit_section_(b, m, TYPE_NAME, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // ref
+  public static boolean typeRef(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "typeRef")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = ref(b, l + 1);
+    exit_section_(b, m, TYPE_REF, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // '*'
+  public static boolean variableArguments(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variableArguments")) return false;
+    if (!nextTokenIs(b, MULTIPLY)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, MULTIPLY);
+    exit_section_(b, m, VARIABLE_ARGUMENTS, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // '(' expressions ')'
   public static boolean wrappedExpressions(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "wrappedExpressions")) return false;
@@ -1201,15 +2065,35 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // StringLiteral
+  // STRING_LITERAL
   public static boolean xacmlDeclaration(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "xacmlDeclaration")) return false;
-    if (!nextTokenIs(b, "<xacml declaration>", STRINGDQ, STRINGSQ)) return false;
+    if (!nextTokenIs(b, STRING_LITERAL)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, XACML_DECLARATION, "<xacml declaration>");
-    r = StringLiteral(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    Marker m = enter_section_(b);
+    r = consumeToken(b, STRING_LITERAL);
+    exit_section_(b, m, XACML_DECLARATION, r);
     return r;
   }
 
+  final static Parser namespace_recover_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return namespace_recover(b, l + 1);
+    }
+  };
+  final static Parser policy_recover_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return policy_recover(b, l + 1);
+    }
+  };
+  final static Parser policy_set_recover_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return policy_set_recover(b, l + 1);
+    }
+  };
+  final static Parser ruleRecover_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return ruleRecover(b, l + 1);
+    }
+  };
 }

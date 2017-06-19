@@ -28,8 +28,56 @@ public class AlfaNamespaceBodyImpl extends ASTWrapperPsiElement implements AlfaN
 
   @Override
   @Nullable
+  public AlfaAdviceDeclaration getAdviceDeclaration() {
+    return findChildByClass(AlfaAdviceDeclaration.class);
+  }
+
+  @Override
+  @Nullable
+  public AlfaAttributeDeclaration getAttributeDeclaration() {
+    return findChildByClass(AlfaAttributeDeclaration.class);
+  }
+
+  @Override
+  @Nullable
+  public AlfaCategoryDeclaration getCategoryDeclaration() {
+    return findChildByClass(AlfaCategoryDeclaration.class);
+  }
+
+  @Override
+  @Nullable
+  public AlfaFunctionDeclaration getFunctionDeclaration() {
+    return findChildByClass(AlfaFunctionDeclaration.class);
+  }
+
+  @Override
+  @Nullable
+  public AlfaImportDeclaration getImportDeclaration() {
+    return findChildByClass(AlfaImportDeclaration.class);
+  }
+
+  @Override
+  @Nullable
   public AlfaNamespaceEntry getNamespaceEntry() {
     return findChildByClass(AlfaNamespaceEntry.class);
+  }
+
+  @Override
+  @Nullable
+  public AlfaObligationDeclaration getObligationDeclaration() {
+    return findChildByClass(AlfaObligationDeclaration.class);
+  }
+
+  @Override
+  @Nullable
+  public AlfaOperatorDeclaration getOperatorDeclaration() {
+    return findChildByClass(AlfaOperatorDeclaration.class);
+  }
+
+  @Override
+  @Nullable
+  public AlfaPolicyCombinatorDeclaration getPolicyCombinatorDeclaration() {
+    return findChildByClass(AlfaPolicyCombinatorDeclaration.class);
   }
 
   @Override
@@ -46,8 +94,20 @@ public class AlfaNamespaceBodyImpl extends ASTWrapperPsiElement implements AlfaN
 
   @Override
   @Nullable
+  public AlfaRuleCombinatorDeclaration getRuleCombinatorDeclaration() {
+    return findChildByClass(AlfaRuleCombinatorDeclaration.class);
+  }
+
+  @Override
+  @Nullable
   public AlfaRuleEntry getRuleEntry() {
     return findChildByClass(AlfaRuleEntry.class);
+  }
+
+  @Override
+  @Nullable
+  public AlfaTypeDeclaration getTypeDeclaration() {
+    return findChildByClass(AlfaTypeDeclaration.class);
   }
 
 }

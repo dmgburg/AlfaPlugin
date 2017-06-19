@@ -26,10 +26,4 @@ public class AlfaXacmlDeclarationImpl extends ASTWrapperPsiElement implements Al
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public AlfaStringLiteral getStringLiteral() {
-    return findNotNullChildByClass(AlfaStringLiteral.class);
-  }
-
 }

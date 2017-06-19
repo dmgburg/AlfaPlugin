@@ -33,9 +33,9 @@ public class AlfaRuleEntryImpl extends ASTWrapperPsiElement implements AlfaRuleE
   }
 
   @Override
-  @NotNull
+  @Nullable
   public AlfaEffect getEffect() {
-    return findNotNullChildByClass(AlfaEffect.class);
+    return findChildByClass(AlfaEffect.class);
   }
 
   @Override

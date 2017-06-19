@@ -10,7 +10,7 @@ public interface AlfaRuleEntry extends PsiElement {
   @Nullable
   AlfaDescription getDescription();
 
-  @NotNull
+  @Nullable
   AlfaEffect getEffect();
 
   @NotNull

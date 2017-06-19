@@ -38,4 +38,10 @@ public class AlfaRuleBodyImpl extends ASTWrapperPsiElement implements AlfaRuleBo
     return findChildByClass(AlfaOnEffect.class);
   }
 
+  @Override
+  @Nullable
+  public AlfaTargetEntry getTargetEntry() {
+    return findChildByClass(AlfaTargetEntry.class);
+  }
+
 }

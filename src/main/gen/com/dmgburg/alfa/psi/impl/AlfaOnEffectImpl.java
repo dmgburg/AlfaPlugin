@@ -32,4 +32,10 @@ public class AlfaOnEffectImpl extends ASTWrapperPsiElement implements AlfaOnEffe
     return findNotNullChildByClass(AlfaEffect.class);
   }
 
+  @Override
+  @NotNull
+  public List<AlfaObligationOrAdviceBody> getObligationOrAdviceBodyList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, AlfaObligationOrAdviceBody.class);
+  }
+
 }

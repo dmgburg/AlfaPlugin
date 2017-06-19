@@ -10,4 +10,7 @@ public interface AlfaOnEffect extends PsiElement {
   @NotNull
   AlfaEffect getEffect();
 
+  @NotNull
+  List<AlfaObligationOrAdviceBody> getObligationOrAdviceBodyList();
+
 }

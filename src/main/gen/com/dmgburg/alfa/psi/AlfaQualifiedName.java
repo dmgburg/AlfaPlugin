@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface AlfaQualifiedName extends PsiElement {
 
-  @NotNull
-  List<AlfaIdentifier> getIdentifierList();
-
 }

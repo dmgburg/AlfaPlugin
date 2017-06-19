@@ -27,15 +27,15 @@ public class AlfaIdDeclarationImpl extends ASTWrapperPsiElement implements AlfaI
   }
 
   @Override
-  @NotNull
-  public AlfaIdentifier getIdentifier() {
-    return findNotNullChildByClass(AlfaIdentifier.class);
-  }
-
-  @Override
   @Nullable
   public AlfaXacmlDeclaration getXacmlDeclaration() {
     return findChildByClass(AlfaXacmlDeclaration.class);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement getIdentifier() {
+    return findNotNullChildByType(IDENTIFIER);
   }
 
 }

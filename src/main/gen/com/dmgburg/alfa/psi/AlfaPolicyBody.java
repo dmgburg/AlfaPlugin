@@ -14,10 +14,10 @@ public interface AlfaPolicyBody extends PsiElement {
   AlfaOnEffect getOnEffect();
 
   @Nullable
-  AlfaRuleEntry getRuleEntry();
+  AlfaRef getRef();
 
   @Nullable
-  AlfaRuleRef getRuleRef();
+  AlfaRuleEntry getRuleEntry();
 
   @Nullable
   AlfaTargetEntry getTargetEntry();

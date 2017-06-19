@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface AlfaXacmlDeclaration extends PsiElement {
 
-  @NotNull
-  AlfaStringLiteral getStringLiteral();
-
 }

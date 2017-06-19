@@ -26,10 +26,4 @@ public class AlfaQualifiedNameImpl extends ASTWrapperPsiElement implements AlfaQ
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public List<AlfaIdentifier> getIdentifierList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, AlfaIdentifier.class);
-  }
-
 }

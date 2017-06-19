@@ -1,33 +1,31 @@
 package com.dmgburg.alfa.completion
 
 import com.dmgburg.alfa.AlfaLanguage
-import com.dmgburg.alfa.psi.AlfaTypes
-import com.intellij.codeInsight.completion.*
-import com.intellij.codeInsight.lookup.LookupElementBuilder
-import com.intellij.patterns.PlatformPatterns
-import com.intellij.util.ProcessingContext
+import com.dmgburg.alfa.psi.AlfaNamespaceBody
+import com.dmgburg.alfa.psi.AlfaTypes.*
+import com.intellij.codeInsight.completion.CompletionContributor
+import com.intellij.codeInsight.completion.CompletionParameters
+import com.intellij.codeInsight.completion.CompletionResultSet
+import com.intellij.codeInsight.completion.CompletionType
+import com.intellij.patterns.PlatformPatterns.*
 
 class AlfaCompletionContributor : CompletionContributor() {
     init {
         extend(CompletionType.BASIC,
-                PlatformPatterns.psiElement(AlfaTypes.POLICY).withLanguage(AlfaLanguage.INSTANCE),
-                object : CompletionProvider<CompletionParameters>() {
-                    public override fun addCompletions(parameters: CompletionParameters,
-                                                       context: ProcessingContext,
-                                                       resultSet: CompletionResultSet) {
-                        resultSet.addElement(LookupElementBuilder.create("Hello"))
-                    }
-                }
+                psiElement(IDENTIFIER).withLanguage(AlfaLanguage.INSTANCE),
+                KeywordCompletion
         )
         extend(CompletionType.BASIC,
-                PlatformPatterns.psiElement().withLanguage(AlfaLanguage.INSTANCE),
-                object : CompletionProvider<CompletionParameters>() {
-                    public override fun addCompletions(parameters: CompletionParameters,
-                                                       context: ProcessingContext,
-                                                       resultSet: CompletionResultSet) {
-                        resultSet.addElement(LookupElementBuilder.create("HelloPolicy"))
-                    }
-                }
+                psiElement(IDENTIFIER).afterSibling(psiElement(ON)).withLanguage(AlfaLanguage.INSTANCE),
+                EffectCompletion
         )
+        extend(CompletionType.BASIC,
+                psiElement(IDENTIFIER).withParent(psiElement(RULE_BODY)).withLanguage(AlfaLanguage.INSTANCE),
+                RuleBodyCompletion
+        )
+    }
+
+    override fun fillCompletionVariants(parameters: CompletionParameters, result: CompletionResultSet) {
+        super.fillCompletionVariants(parameters, result)
     }
 }

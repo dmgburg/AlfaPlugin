@@ -26,10 +26,4 @@ public class AlfaAttributeDesignatorIssuerImpl extends ASTWrapperPsiElement impl
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public AlfaStringLiteral getStringLiteral() {
-    return findNotNullChildByClass(AlfaStringLiteral.class);
-  }
-
 }

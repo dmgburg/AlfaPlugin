@@ -1,6 +1,6 @@
 {
   parserClass="com.dmgburg.alfa.psi.parser.AlfaParser"
-  parserUtilClass="com.dmgburg.alfa.psi.parser.AlfaParserUtil"
+//  parserUtilClass="com.dmgburg.alfa.psi.parser.AlfaParserUtil"
 
   extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
@@ -14,16 +14,9 @@
   tokenTypeClass="com.dmgburg.alfa.psi.AlfaTokenType"
 
   tokens = [
-      space='regexp:\s+'
-      letters = "regexp:[a-zA-Z]+"
-      stringDQ = "regexp:\"[^\"]*\"|'[^']*'"
-      stringSQ = "regexp:'[^']*\'|'[^']*'"
-      digit = "regexp:[0-9]"
-      line_comment='regexp://.*'
-      block_comment='regexp:/\*[\s\S]*?\*/'
-      dot='.'
-      curve1='{'
-      curve2='}'
+//      dot='.'
+//      curve1='{'
+//      curve2='}'
       and='&&'
       or='||'
       lessOrEqual='<='
@@ -35,62 +28,70 @@
       multiply='*'
       divide='/'
       equal='=='
+
+      IDENTIFIER="regexp:\w+"
+      WHITE_SPACE='regexp:\s+'
+      string_literal="regexp:('([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\\'|\\)*\")"
+      line_comment="regexp://.*"
+      block_comment="regexp:/\*(.|\n)*?\*/"
     ]
 }
 
 root ::= namespaceEntry+
 
-namespaceEntry ::= namespace namespaceName '{' namespaceBody* '}'
+namespaceEntry ::= namespace namespaceName '{' namespaceBody* '}' { pin=3 recoverWhile=namespace_recover}
+private namespace_recover::=!(namespaceBodyStart|'}')
+private namespaceBodyStart ::= namespace|policy|policyset|rule
 
 namespaceName ::= qualifiedName
 
-qualifiedName ::= Identifier ['.' Identifier]
-
-Identifier ::=  letters
-
-//letters ::= letter+
+qualifiedName ::= IDENTIFIER ['.' IDENTIFIER]
 
 namespaceBody ::= (
-//    importDeclaration|
     namespaceEntry|
-//    attributeDeclaration|
-//    obligationDeclaration|
-//    adviceDeclaration|
-//    ruleCombinatorDeclaration|
-//    policyCombinatorDeclaration|
-//    categoryDeclaration|
-//    operatorDeclaration|
-//    functionDeclaration|
-//    typeDeclaration|
     policySetEntry|
     policyEntry|
-    ruleEntry
+    ruleEntry|
+    obligationDeclaration|
+    adviceDeclaration|
+    attributeDeclaration|
+    policyCombinatorDeclaration|
+    ruleCombinatorDeclaration|
+    typeDeclaration|
+    operatorDeclaration|
+    functionDeclaration|
+    importDeclaration|
+    categoryDeclaration
     )
 
-policySetEntry ::= policyset policySetName? description? '{' policySetBody* '}'
+policySetEntry ::= policyset policySetName? description? '{' policySetBody* '}' {pin=4 recoverWhile=policy_set_recover}
+private policy_set_recover::=!(policysetBodyStart|'}')
+private policysetBodyStart ::= policy|policyset|rule|apply|target|on|qualifiedName
 
 policySetName ::= qualifiedName
 
 policySetBody ::= combinationAlgorithmRef|
         targetEntry|
         onEffect|
-        policyOrPolicySetRef|
+        ref|
         policyEntry|
         policySetEntry
 
-policyEntry ::= policy policyName? description? '{' policyBody* '}'
+policyEntry ::= policy policyName? description? '{' policyBody* '}' { pin=4 recoverWhile=policy_recover}
+private policy_recover::=!(policyBodyStart|'}')
+private policyBodyStart ::= rule|apply|target|on|qualifiedName
 
 policyBody ::= targetEntry|
         combinationAlgorithmRef|
         onEffect|
-        ruleRef|
+        ref|
         ruleEntry
 
 policyName ::= idDeclaration
 
-idDeclaration ::= Identifier ('=' xacmlDeclaration)?
+idDeclaration ::= IDENTIFIER ('=' xacmlDeclaration)?
 
-xacmlDeclaration ::= StringLiteral
+xacmlDeclaration ::= STRING_LITERAL
 
 targetEntry ::= target clauseEntry+
 
@@ -112,7 +113,7 @@ leftClauseOperand ::= clauseOperand
 
 rightClauseOperand ::= clauseOperand
 
-clauseOperator ::= Identifier
+clauseOperator ::= IDENTIFIER
 
 clauseOperand ::= attributeRef | constant
 
@@ -120,23 +121,20 @@ attributeRef ::= ref attributeDesignator?
 
 attributeDesignator ::= '[' attributeDesignatorMustBePresent? attributeDesignatorIssuer? ']'
 
-attributeDesignatorMustBePresent ::= 'musteepresent'
+attributeDesignatorMustBePresent ::= musteepresent
 
-attributeDesignatorIssuer ::= 'issuer' '=' StringLiteral
-
-policyOrPolicySetRef ::= ref
+attributeDesignatorIssuer ::= issuer '=' STRING_LITERAL
 
 ref ::= qualifiedName
 
-combinationAlgorithmRef ::= apply ref
+combinationAlgorithmRef ::= 'apply' ref
 
-ruleRef ::= ref
+ruleEntry ::= rule ruleName? description? '{' effect ruleBody* '}' {pin=4 recoverWhile=ruleRecover}
+private ruleRecover ::= !('}')
 
-ruleEntry ::= rule ruleName? description? '{' effect ruleBody* '}'
+description ::= STRING_LITERAL
 
-description ::= StringLiteral
-
-ruleBody ::= target | conditionEntry | onEffect
+ruleBody ::= targetEntry | conditionEntry | onEffect
 
 conditionEntry ::= condition conditionBody
 
@@ -164,18 +162,111 @@ ruleName ::= idDeclaration
 
 effect ::= permit|deny
 
+onEffect ::= on effect '{' obligationOrAdviceBody+ '}' {pin=3}
+
+// obligation and advice
+
+obligationOrAdviceBody ::= obligationBody | adviceBody
+
+obligationBody ::= obligation obligationRef ('{' attributeAssignBody '}')?
+
+adviceBody ::= advice adviceRef ('{' attributeAssignBody '}')?
+
+obligationRef ::= ref
+
+attributeAssignBody ::= attributeAssign+
+
+attributeAssign ::= attributeRef '=' expression
+
+adviceRef ::= ref
+
+obligationDeclaration ::= obligation idDeclaration
+
+adviceDeclaration ::= advice idDeclaration
+
+//Attributes
+attributeDeclaration ::= attribute attributeName '{' attributeBody '}'
+
+attributeName ::= IDENTIFIER
+
+attributeBody ::= attributeId attributeType attributeCategory
+
+attributeId ::= id '=' xacmlDeclaration
+
+attributeType ::= type '=' ref
+
+attributeCategory ::= category '=' ref
+
+// Combining algorithms
+
+ruleCombinatorDeclaration ::= ruleCombinator algorithmName '=' xacmlDeclaration
+
+policyCombinatorDeclaration ::= policyCombinator algorithmName '=' xacmlDeclaration
+
+algorithmName ::= IDENTIFIER
+
+// category declaration
+
+categoryDeclaration ::= category categoryName '=' xacmlDeclaration
+
+categoryName ::= IDENTIFIER
+
+// type declaration
+
+typeDeclaration ::= type typeName '=' xacmlDeclaration
+
+typeName ::= IDENTIFIER
+
+// function declaration
+
+functionDeclaration ::= function functionName '=' functionBody
+
+functionName ::=  IDENTIFIER
+
+functionBody ::= xacmlDeclaration ':' functionBodyArgument+ variableArguments? '->' functionBodyReturn
+
+variableArguments ::= '*'
+
+functionBodyArgument ::= typeRef | typeBag | anyAtomicType | anyAtomicOrBagType | functionType
+
+functionBodyReturn ::= typeRef | typeBag | anyAtomicType
+
+typeRef ::= ref
+
+typeBag ::= bag '[' (typeRef| anyAtomicType) ']'
+
+anyAtomicType ::= anyAtomic
+
+anyAtomicOrBagType ::= anyAtomicOrBag
+
+functionType ::= function
+
+// operators
+
+operatorDeclaration ::= infix operatorFeature* '(' operator ')' '=' '{' operatorDeclarationBody+ '}' operatorInvrese?
+
+operatorFeature ::= OperatorFeature
+
+operatorInvrese ::= inv operator
+
+operatorDeclarationBody ::= functionBody
+
+// import declaration
+
+importDeclaration ::= import importName
+
+importName ::= qualifiedName importEverything?
+
+importEverything ::= '.' '*'
+
+// constants
+
 constant ::= integerLiteral|
-    StringLiteral
+    STRING_LITERAL
 //    booleanLiteral|
 //    floatingPointLiteral|
 //    ipAddressLiteral
-    
 
-onEffect ::= on effect '{' oblegationOrAdviceBody+ '}'
-
-StringLiteral ::=
-    StringDQ |
-    StringSQ
 
 integerLiteral ::= Sign? DecimalIntegerLiteral
 

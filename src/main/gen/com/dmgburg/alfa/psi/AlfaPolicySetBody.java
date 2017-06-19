@@ -17,10 +17,10 @@ public interface AlfaPolicySetBody extends PsiElement {
   AlfaPolicyEntry getPolicyEntry();
 
   @Nullable
-  AlfaPolicyOrPolicySetRef getPolicyOrPolicySetRef();
+  AlfaPolicySetEntry getPolicySetEntry();
 
   @Nullable
-  AlfaPolicySetEntry getPolicySetEntry();
+  AlfaRef getRef();
 
   @Nullable
   AlfaTargetEntry getTargetEntry();

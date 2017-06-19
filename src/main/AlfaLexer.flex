@@ -25,54 +25,63 @@ import static com.dmgburg.alfa.psi.AlfaTypes.*;
 EOL=\R
 WHITE_SPACE=\s+
 
-SPACE=[ \t\n\x0B\f\r]+
-LETTERS=[a-zA-Z]+
-STRINGDQ=\"[^\"]*\"|'[^']*'
-STRINGSQ='[^']*'|'[^']*'
-DIGIT=[0-9]
+IDENTIFIER=[a-zA-Z_0-9]+
+WHITE_SPACE=[ \t\n\x0B\f\r]+
+STRING_LITERAL=('([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\")
 LINE_COMMENT="//".*
-BLOCK_COMMENT="/"\*[\s\S]*?\*"/"
+BLOCK_COMMENT="/"\*(.|\n)*?\*"/"
 
 %%
 <YYINITIAL> {
-  {WHITE_SPACE}               { return WHITE_SPACE; }
+  {WHITE_SPACE}              { return WHITE_SPACE; }
 
-  "."                         { return DOT; }
-  "{"                         { return CURVE1; }
-  "}"                         { return CURVE2; }
-  "&&"                        { return AND; }
-  "||"                        { return OR; }
-  "<="                        { return LESSOREQUAL; }
-  ">="                        { return MOREOREQUAL; }
-  "<"                         { return LESS; }
-  ">"                         { return MORE; }
-  "+"                         { return PLUS; }
-  "-"                         { return MUNUS; }
-  "*"                         { return MULTIPLY; }
-  "/"                         { return DIVIDE; }
-  "=="                        { return EQUAL; }
-  "namespace"                 { return NAMESPACE; }
-  "policyset"                 { return POLICYSET; }
-  "policy"                    { return POLICY; }
-  "target"                    { return TARGET; }
-  "clause"                    { return CLAUSE; }
-  "apply"                     { return APPLY; }
-  "rule"                      { return RULE; }
-  "condition"                 { return CONDITION; }
-  "function"                  { return FUNCTION; }
-  "permit"                    { return PERMIT; }
-  "deny"                      { return DENY; }
-  "on"                        { return ON; }
-  "oblegationOrAdviceBody"    { return OBLEGATIONORADVICEBODY; }
-  "DecimalIntegerLiteral"     { return DECIMALINTEGERLITERAL; }
+  "&&"                       { return AND; }
+  "||"                       { return OR; }
+  "<="                       { return LESSOREQUAL; }
+  ">="                       { return MOREOREQUAL; }
+  "<"                        { return LESS; }
+  ">"                        { return MORE; }
+  "+"                        { return PLUS; }
+  "-"                        { return MUNUS; }
+  "*"                        { return MULTIPLY; }
+  "/"                        { return DIVIDE; }
+  "=="                       { return EQUAL; }
+  "namespace"                { return NAMESPACE; }
+  "policy"                   { return POLICY; }
+  "policyset"                { return POLICYSET; }
+  "rule"                     { return RULE; }
+  "apply"                    { return APPLY; }
+  "target"                   { return TARGET; }
+  "on"                       { return ON; }
+  "clause"                   { return CLAUSE; }
+  "musteepresent"            { return MUSTEEPRESENT; }
+  "issuer"                   { return ISSUER; }
+  "condition"                { return CONDITION; }
+  "function"                 { return FUNCTION; }
+  "permit"                   { return PERMIT; }
+  "deny"                     { return DENY; }
+  "obligation"               { return OBLIGATION; }
+  "advice"                   { return ADVICE; }
+  "attribute"                { return ATTRIBUTE; }
+  "id"                       { return ID; }
+  "type"                     { return TYPE; }
+  "category"                 { return CATEGORY; }
+  "ruleCombinator"           { return RULECOMBINATOR; }
+  "policyCombinator"         { return POLICYCOMBINATOR; }
+  "bag"                      { return BAG; }
+  "anyAtomic"                { return ANYATOMIC; }
+  "anyAtomicOrBag"           { return ANYATOMICORBAG; }
+  "infix"                    { return INFIX; }
+  "OperatorFeature"          { return OPERATORFEATURE; }
+  "inv"                      { return INV; }
+  "import"                   { return IMPORT; }
+  "DecimalIntegerLiteral"    { return DECIMALINTEGERLITERAL; }
 
-  {SPACE}                     { return SPACE; }
-  {LETTERS}                   { return LETTERS; }
-  {STRINGDQ}                  { return STRINGDQ; }
-  {STRINGSQ}                  { return STRINGSQ; }
-  {DIGIT}                     { return DIGIT; }
-  {LINE_COMMENT}              { return LINE_COMMENT; }
-  {BLOCK_COMMENT}             { return BLOCK_COMMENT; }
+  {IDENTIFIER}               { return IDENTIFIER; }
+  {WHITE_SPACE}              { return WHITE_SPACE; }
+  {STRING_LITERAL}           { return STRING_LITERAL; }
+  {LINE_COMMENT}             { return LINE_COMMENT; }
+  {BLOCK_COMMENT}            { return BLOCK_COMMENT; }
 
 }
 

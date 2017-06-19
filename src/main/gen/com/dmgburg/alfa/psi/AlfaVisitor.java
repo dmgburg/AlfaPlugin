@@ -7,15 +7,51 @@ import com.intellij.psi.PsiElement;
 
 public class AlfaVisitor extends PsiElementVisitor {
 
-  public void visitIdentifier(@NotNull AlfaIdentifier o) {
-    visitPsiElement(o);
-  }
-
   public void visitSign(@NotNull AlfaSign o) {
     visitPsiElement(o);
   }
 
-  public void visitStringLiteral(@NotNull AlfaStringLiteral o) {
+  public void visitAdviceBody(@NotNull AlfaAdviceBody o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdviceDeclaration(@NotNull AlfaAdviceDeclaration o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdviceRef(@NotNull AlfaAdviceRef o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAlgorithmName(@NotNull AlfaAlgorithmName o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAnyAtomicOrBagType(@NotNull AlfaAnyAtomicOrBagType o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAnyAtomicType(@NotNull AlfaAnyAtomicType o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAttributeAssign(@NotNull AlfaAttributeAssign o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAttributeAssignBody(@NotNull AlfaAttributeAssignBody o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAttributeBody(@NotNull AlfaAttributeBody o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAttributeCategory(@NotNull AlfaAttributeCategory o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAttributeDeclaration(@NotNull AlfaAttributeDeclaration o) {
     visitPsiElement(o);
   }
 
@@ -31,7 +67,27 @@ public class AlfaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitAttributeId(@NotNull AlfaAttributeId o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAttributeName(@NotNull AlfaAttributeName o) {
+    visitPsiElement(o);
+  }
+
   public void visitAttributeRef(@NotNull AlfaAttributeRef o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAttributeType(@NotNull AlfaAttributeType o) {
+    visitPsiElement(o);
+  }
+
+  public void visitCategoryDeclaration(@NotNull AlfaCategoryDeclaration o) {
+    visitPsiElement(o);
+  }
+
+  public void visitCategoryName(@NotNull AlfaCategoryName o) {
     visitPsiElement(o);
   }
 
@@ -95,6 +151,18 @@ public class AlfaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitFunctionBody(@NotNull AlfaFunctionBody o) {
+    visitPsiElement(o);
+  }
+
+  public void visitFunctionBodyArgument(@NotNull AlfaFunctionBodyArgument o) {
+    visitPsiElement(o);
+  }
+
+  public void visitFunctionBodyReturn(@NotNull AlfaFunctionBodyReturn o) {
+    visitPsiElement(o);
+  }
+
   public void visitFunctionClause(@NotNull AlfaFunctionClause o) {
     visitPsiElement(o);
   }
@@ -103,7 +171,15 @@ public class AlfaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitFunctionDeclaration(@NotNull AlfaFunctionDeclaration o) {
+    visitPsiElement(o);
+  }
+
   public void visitFunctionEntry(@NotNull AlfaFunctionEntry o) {
+    visitPsiElement(o);
+  }
+
+  public void visitFunctionName(@NotNull AlfaFunctionName o) {
     visitPsiElement(o);
   }
 
@@ -115,7 +191,23 @@ public class AlfaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitFunctionType(@NotNull AlfaFunctionType o) {
+    visitPsiElement(o);
+  }
+
   public void visitIdDeclaration(@NotNull AlfaIdDeclaration o) {
+    visitPsiElement(o);
+  }
+
+  public void visitImportDeclaration(@NotNull AlfaImportDeclaration o) {
+    visitPsiElement(o);
+  }
+
+  public void visitImportEverything(@NotNull AlfaImportEverything o) {
+    visitPsiElement(o);
+  }
+
+  public void visitImportName(@NotNull AlfaImportName o) {
     visitPsiElement(o);
   }
 
@@ -139,6 +231,22 @@ public class AlfaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitObligationBody(@NotNull AlfaObligationBody o) {
+    visitPsiElement(o);
+  }
+
+  public void visitObligationDeclaration(@NotNull AlfaObligationDeclaration o) {
+    visitPsiElement(o);
+  }
+
+  public void visitObligationOrAdviceBody(@NotNull AlfaObligationOrAdviceBody o) {
+    visitPsiElement(o);
+  }
+
+  public void visitObligationRef(@NotNull AlfaObligationRef o) {
+    visitPsiElement(o);
+  }
+
   public void visitOnEffect(@NotNull AlfaOnEffect o) {
     visitPsiElement(o);
   }
@@ -151,7 +259,27 @@ public class AlfaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitOperatorDeclaration(@NotNull AlfaOperatorDeclaration o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOperatorDeclarationBody(@NotNull AlfaOperatorDeclarationBody o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOperatorFeature(@NotNull AlfaOperatorFeature o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOperatorInvrese(@NotNull AlfaOperatorInvrese o) {
+    visitPsiElement(o);
+  }
+
   public void visitPolicyBody(@NotNull AlfaPolicyBody o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPolicyCombinatorDeclaration(@NotNull AlfaPolicyCombinatorDeclaration o) {
     visitPsiElement(o);
   }
 
@@ -160,10 +288,6 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitPolicyName(@NotNull AlfaPolicyName o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPolicyOrPolicySetRef(@NotNull AlfaPolicyOrPolicySetRef o) {
     visitPsiElement(o);
   }
 
@@ -195,6 +319,10 @@ public class AlfaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitRuleCombinatorDeclaration(@NotNull AlfaRuleCombinatorDeclaration o) {
+    visitPsiElement(o);
+  }
+
   public void visitRuleEntry(@NotNull AlfaRuleEntry o) {
     visitPsiElement(o);
   }
@@ -203,15 +331,31 @@ public class AlfaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitRuleRef(@NotNull AlfaRuleRef o) {
-    visitPsiElement(o);
-  }
-
   public void visitSingleClauseExpression(@NotNull AlfaSingleClauseExpression o) {
     visitPsiElement(o);
   }
 
   public void visitTargetEntry(@NotNull AlfaTargetEntry o) {
+    visitPsiElement(o);
+  }
+
+  public void visitTypeBag(@NotNull AlfaTypeBag o) {
+    visitPsiElement(o);
+  }
+
+  public void visitTypeDeclaration(@NotNull AlfaTypeDeclaration o) {
+    visitPsiElement(o);
+  }
+
+  public void visitTypeName(@NotNull AlfaTypeName o) {
+    visitPsiElement(o);
+  }
+
+  public void visitTypeRef(@NotNull AlfaTypeRef o) {
+    visitPsiElement(o);
+  }
+
+  public void visitVariableArguments(@NotNull AlfaVariableArguments o) {
     visitPsiElement(o);
   }
 

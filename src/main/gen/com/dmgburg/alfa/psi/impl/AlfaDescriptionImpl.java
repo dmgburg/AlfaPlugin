@@ -26,10 +26,4 @@ public class AlfaDescriptionImpl extends ASTWrapperPsiElement implements AlfaDes
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public AlfaStringLiteral getStringLiteral() {
-    return findNotNullChildByClass(AlfaStringLiteral.class);
-  }
-
 }

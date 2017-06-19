@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface AlfaClauseOperator extends PsiElement {
 
   @NotNull
-  AlfaIdentifier getIdentifier();
+  PsiElement getIdentifier();
 
 }

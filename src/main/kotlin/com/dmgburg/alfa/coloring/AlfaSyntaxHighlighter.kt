@@ -10,6 +10,8 @@ import com.intellij.psi.tree.IElementType
 
 import com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey
 import com.intellij.openapi.options.colors.AttributesDescriptor
+import com.intellij.psi.impl.source.tree.ChildRole.CONDITION
+import org.apache.log4j.spi.Filter.DENY
 
 class AlfaSyntaxHighlighter : com.intellij.openapi.fileTypes.SyntaxHighlighterBase() {
 
@@ -19,9 +21,9 @@ class AlfaSyntaxHighlighter : com.intellij.openapi.fileTypes.SyntaxHighlighterBa
 
     override fun getTokenHighlights(tokenType: com.intellij.psi.tree.IElementType): Array<com.intellij.openapi.editor.colors.TextAttributesKey> {
         return when (tokenType) {
-            NAMESPACE, TARGET, CLAUSE, APPLY, RULE, PERMIT, DENY, CONDITION -> return KEY_KEYS
+//            NAMESPACE, TARGET, CLAUSE, APPLY, RULE, PERMIT, DENY, CONDITION -> return KEY_KEYS
             POLICY, POLICYSET -> return POLICY_OR_SET_KEYS
-            STRINGDQ, STRINGSQ -> VALUE_KEYS
+            STRING_LITERAL -> VALUE_KEYS
             com.intellij.psi.TokenType.BAD_CHARACTER -> BAD_CHAR_KEYS
             else -> EMPTY_KEYS
         }

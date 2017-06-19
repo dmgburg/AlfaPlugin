@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface AlfaDescription extends PsiElement {
 
-  @NotNull
-  AlfaStringLiteral getStringLiteral();
-
 }

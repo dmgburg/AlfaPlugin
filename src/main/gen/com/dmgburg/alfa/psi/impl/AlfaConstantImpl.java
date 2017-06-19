@@ -28,12 +28,6 @@ public class AlfaConstantImpl extends ASTWrapperPsiElement implements AlfaConsta
 
   @Override
   @Nullable
-  public AlfaStringLiteral getStringLiteral() {
-    return findChildByClass(AlfaStringLiteral.class);
-  }
-
-  @Override
-  @Nullable
   public AlfaIntegerLiteral getIntegerLiteral() {
     return findChildByClass(AlfaIntegerLiteral.class);
   }

@@ -7,10 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface AlfaIdDeclaration extends PsiElement {
 
-  @NotNull
-  AlfaIdentifier getIdentifier();
-
   @Nullable
   AlfaXacmlDeclaration getXacmlDeclaration();
+
+  @NotNull
+  PsiElement getIdentifier();
 
 }
