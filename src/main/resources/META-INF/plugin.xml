@@ -20,7 +20,8 @@
         <colorSettingsPage implementation="com.dmgburg.alfa.coloring.AlfaColorSettingsPage"/>
 
         <!--annotators-->
-        <annotator language="Alfa" implementationClass="com.dmgburg.alfa.annotators.PolicyEntryAnnotator"/>
+        <annotator language="Alfa" implementationClass="com.dmgburg.alfa.annotators.RefAnnotator"/>
+        <annotator language="Alfa" implementationClass="com.dmgburg.alfa.annotators.NoMoreThanOneChildExpectedAnnotator"/>
 
         <!--Completion-->
         <completion.contributor language="Alfa" implementationClass="com.dmgburg.alfa.completion.AlfaCompletionContributor"/>

@@ -20,6 +20,14 @@ fun AlfaPolicyEntry.getIdentifier() : Identifier?{
     return Identifier(result)
 }
 
+fun AlfaAttributeDeclaration.getIdentifier() : Identifier?{
+    val name = this.attributeName
+    val result = arrayListOf<String>()
+    result.addAll(this.getNamespace())
+    result.addAll(name.text.split('.'))
+    return Identifier(result)
+}
+
 fun PsiElement.getNamespace(): List<String> {
     var item : PsiElement = this;
     val result = mutableListOf<String>()

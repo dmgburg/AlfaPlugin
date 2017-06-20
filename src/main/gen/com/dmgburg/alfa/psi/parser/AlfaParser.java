@@ -709,14 +709,15 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'apply' ref
+  // apply ref
   public static boolean combinationAlgorithmRef(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "combinationAlgorithmRef")) return false;
+    if (!nextTokenIs(b, APPLY)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, COMBINATION_ALGORITHM_REF, "<combination algorithm ref>");
-    r = consumeToken(b, "apply");
+    Marker m = enter_section_(b);
+    r = consumeToken(b, APPLY);
     r = r && ref(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, m, COMBINATION_ALGORITHM_REF, r);
     return r;
   }
 
