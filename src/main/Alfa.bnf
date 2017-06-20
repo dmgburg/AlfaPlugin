@@ -130,7 +130,7 @@ attributeDesignatorIssuer ::= issuer '=' STRING_LITERAL
 
 ref ::= qualifiedName
 
-combinationAlgorithmRef ::= 'apply' ref
+combinationAlgorithmRef ::= apply ref
 
 ruleEntry ::= rule ruleName? description? '{' effect ruleBody* '}' {pin=4 recoverWhile=ruleRecover}
 private ruleRecover ::= !('}')
