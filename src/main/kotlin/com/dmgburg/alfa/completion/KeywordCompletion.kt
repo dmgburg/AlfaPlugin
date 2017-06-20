@@ -1,6 +1,6 @@
 package com.dmgburg.alfa.completion
 
-import com.dmgburg.alfa.psi.AlfaNamespaceBody
+import com.dmgburg.alfa.psi.*
 import com.dmgburg.alfa.psi.AlfaTypes.*
 import com.dmgburg.alfa.utils.closestBody
 import com.intellij.codeInsight.completion.CompletionParameters
@@ -17,8 +17,8 @@ object KeywordCompletion : CompletionProvider<CompletionParameters>() {
         val tokens: List<IElementType> =
                 when (body) {
                     is AlfaNamespaceBody -> listOf(NAMESPACE, POLICY, POLICYSET)
-//                    is AlfaPolicySetBody -> listOf(POLICY, POLICYSET, TARGET, APPLY, ON)
-//                    is AlfaPolicyBody -> listOf(TARGET, APPLY, RULE, ON)
+                    is AlfaPolicySetBody -> listOf(POLICY, POLICYSET, TARGET, APPLY, ON)
+                    is AlfaPolicyBody -> listOf(TARGET, APPLY, RULE, ON)
                     else -> emptyList()
                 }
         resultSet.addAllElements(tokens)
@@ -31,6 +31,15 @@ object EffectCompletion : CompletionProvider<CompletionParameters>() {
     }
 }
 
+object PolicyRefCompletion : CompletionProvider<CompletionParameters>() {
+    override fun addCompletions(parameters: CompletionParameters, context: ProcessingContext?, result: CompletionResultSet) {
+        val body = parameters.position.closestBody()
+        if (body is AlfaPolicySetBody){
+            findAllPolicySet(body.project).map {it.policySetName?.qualifiedName?.text }.forEach{result.addElement(it)}
+            findAllPolicy(body.project).map {it.policyName?.idDeclaration?.identifier?.text }.forEach{result.addElement(it)}
+        }
+    }
+}
 
 object RuleBodyCompletion : CompletionProvider<CompletionParameters>() {
     override fun addCompletions(parameters: CompletionParameters, context: ProcessingContext?, result: CompletionResultSet) {

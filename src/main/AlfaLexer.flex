@@ -35,6 +35,9 @@ BLOCK_COMMENT="/"\*(.|\n)*?\*"/"
 <YYINITIAL> {
   {WHITE_SPACE}              { return WHITE_SPACE; }
 
+  "."                        { return DOT; }
+  "{"                        { return CURVE1; }
+  "}"                        { return CURVE2; }
   "&&"                       { return AND; }
   "||"                       { return OR; }
   "<="                       { return LESSOREQUAL; }

@@ -291,6 +291,10 @@ public class AlfaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPolicyOrPolicySetRef(@NotNull AlfaPolicyOrPolicySetRef o) {
+    visitPsiElement(o);
+  }
+
   public void visitPolicySetBody(@NotNull AlfaPolicySetBody o) {
     visitPsiElement(o);
   }
@@ -328,6 +332,10 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitRuleName(@NotNull AlfaRuleName o) {
+    visitPsiElement(o);
+  }
+
+  public void visitRuleRef(@NotNull AlfaRuleRef o) {
     visitPsiElement(o);
   }
 

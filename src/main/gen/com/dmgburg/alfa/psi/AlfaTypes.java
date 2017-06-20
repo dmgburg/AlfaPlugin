@@ -78,6 +78,7 @@ public interface AlfaTypes {
   IElementType POLICY_COMBINATOR_DECLARATION = new AlfaElementType("POLICY_COMBINATOR_DECLARATION");
   IElementType POLICY_ENTRY = new AlfaElementType("POLICY_ENTRY");
   IElementType POLICY_NAME = new AlfaElementType("POLICY_NAME");
+  IElementType POLICY_OR_POLICY_SET_REF = new AlfaElementType("POLICY_OR_POLICY_SET_REF");
   IElementType POLICY_SET_BODY = new AlfaElementType("POLICY_SET_BODY");
   IElementType POLICY_SET_ENTRY = new AlfaElementType("POLICY_SET_ENTRY");
   IElementType POLICY_SET_NAME = new AlfaElementType("POLICY_SET_NAME");
@@ -88,6 +89,7 @@ public interface AlfaTypes {
   IElementType RULE_COMBINATOR_DECLARATION = new AlfaElementType("RULE_COMBINATOR_DECLARATION");
   IElementType RULE_ENTRY = new AlfaElementType("RULE_ENTRY");
   IElementType RULE_NAME = new AlfaElementType("RULE_NAME");
+  IElementType RULE_REF = new AlfaElementType("RULE_REF");
   IElementType SIGN = new AlfaElementType("SIGN");
   IElementType SINGLE_CLAUSE_EXPRESSION = new AlfaElementType("SINGLE_CLAUSE_EXPRESSION");
   IElementType TARGET_ENTRY = new AlfaElementType("TARGET_ENTRY");
@@ -110,9 +112,12 @@ public interface AlfaTypes {
   IElementType CATEGORY = new AlfaTokenType("category");
   IElementType CLAUSE = new AlfaTokenType("clause");
   IElementType CONDITION = new AlfaTokenType("condition");
+  IElementType CURVE1 = new AlfaTokenType("{");
+  IElementType CURVE2 = new AlfaTokenType("}");
   IElementType DECIMALINTEGERLITERAL = new AlfaTokenType("DecimalIntegerLiteral");
   IElementType DENY = new AlfaTokenType("deny");
   IElementType DIVIDE = new AlfaTokenType("/");
+  IElementType DOT = new AlfaTokenType(".");
   IElementType EQUAL = new AlfaTokenType("==");
   IElementType FUNCTION = new AlfaTokenType("function");
   IElementType ID = new AlfaTokenType("id");
@@ -358,6 +363,9 @@ public interface AlfaTypes {
       else if (type == POLICY_NAME) {
         return new AlfaPolicyNameImpl(node);
       }
+      else if (type == POLICY_OR_POLICY_SET_REF) {
+        return new AlfaPolicyOrPolicySetRefImpl(node);
+      }
       else if (type == POLICY_SET_BODY) {
         return new AlfaPolicySetBodyImpl(node);
       }
@@ -387,6 +395,9 @@ public interface AlfaTypes {
       }
       else if (type == RULE_NAME) {
         return new AlfaRuleNameImpl(node);
+      }
+      else if (type == RULE_REF) {
+        return new AlfaRuleRefImpl(node);
       }
       else if (type == SIGN) {
         return new AlfaSignImpl(node);

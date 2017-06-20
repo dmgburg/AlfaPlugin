@@ -14,9 +14,9 @@
   tokenTypeClass="com.dmgburg.alfa.psi.AlfaTokenType"
 
   tokens = [
-//      dot='.'
-//      curve1='{'
-//      curve2='}'
+      dot='.'
+      curve1='{'
+      curve2='}'
       and='&&'
       or='||'
       lessOrEqual='<='
@@ -73,7 +73,7 @@ policySetName ::= qualifiedName
 policySetBody ::= combinationAlgorithmRef|
         targetEntry|
         onEffect|
-        ref|
+        policyOrPolicySetRef|
         policyEntry|
         policySetEntry
 
@@ -84,8 +84,11 @@ private policyBodyStart ::= rule|apply|target|on|qualifiedName
 policyBody ::= targetEntry|
         combinationAlgorithmRef|
         onEffect|
-        ref|
+        ruleRef|
         ruleEntry
+
+policyOrPolicySetRef ::= ref
+ruleRef ::= ref
 
 policyName ::= idDeclaration
 

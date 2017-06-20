@@ -236,6 +236,9 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     else if (t == POLICY_NAME) {
       r = policyName(b, 0);
     }
+    else if (t == POLICY_OR_POLICY_SET_REF) {
+      r = policyOrPolicySetRef(b, 0);
+    }
     else if (t == POLICY_SET_BODY) {
       r = policySetBody(b, 0);
     }
@@ -265,6 +268,9 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     }
     else if (t == RULE_NAME) {
       r = ruleName(b, 0);
+    }
+    else if (t == RULE_REF) {
+      r = ruleRef(b, 0);
     }
     else if (t == SINGLE_CLAUSE_EXPRESSION) {
       r = singleClauseExpression(b, 0);
@@ -342,9 +348,9 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "adviceBody_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, "{");
+    r = consumeToken(b, CURVE1);
     r = r && attributeAssignBody(b, l + 1);
-    r = r && consumeToken(b, "}");
+    r = r && consumeToken(b, CURVE2);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -479,9 +485,9 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, ATTRIBUTE);
     r = r && attributeName(b, l + 1);
-    r = r && consumeToken(b, "{");
+    r = r && consumeToken(b, CURVE1);
     r = r && attributeBody(b, l + 1);
-    r = r && consumeToken(b, "}");
+    r = r && consumeToken(b, CURVE2);
     exit_section_(b, m, ATTRIBUTE_DECLARATION, r);
     return r;
   }
@@ -1111,11 +1117,11 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // '.' '*'
   public static boolean importEverything(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "importEverything")) return false;
+    if (!nextTokenIs(b, DOT)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, IMPORT_EVERYTHING, "<import everything>");
-    r = consumeToken(b, ".");
-    r = r && consumeToken(b, MULTIPLY);
-    exit_section_(b, l, m, r, false, null);
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, DOT, MULTIPLY);
+    exit_section_(b, m, IMPORT_EVERYTHING, r);
     return r;
   }
 
@@ -1228,10 +1234,10 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, NAMESPACE_ENTRY, "<namespace entry>");
     r = consumeToken(b, NAMESPACE);
     r = r && namespaceName(b, l + 1);
-    r = r && consumeToken(b, "{");
+    r = r && consumeToken(b, CURVE1);
     p = r; // pin = 3
     r = r && report_error_(b, namespaceEntry_3(b, l + 1));
-    r = p && consumeToken(b, "}") && r;
+    r = p && consumeToken(b, CURVE2) && r;
     exit_section_(b, l, m, r, p, namespace_recover_parser_);
     return r || p;
   }
@@ -1277,7 +1283,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = namespaceBodyStart(b, l + 1);
-    if (!r) r = consumeToken(b, "}");
+    if (!r) r = consumeToken(b, CURVE2);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1308,9 +1314,9 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "obligationBody_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, "{");
+    r = consumeToken(b, CURVE1);
     r = r && attributeAssignBody(b, l + 1);
-    r = r && consumeToken(b, "}");
+    r = r && consumeToken(b, CURVE2);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1362,10 +1368,10 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, ON_EFFECT, null);
     r = consumeToken(b, ON);
     r = r && effect(b, l + 1);
-    r = r && consumeToken(b, "{");
+    r = r && consumeToken(b, CURVE1);
     p = r; // pin = 3
     r = r && report_error_(b, onEffect_3(b, l + 1));
-    r = p && consumeToken(b, "}") && r;
+    r = p && consumeToken(b, CURVE2) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -1434,9 +1440,9 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     r = r && operator(b, l + 1);
     r = r && consumeToken(b, ")");
     r = r && consumeToken(b, "=");
-    r = r && consumeToken(b, "{");
+    r = r && consumeToken(b, CURVE1);
     r = r && operatorDeclaration_7(b, l + 1);
-    r = r && consumeToken(b, "}");
+    r = r && consumeToken(b, CURVE2);
     r = r && operatorDeclaration_9(b, l + 1);
     exit_section_(b, m, OPERATOR_DECLARATION, r);
     return r;
@@ -1518,7 +1524,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // targetEntry|
   //         combinationAlgorithmRef|
   //         onEffect|
-  //         ref|
+  //         ruleRef|
   //         ruleEntry
   public static boolean policyBody(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "policyBody")) return false;
@@ -1527,7 +1533,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     r = targetEntry(b, l + 1);
     if (!r) r = combinationAlgorithmRef(b, l + 1);
     if (!r) r = onEffect(b, l + 1);
-    if (!r) r = ref(b, l + 1);
+    if (!r) r = ruleRef(b, l + 1);
     if (!r) r = ruleEntry(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -1572,10 +1578,10 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, POLICY);
     r = r && policyEntry_1(b, l + 1);
     r = r && policyEntry_2(b, l + 1);
-    r = r && consumeToken(b, "{");
+    r = r && consumeToken(b, CURVE1);
     p = r; // pin = 4
     r = r && report_error_(b, policyEntry_4(b, l + 1));
-    r = p && consumeToken(b, "}") && r;
+    r = p && consumeToken(b, CURVE2) && r;
     exit_section_(b, l, m, r, p, policy_recover_parser_);
     return r || p;
   }
@@ -1619,10 +1625,22 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // ref
+  public static boolean policyOrPolicySetRef(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "policyOrPolicySetRef")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = ref(b, l + 1);
+    exit_section_(b, m, POLICY_OR_POLICY_SET_REF, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // combinationAlgorithmRef|
   //         targetEntry|
   //         onEffect|
-  //         ref|
+  //         policyOrPolicySetRef|
   //         policyEntry|
   //         policySetEntry
   public static boolean policySetBody(PsiBuilder b, int l) {
@@ -1632,7 +1650,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     r = combinationAlgorithmRef(b, l + 1);
     if (!r) r = targetEntry(b, l + 1);
     if (!r) r = onEffect(b, l + 1);
-    if (!r) r = ref(b, l + 1);
+    if (!r) r = policyOrPolicySetRef(b, l + 1);
     if (!r) r = policyEntry(b, l + 1);
     if (!r) r = policySetEntry(b, l + 1);
     exit_section_(b, l, m, r, false, null);
@@ -1648,10 +1666,10 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, POLICYSET);
     r = r && policySetEntry_1(b, l + 1);
     r = r && policySetEntry_2(b, l + 1);
-    r = r && consumeToken(b, "{");
+    r = r && consumeToken(b, CURVE1);
     p = r; // pin = 4
     r = r && report_error_(b, policySetEntry_4(b, l + 1));
-    r = p && consumeToken(b, "}") && r;
+    r = p && consumeToken(b, CURVE2) && r;
     exit_section_(b, l, m, r, p, policy_set_recover_parser_);
     return r || p;
   }
@@ -1711,7 +1729,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = policyBodyStart(b, l + 1);
-    if (!r) r = consumeToken(b, "}");
+    if (!r) r = consumeToken(b, CURVE2);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1733,7 +1751,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = policysetBodyStart(b, l + 1);
-    if (!r) r = consumeToken(b, "}");
+    if (!r) r = consumeToken(b, CURVE2);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1771,19 +1789,8 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // ['.' IDENTIFIER]
   private static boolean qualifiedName_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "qualifiedName_1")) return false;
-    qualifiedName_1_0(b, l + 1);
+    parseTokens(b, 0, DOT, IDENTIFIER);
     return true;
-  }
-
-  // '.' IDENTIFIER
-  private static boolean qualifiedName_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "qualifiedName_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, ".");
-    r = r && consumeToken(b, IDENTIFIER);
-    exit_section_(b, m, null, r);
-    return r;
   }
 
   /* ********************************************************** */
@@ -1864,11 +1871,11 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, RULE);
     r = r && ruleEntry_1(b, l + 1);
     r = r && ruleEntry_2(b, l + 1);
-    r = r && consumeToken(b, "{");
+    r = r && consumeToken(b, CURVE1);
     p = r; // pin = 4
     r = r && report_error_(b, effect(b, l + 1));
     r = p && report_error_(b, ruleEntry_5(b, l + 1)) && r;
-    r = p && consumeToken(b, "}") && r;
+    r = p && consumeToken(b, CURVE2) && r;
     exit_section_(b, l, m, r, p, ruleRecover_parser_);
     return r || p;
   }
@@ -1917,18 +1924,20 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ruleRecover")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NOT_);
-    r = !ruleRecover_0(b, l + 1);
+    r = !consumeToken(b, CURVE2);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // ('}')
-  private static boolean ruleRecover_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ruleRecover_0")) return false;
+  /* ********************************************************** */
+  // ref
+  public static boolean ruleRef(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ruleRef")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, "}");
-    exit_section_(b, m, null, r);
+    r = ref(b, l + 1);
+    exit_section_(b, m, RULE_REF, r);
     return r;
   }
 

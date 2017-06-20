@@ -46,14 +46,14 @@ public class AlfaPolicySetBodyImpl extends ASTWrapperPsiElement implements AlfaP
 
   @Override
   @Nullable
-  public AlfaPolicySetEntry getPolicySetEntry() {
-    return findChildByClass(AlfaPolicySetEntry.class);
+  public AlfaPolicyOrPolicySetRef getPolicyOrPolicySetRef() {
+    return findChildByClass(AlfaPolicyOrPolicySetRef.class);
   }
 
   @Override
   @Nullable
-  public AlfaRef getRef() {
-    return findChildByClass(AlfaRef.class);
+  public AlfaPolicySetEntry getPolicySetEntry() {
+    return findChildByClass(AlfaPolicySetEntry.class);
   }
 
   @Override

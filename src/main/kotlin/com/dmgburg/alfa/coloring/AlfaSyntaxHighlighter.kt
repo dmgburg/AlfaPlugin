@@ -10,8 +10,6 @@ import com.intellij.psi.tree.IElementType
 
 import com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey
 import com.intellij.openapi.options.colors.AttributesDescriptor
-import com.intellij.psi.impl.source.tree.ChildRole.CONDITION
-import org.apache.log4j.spi.Filter.DENY
 
 class AlfaSyntaxHighlighter : com.intellij.openapi.fileTypes.SyntaxHighlighterBase() {
 
@@ -21,8 +19,10 @@ class AlfaSyntaxHighlighter : com.intellij.openapi.fileTypes.SyntaxHighlighterBa
 
     override fun getTokenHighlights(tokenType: com.intellij.psi.tree.IElementType): Array<com.intellij.openapi.editor.colors.TextAttributesKey> {
         return when (tokenType) {
-//            NAMESPACE, TARGET, CLAUSE, APPLY, RULE, PERMIT, DENY, CONDITION -> return KEY_KEYS
-            POLICY, POLICYSET -> return POLICY_OR_SET_KEYS
+            NAMESPACE, POLICY, POLICYSET, RULE, APPLY, TARGET, ON, CLAUSE, MUSTEEPRESENT,
+            ISSUER, CONDITION, FUNCTION, PERMIT, DENY, OBLIGATION, ADVICE, ATTRIBUTE, ID,
+            TYPE, CATEGORY, RULECOMBINATOR, POLICYCOMBINATOR, BAG, ANYATOMIC, ANYATOMICORBAG,
+            INFIX, INV, IMPORT -> return KEY_KEYS
             STRING_LITERAL -> VALUE_KEYS
             com.intellij.psi.TokenType.BAD_CHARACTER -> BAD_CHAR_KEYS
             else -> EMPTY_KEYS
@@ -38,12 +38,9 @@ class AlfaSyntaxHighlighter : com.intellij.openapi.fileTypes.SyntaxHighlighterBa
         val POLICY_OR_SET = createTextAttributesKey("SIMPLE_BAD_CHARACTER", DefaultLanguageHighlighterColors.FUNCTION_CALL)
 
         private val BAD_CHAR_KEYS = arrayOf(com.dmgburg.alfa.coloring.AlfaSyntaxHighlighter.Companion.BAD_CHARACTER)
-        private val SEPARATOR_KEYS = arrayOf(com.dmgburg.alfa.coloring.AlfaSyntaxHighlighter.Companion.SEPARATOR)
         private val KEY_KEYS = arrayOf(com.dmgburg.alfa.coloring.AlfaSyntaxHighlighter.Companion.KEY)
         private val VALUE_KEYS = arrayOf(com.dmgburg.alfa.coloring.AlfaSyntaxHighlighter.Companion.VALUE)
-        private val COMMENT_KEYS = arrayOf(com.dmgburg.alfa.coloring.AlfaSyntaxHighlighter.Companion.COMMENT)
         private val EMPTY_KEYS = emptyArray<com.intellij.openapi.editor.colors.TextAttributesKey>()
-        private val POLICY_OR_SET_KEYS = arrayOf(POLICY_OR_SET)
 
         val DESCRIPTORS = arrayOf(
                 AttributesDescriptor("Key", KEY),
