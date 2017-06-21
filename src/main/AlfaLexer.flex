@@ -77,7 +77,8 @@ BLOCK_COMMENT="/"\*(.|\n)*?\*"/"
   "anyAtomic"                { return ANYATOMIC; }
   "anyAtomicOrBag"           { return ANYATOMICORBAG; }
   "infix"                    { return INFIX; }
-  "OperatorFeature"          { return OPERATORFEATURE; }
+  "comm"                     { return COMM; }
+  "allowbags"                { return ALLOWBAGS; }
   "inv"                      { return INV; }
   "import"                   { return IMPORT; }
   "DecimalIntegerLiteral"    { return DECIMALINTEGERLITERAL; }

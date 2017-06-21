@@ -102,6 +102,7 @@ public interface AlfaTypes {
   IElementType XACML_DECLARATION = new AlfaElementType("XACML_DECLARATION");
 
   IElementType ADVICE = new AlfaTokenType("advice");
+  IElementType ALLOWBAGS = new AlfaTokenType("allowbags");
   IElementType AND = new AlfaTokenType("&&");
   IElementType ANYATOMIC = new AlfaTokenType("anyAtomic");
   IElementType ANYATOMICORBAG = new AlfaTokenType("anyAtomicOrBag");
@@ -113,6 +114,7 @@ public interface AlfaTypes {
   IElementType CATEGORY = new AlfaTokenType("category");
   IElementType CLAUSE = new AlfaTokenType("clause");
   IElementType COLON = new AlfaTokenType(":");
+  IElementType COMM = new AlfaTokenType("comm");
   IElementType CONDITION = new AlfaTokenType("condition");
   IElementType CURVE1 = new AlfaTokenType("{");
   IElementType CURVE2 = new AlfaTokenType("}");
@@ -139,7 +141,6 @@ public interface AlfaTypes {
   IElementType NAMESPACE = new AlfaTokenType("namespace");
   IElementType OBLIGATION = new AlfaTokenType("obligation");
   IElementType ON = new AlfaTokenType("on");
-  IElementType OPERATORFEATURE = new AlfaTokenType("OperatorFeature");
   IElementType OR = new AlfaTokenType("||");
   IElementType PERMIT = new AlfaTokenType("permit");
   IElementType PLUS = new AlfaTokenType("+");

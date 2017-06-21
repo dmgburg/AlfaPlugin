@@ -29,15 +29,6 @@ task wrapper(type: Wrapper) {
     distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
 }
 
-task generateParser(type: JavaExec) {
-    classpath = fileTree("grammarKit")
-
-    main = 'org.intellij.grammar.Main'
-
-    // arguments to pass to the application
-    args "$buildDir/grammar/", "$projectDir\\src\\main\\Alfa.bnf"
-}
-
 sourceSets {
     main {
         java {
@@ -46,14 +37,52 @@ sourceSets {
     }
 }
 
+def ideaVersion = '172.3095.12'
+
 intellij {
-    version 'IC-2017.1' //IntelliJ IDEA 2016.3 dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
+    version "IC-$ideaVersion"
 }
 
 repositories {
     mavenCentral()
+    maven {
+        url = "https://www.jetbrains.com/intellij-repository/releases"
+    }
+}
+
+configurations {
+    ideaRelease
+    jflex
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    ideaRelease "com.jetbrains.intellij.idea:ideaIC:$ideaVersion"
+//    jflex group: 'de.jflex', name: 'jflex', version: '1.7.0'
+}
+
+task generationJars(type: Sync) {
+    dependsOn configurations.ideaRelease
+
+    from { // use of closure defers evaluation until execution time
+        configurations.ideaRelease.collect {zipTree(it).matching{ it.include("lib/*")}.files}
+    }
+    into "$buildDir/grammarKit/"
+}
+
+task generateParser(type: JavaExec, dependsOn: generationJars) {
+    classpath = files(fileTree("$buildDir/grammarKit"), fileTree("$projectDir/grammarKit"))
+    main = 'org.intellij.grammar.Main'
+    args "$projectDir/src/main/gen/", "$projectDir\\src\\main\\Alfa.bnf"
+}
+
+task generateLexer(type: JavaExec) {
+    classpath = fileTree("$projectDir/grammarKit")
+    main = 'jflex.Main'
+    args "-d", "$projectDir/src/main/gen/com/dmgburg/alfa/psi/parser", "--skel", "$projectDir/grammarKit/idea-flex.skeleton",  "$projectDir/src/main/AlfaLexer.flex"
+}
+
+compileJava{
+    dependsOn generateLexer
+    dependsOn generateParser
 }
