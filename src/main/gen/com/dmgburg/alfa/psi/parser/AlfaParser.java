@@ -424,7 +424,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = attributeRef(b, l + 1);
-    r = r && consumeToken(b, "=");
+    r = r && consumeToken(b, ASSIGN);
     r = r && expression(b, l + 1);
     exit_section_(b, m, ATTRIBUTE_ASSIGN, r);
     return r;
@@ -469,8 +469,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, CATEGORY)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, CATEGORY);
-    r = r && consumeToken(b, "=");
+    r = consumeTokens(b, 0, CATEGORY, ASSIGN);
     r = r && ref(b, l + 1);
     exit_section_(b, m, ATTRIBUTE_CATEGORY, r);
     return r;
@@ -527,9 +526,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, ISSUER)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, ISSUER);
-    r = r && consumeToken(b, "=");
-    r = r && consumeToken(b, STRING_LITERAL);
+    r = consumeTokens(b, 0, ISSUER, ASSIGN, STRING_LITERAL);
     exit_section_(b, m, ATTRIBUTE_DESIGNATOR_ISSUER, r);
     return r;
   }
@@ -553,8 +550,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, ID)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, ID);
-    r = r && consumeToken(b, "=");
+    r = consumeTokens(b, 0, ID, ASSIGN);
     r = r && xacmlDeclaration(b, l + 1);
     exit_section_(b, m, ATTRIBUTE_ID, r);
     return r;
@@ -599,8 +595,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, TYPE)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, TYPE);
-    r = r && consumeToken(b, "=");
+    r = consumeTokens(b, 0, TYPE, ASSIGN);
     r = r && ref(b, l + 1);
     exit_section_(b, m, ATTRIBUTE_TYPE, r);
     return r;
@@ -615,7 +610,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, CATEGORY);
     r = r && categoryName(b, l + 1);
-    r = r && consumeToken(b, "=");
+    r = r && consumeToken(b, ASSIGN);
     r = r && xacmlDeclaration(b, l + 1);
     exit_section_(b, m, CATEGORY_DECLARATION, r);
     return r;
@@ -854,7 +849,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = xacmlDeclaration(b, l + 1);
-    r = r && consumeToken(b, ":");
+    r = r && consumeToken(b, COLON);
     r = r && functionBody_2(b, l + 1);
     r = r && functionBody_3(b, l + 1);
     r = r && consumeToken(b, "->");
@@ -974,7 +969,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, FUNCTION);
     r = r && functionName(b, l + 1);
-    r = r && consumeToken(b, "=");
+    r = r && consumeToken(b, ASSIGN);
     r = r && functionBody(b, l + 1);
     exit_section_(b, m, FUNCTION_DECLARATION, r);
     return r;
@@ -1095,7 +1090,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "idDeclaration_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, "=");
+    r = consumeToken(b, ASSIGN);
     r = r && xacmlDeclaration(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -1214,32 +1209,19 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // namespace|policy|policyset|rule
-  static boolean namespaceBodyStart(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "namespaceBodyStart")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, NAMESPACE);
-    if (!r) r = consumeToken(b, POLICY);
-    if (!r) r = consumeToken(b, POLICYSET);
-    if (!r) r = consumeToken(b, RULE);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
   // namespace namespaceName '{' namespaceBody* '}'
   public static boolean namespaceEntry(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "namespaceEntry")) return false;
+    if (!nextTokenIs(b, NAMESPACE)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, NAMESPACE_ENTRY, "<namespace entry>");
+    Marker m = enter_section_(b, l, _NONE_, NAMESPACE_ENTRY, null);
     r = consumeToken(b, NAMESPACE);
     r = r && namespaceName(b, l + 1);
     r = r && consumeToken(b, CURVE1);
     p = r; // pin = 3
     r = r && report_error_(b, namespaceEntry_3(b, l + 1));
     r = p && consumeToken(b, CURVE2) && r;
-    exit_section_(b, l, m, r, p, namespace_recover_parser_);
+    exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
@@ -1264,28 +1246,6 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = qualifiedName(b, l + 1);
     exit_section_(b, m, NAMESPACE_NAME, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // !(namespaceBodyStart|'}')
-  static boolean namespace_recover(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "namespace_recover")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
-    r = !namespace_recover_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // namespaceBodyStart|'}'
-  private static boolean namespace_recover_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "namespace_recover_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = namespaceBodyStart(b, l + 1);
-    if (!r) r = consumeToken(b, CURVE2);
-    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -1440,8 +1400,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     r = r && consumeToken(b, "(");
     r = r && operator(b, l + 1);
     r = r && consumeToken(b, ")");
-    r = r && consumeToken(b, "=");
-    r = r && consumeToken(b, CURVE1);
+    r = r && consumeTokens(b, 0, ASSIGN, CURVE1);
     r = r && operatorDeclaration_7(b, l + 1);
     r = r && consumeToken(b, CURVE2);
     r = r && operatorDeclaration_9(b, l + 1);
@@ -1541,21 +1500,6 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // rule|apply|target|on|qualifiedName
-  static boolean policyBodyStart(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "policyBodyStart")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, RULE);
-    if (!r) r = consumeToken(b, APPLY);
-    if (!r) r = consumeToken(b, TARGET);
-    if (!r) r = consumeToken(b, ON);
-    if (!r) r = qualifiedName(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
   // policyCombinator algorithmName '=' xacmlDeclaration
   public static boolean policyCombinatorDeclaration(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "policyCombinatorDeclaration")) return false;
@@ -1564,7 +1508,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, POLICYCOMBINATOR);
     r = r && algorithmName(b, l + 1);
-    r = r && consumeToken(b, "=");
+    r = r && consumeToken(b, ASSIGN);
     r = r && xacmlDeclaration(b, l + 1);
     exit_section_(b, m, POLICY_COMBINATOR_DECLARATION, r);
     return r;
@@ -1574,8 +1518,9 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // policy policyName? description? '{' policyBody* '}'
   public static boolean policyEntry(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "policyEntry")) return false;
+    if (!nextTokenIs(b, POLICY)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, POLICY_ENTRY, "<policy entry>");
+    Marker m = enter_section_(b, l, _NONE_, POLICY_ENTRY, null);
     r = consumeToken(b, POLICY);
     r = r && policyEntry_1(b, l + 1);
     r = r && policyEntry_2(b, l + 1);
@@ -1583,7 +1528,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     p = r; // pin = 4
     r = r && report_error_(b, policyEntry_4(b, l + 1));
     r = p && consumeToken(b, CURVE2) && r;
-    exit_section_(b, l, m, r, p, policy_recover_parser_);
+    exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
@@ -1662,8 +1607,9 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // policyset policySetName? description? '{' policySetBody* '}'
   public static boolean policySetEntry(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "policySetEntry")) return false;
+    if (!nextTokenIs(b, POLICYSET)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, POLICY_SET_ENTRY, "<policy set entry>");
+    Marker m = enter_section_(b, l, _NONE_, POLICY_SET_ENTRY, null);
     r = consumeToken(b, POLICYSET);
     r = r && policySetEntry_1(b, l + 1);
     r = r && policySetEntry_2(b, l + 1);
@@ -1671,7 +1617,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     p = r; // pin = 4
     r = r && report_error_(b, policySetEntry_4(b, l + 1));
     r = p && consumeToken(b, CURVE2) && r;
-    exit_section_(b, l, m, r, p, policy_set_recover_parser_);
+    exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
@@ -1710,67 +1656,6 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = qualifiedName(b, l + 1);
     exit_section_(b, m, POLICY_SET_NAME, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // !(policyBodyStart|'}')
-  static boolean policy_recover(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "policy_recover")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
-    r = !policy_recover_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // policyBodyStart|'}'
-  private static boolean policy_recover_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "policy_recover_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = policyBodyStart(b, l + 1);
-    if (!r) r = consumeToken(b, CURVE2);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // !(policysetBodyStart|'}')
-  static boolean policy_set_recover(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "policy_set_recover")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
-    r = !policy_set_recover_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // policysetBodyStart|'}'
-  private static boolean policy_set_recover_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "policy_set_recover_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = policysetBodyStart(b, l + 1);
-    if (!r) r = consumeToken(b, CURVE2);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // policy|policyset|rule|apply|target|on|qualifiedName
-  static boolean policysetBodyStart(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "policysetBodyStart")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, POLICY);
-    if (!r) r = consumeToken(b, POLICYSET);
-    if (!r) r = consumeToken(b, RULE);
-    if (!r) r = consumeToken(b, APPLY);
-    if (!r) r = consumeToken(b, TARGET);
-    if (!r) r = consumeToken(b, ON);
-    if (!r) r = qualifiedName(b, l + 1);
-    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -1857,7 +1742,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, RULECOMBINATOR);
     r = r && algorithmName(b, l + 1);
-    r = r && consumeToken(b, "=");
+    r = r && consumeToken(b, ASSIGN);
     r = r && xacmlDeclaration(b, l + 1);
     exit_section_(b, m, RULE_COMBINATOR_DECLARATION, r);
     return r;
@@ -1867,8 +1752,9 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   // rule ruleName? description? '{' effect ruleBody* '}'
   public static boolean ruleEntry(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ruleEntry")) return false;
+    if (!nextTokenIs(b, RULE)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, RULE_ENTRY, "<rule entry>");
+    Marker m = enter_section_(b, l, _NONE_, RULE_ENTRY, null);
     r = consumeToken(b, RULE);
     r = r && ruleEntry_1(b, l + 1);
     r = r && ruleEntry_2(b, l + 1);
@@ -1877,7 +1763,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     r = r && report_error_(b, effect(b, l + 1));
     r = p && report_error_(b, ruleEntry_5(b, l + 1)) && r;
     r = p && consumeToken(b, CURVE2) && r;
-    exit_section_(b, l, m, r, p, ruleRecover_parser_);
+    exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
@@ -1916,17 +1802,6 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = idDeclaration(b, l + 1);
     exit_section_(b, m, RULE_NAME, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // !('}')
-  static boolean ruleRecover(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ruleRecover")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
-    r = !consumeToken(b, CURVE2);
-    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -2019,7 +1894,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, TYPE);
     r = r && typeName(b, l + 1);
-    r = r && consumeToken(b, "=");
+    r = r && consumeToken(b, ASSIGN);
     r = r && xacmlDeclaration(b, l + 1);
     exit_section_(b, m, TYPE_DECLARATION, r);
     return r;
@@ -2086,24 +1961,4 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  final static Parser namespace_recover_parser_ = new Parser() {
-    public boolean parse(PsiBuilder b, int l) {
-      return namespace_recover(b, l + 1);
-    }
-  };
-  final static Parser policy_recover_parser_ = new Parser() {
-    public boolean parse(PsiBuilder b, int l) {
-      return policy_recover(b, l + 1);
-    }
-  };
-  final static Parser policy_set_recover_parser_ = new Parser() {
-    public boolean parse(PsiBuilder b, int l) {
-      return policy_set_recover(b, l + 1);
-    }
-  };
-  final static Parser ruleRecover_parser_ = new Parser() {
-    public boolean parse(PsiBuilder b, int l) {
-      return ruleRecover(b, l + 1);
-    }
-  };
 }

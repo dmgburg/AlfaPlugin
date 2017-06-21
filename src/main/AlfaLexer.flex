@@ -49,20 +49,22 @@ BLOCK_COMMENT="/"\*(.|\n)*?\*"/"
   "*"                        { return MULTIPLY; }
   "/"                        { return DIVIDE; }
   "=="                       { return EQUAL; }
+  "="                        { return ASSIGN; }
+  ":"                        { return COLON; }
   "namespace"                { return NAMESPACE; }
-  "policy"                   { return POLICY; }
   "policyset"                { return POLICYSET; }
-  "rule"                     { return RULE; }
-  "apply"                    { return APPLY; }
+  "policy"                   { return POLICY; }
   "target"                   { return TARGET; }
-  "on"                       { return ON; }
   "clause"                   { return CLAUSE; }
   "musteepresent"            { return MUSTEEPRESENT; }
   "issuer"                   { return ISSUER; }
+  "apply"                    { return APPLY; }
+  "rule"                     { return RULE; }
   "condition"                { return CONDITION; }
   "function"                 { return FUNCTION; }
   "permit"                   { return PERMIT; }
   "deny"                     { return DENY; }
+  "on"                       { return ON; }
   "obligation"               { return OBLIGATION; }
   "advice"                   { return ADVICE; }
   "attribute"                { return ATTRIBUTE; }

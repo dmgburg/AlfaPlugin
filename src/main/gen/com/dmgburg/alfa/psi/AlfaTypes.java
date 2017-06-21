@@ -106,11 +106,13 @@ public interface AlfaTypes {
   IElementType ANYATOMIC = new AlfaTokenType("anyAtomic");
   IElementType ANYATOMICORBAG = new AlfaTokenType("anyAtomicOrBag");
   IElementType APPLY = new AlfaTokenType("apply");
+  IElementType ASSIGN = new AlfaTokenType("=");
   IElementType ATTRIBUTE = new AlfaTokenType("attribute");
   IElementType BAG = new AlfaTokenType("bag");
   IElementType BLOCK_COMMENT = new AlfaTokenType("block_comment");
   IElementType CATEGORY = new AlfaTokenType("category");
   IElementType CLAUSE = new AlfaTokenType("clause");
+  IElementType COLON = new AlfaTokenType(":");
   IElementType CONDITION = new AlfaTokenType("condition");
   IElementType CURVE1 = new AlfaTokenType("{");
   IElementType CURVE2 = new AlfaTokenType("}");

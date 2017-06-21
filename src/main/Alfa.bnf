@@ -28,6 +28,8 @@
       multiply='*'
       divide='/'
       equal='=='
+      assign='='
+      colon=':'
 
       IDENTIFIER="regexp:\w+"
       WHITE_SPACE='regexp:\s+'
@@ -39,9 +41,7 @@
 
 root ::= namespaceEntry+
 
-namespaceEntry ::= namespace namespaceName '{' namespaceBody* '}' { pin=3 recoverWhile=namespace_recover}
-private namespace_recover::=!(namespaceBodyStart|'}')
-private namespaceBodyStart ::= namespace|policy|policyset|rule
+namespaceEntry ::= namespace namespaceName '{' namespaceBody* '}' { pin=3}
 
 namespaceName ::= qualifiedName
 
@@ -64,9 +64,7 @@ namespaceBody ::= (
     categoryDeclaration
     )
 
-policySetEntry ::= policyset policySetName? description? '{' policySetBody* '}' {pin=4 recoverWhile=policy_set_recover}
-private policy_set_recover::=!(policysetBodyStart|'}')
-private policysetBodyStart ::= policy|policyset|rule|apply|target|on|qualifiedName
+policySetEntry ::= policyset policySetName? description? '{' policySetBody* '}' {pin=4}
 
 policySetName ::= qualifiedName
 
@@ -77,9 +75,7 @@ policySetBody ::= combinationAlgorithmRef|
         policyEntry|
         policySetEntry
 
-policyEntry ::= policy policyName? description? '{' policyBody* '}' { pin=4 recoverWhile=policy_recover}
-private policy_recover::=!(policyBodyStart|'}')
-private policyBodyStart ::= rule|apply|target|on|qualifiedName
+policyEntry ::= policy policyName? description? '{' policyBody* '}' { pin=4 }
 
 policyBody ::= targetEntry|
         combinationAlgorithmRef|
@@ -132,8 +128,7 @@ ref ::= qualifiedName
 
 combinationAlgorithmRef ::= apply ref
 
-ruleEntry ::= rule ruleName? description? '{' effect ruleBody* '}' {pin=4 recoverWhile=ruleRecover}
-private ruleRecover ::= !('}')
+ruleEntry ::= rule ruleName? description? '{' effect ruleBody* '}' {pin=4}
 
 description ::= STRING_LITERAL
 
