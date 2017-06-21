@@ -243,7 +243,7 @@ functionType ::= function
 
 operatorDeclaration ::= infix operatorFeature* '(' operator ')' '=' '{' operatorDeclarationBody+ '}' operatorInvrese?
 
-operatorFeature ::= OperatorFeature
+operatorFeature ::= comm | allowbags
 
 operatorInvrese ::= inv operator
 
