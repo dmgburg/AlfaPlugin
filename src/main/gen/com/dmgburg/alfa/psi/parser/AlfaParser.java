@@ -260,6 +260,9 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     else if (t == RULE_BODY) {
       r = ruleBody(b, 0);
     }
+    else if (t == RULE_BODY_ELEMENT) {
+      r = ruleBodyElement(b, 0);
+    }
     else if (t == RULE_COMBINATOR_DECLARATION) {
       r = ruleCombinatorDeclaration(b, 0);
     }
@@ -1722,11 +1725,36 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // targetEntry | conditionEntry | onEffect
+  // effect ruleBodyElement*
   public static boolean ruleBody(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ruleBody")) return false;
+    if (!nextTokenIs(b, "<rule body>", DENY, PERMIT)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, RULE_BODY, "<rule body>");
+    r = effect(b, l + 1);
+    r = r && ruleBody_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // ruleBodyElement*
+  private static boolean ruleBody_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ruleBody_1")) return false;
+    int c = current_position_(b);
+    while (true) {
+      if (!ruleBodyElement(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "ruleBody_1", c)) break;
+      c = current_position_(b);
+    }
+    return true;
+  }
+
+  /* ********************************************************** */
+  // targetEntry | conditionEntry | onEffect
+  public static boolean ruleBodyElement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ruleBodyElement")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, RULE_BODY_ELEMENT, "<rule body element>");
     r = targetEntry(b, l + 1);
     if (!r) r = conditionEntry(b, l + 1);
     if (!r) r = onEffect(b, l + 1);
@@ -1750,7 +1778,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // rule ruleName? description? '{' effect ruleBody* '}'
+  // rule ruleName? description? '{' ruleBody '}'
   public static boolean ruleEntry(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ruleEntry")) return false;
     if (!nextTokenIs(b, RULE)) return false;
@@ -1761,8 +1789,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     r = r && ruleEntry_2(b, l + 1);
     r = r && consumeToken(b, CURVE1);
     p = r; // pin = 4
-    r = r && report_error_(b, effect(b, l + 1));
-    r = p && report_error_(b, ruleEntry_5(b, l + 1)) && r;
+    r = r && report_error_(b, ruleBody(b, l + 1));
     r = p && consumeToken(b, CURVE2) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
@@ -1779,18 +1806,6 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   private static boolean ruleEntry_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ruleEntry_2")) return false;
     description(b, l + 1);
-    return true;
-  }
-
-  // ruleBody*
-  private static boolean ruleEntry_5(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ruleEntry_5")) return false;
-    int c = current_position_(b);
-    while (true) {
-      if (!ruleBody(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "ruleEntry_5", c)) break;
-      c = current_position_(b);
-    }
     return true;
   }
 

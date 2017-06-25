@@ -12,14 +12,14 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.dmgburg.alfa.psi.*;
 import com.dmgburg.alfa.utils.ParserUtilsKt;
 
-public class AlfaRuleBodyImpl extends ASTWrapperPsiElement implements AlfaRuleBody {
+public class AlfaRuleBodyElementImpl extends ASTWrapperPsiElement implements AlfaRuleBodyElement {
 
-  public AlfaRuleBodyImpl(ASTNode node) {
+  public AlfaRuleBodyElementImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull AlfaVisitor visitor) {
-    visitor.visitRuleBody(this);
+    visitor.visitRuleBodyElement(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -28,15 +28,21 @@ public class AlfaRuleBodyImpl extends ASTWrapperPsiElement implements AlfaRuleBo
   }
 
   @Override
-  @NotNull
-  public AlfaEffect getEffect() {
-    return findNotNullChildByClass(AlfaEffect.class);
+  @Nullable
+  public AlfaConditionEntry getConditionEntry() {
+    return findChildByClass(AlfaConditionEntry.class);
   }
 
   @Override
-  @NotNull
-  public List<AlfaRuleBodyElement> getRuleBodyElementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, AlfaRuleBodyElement.class);
+  @Nullable
+  public AlfaOnEffect getOnEffect() {
+    return findChildByClass(AlfaOnEffect.class);
+  }
+
+  @Override
+  @Nullable
+  public AlfaTargetEntry getTargetEntry() {
+    return findChildByClass(AlfaTargetEntry.class);
   }
 
 }

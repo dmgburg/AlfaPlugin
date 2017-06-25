@@ -324,6 +324,10 @@ public class AlfaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitRuleBodyElement(@NotNull AlfaRuleBodyElement o) {
+    visitPsiElement(o);
+  }
+
   public void visitRuleCombinatorDeclaration(@NotNull AlfaRuleCombinatorDeclaration o) {
     visitPsiElement(o);
   }

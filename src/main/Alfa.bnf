@@ -132,13 +132,15 @@ ref ::= qualifiedName
 
 combinationAlgorithmRef ::= apply ref
 
-ruleEntry ::= rule ruleName? description? '{' effect ruleBody* '}' {pin=4 mixin="com.dmgburg.alfa.reference.AlfaNamedRule"
+ruleEntry ::= rule ruleName? description? '{' ruleBody '}' {pin=4 mixin="com.dmgburg.alfa.reference.AlfaNamedRule"
                                                                           implements="com.dmgburg.alfa.reference.AlfaNamedElement"
                                                                           methods=[getName setName getNameIdentifier]}
 
 description ::= STRING_LITERAL
 
-ruleBody ::= targetEntry | conditionEntry | onEffect
+ruleBody ::= effect ruleBodyElement*
+
+ruleBodyElement ::= targetEntry | conditionEntry | onEffect
 
 conditionEntry ::= condition conditionBody
 

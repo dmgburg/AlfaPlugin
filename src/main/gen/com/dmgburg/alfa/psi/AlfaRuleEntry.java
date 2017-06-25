@@ -12,10 +12,7 @@ public interface AlfaRuleEntry extends AlfaNamedElement {
   AlfaDescription getDescription();
 
   @Nullable
-  AlfaEffect getEffect();
-
-  @NotNull
-  List<AlfaRuleBody> getRuleBodyList();
+  AlfaRuleBody getRuleBody();
 
   @Nullable
   AlfaRuleName getRuleName();

@@ -86,6 +86,7 @@ public interface AlfaTypes {
   IElementType REF = new AlfaElementType("REF");
   IElementType RIGHT_CLAUSE_OPERAND = new AlfaElementType("RIGHT_CLAUSE_OPERAND");
   IElementType RULE_BODY = new AlfaElementType("RULE_BODY");
+  IElementType RULE_BODY_ELEMENT = new AlfaElementType("RULE_BODY_ELEMENT");
   IElementType RULE_COMBINATOR_DECLARATION = new AlfaElementType("RULE_COMBINATOR_DECLARATION");
   IElementType RULE_ENTRY = new AlfaElementType("RULE_ENTRY");
   IElementType RULE_NAME = new AlfaElementType("RULE_NAME");
@@ -389,6 +390,9 @@ public interface AlfaTypes {
       }
       else if (type == RULE_BODY) {
         return new AlfaRuleBodyImpl(node);
+      }
+      else if (type == RULE_BODY_ELEMENT) {
+        return new AlfaRuleBodyElementImpl(node);
       }
       else if (type == RULE_COMBINATOR_DECLARATION) {
         return new AlfaRuleCombinatorDeclarationImpl(node);

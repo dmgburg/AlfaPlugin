@@ -25,7 +25,7 @@ class AlfaCompletionContributor : CompletionContributor() {
                 EffectCompletion
         )
         extend(CompletionType.BASIC,
-                psiElement(IDENTIFIER).withParent(psiElement(RULE_BODY)).withLanguage(AlfaLanguage.INSTANCE),
+                psiElement(IDENTIFIER).withParent(psiElement(RULE_BODY_ELEMENT)).withLanguage(AlfaLanguage.INSTANCE),
                 RuleBodyCompletion
         )
     }

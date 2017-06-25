@@ -35,14 +35,8 @@ public class AlfaRuleEntryImpl extends AlfaNamedRule implements AlfaRuleEntry {
 
   @Override
   @Nullable
-  public AlfaEffect getEffect() {
-    return findChildByClass(AlfaEffect.class);
-  }
-
-  @Override
-  @NotNull
-  public List<AlfaRuleBody> getRuleBodyList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, AlfaRuleBody.class);
+  public AlfaRuleBody getRuleBody() {
+    return findChildByClass(AlfaRuleBody.class);
   }
 
   @Override

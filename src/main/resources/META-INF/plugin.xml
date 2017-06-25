@@ -27,8 +27,9 @@
         <completion.contributor language="Alfa" implementationClass="com.dmgburg.alfa.completion.AlfaCompletionContributor"/>
 
         <!--Reference-->
-        <psi.referenceContributor implementation="com.dmgburg.alfa.reference.AlfaReferenceContributor"/>
-        <!--<psi.referenceContributor implementation="com.simpleplugin.SimpleReferenceContributor"/>-->
+
+        <!--Formatting-->
+        <lang.formatter language="Alfa" implementationClass="com.dmgburg.alfa.formatting.AlfaFormattingModelBuilder"/>
     </extensions>
 
 </idea-plugin>

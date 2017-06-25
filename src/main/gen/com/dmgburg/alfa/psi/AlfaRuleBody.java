@@ -7,13 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface AlfaRuleBody extends PsiElement {
 
-  @Nullable
-  AlfaConditionEntry getConditionEntry();
+  @NotNull
+  AlfaEffect getEffect();
 
-  @Nullable
-  AlfaOnEffect getOnEffect();
-
-  @Nullable
-  AlfaTargetEntry getTargetEntry();
+  @NotNull
+  List<AlfaRuleBodyElement> getRuleBodyElementList();
 
 }
