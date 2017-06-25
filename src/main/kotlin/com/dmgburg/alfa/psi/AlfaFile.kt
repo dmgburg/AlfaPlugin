@@ -6,6 +6,10 @@ import com.intellij.extapi.psi.PsiFileBase
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.psi.FileViewProvider
 import javax.swing.Icon
+import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry
+import com.intellij.psi.PsiReference
+
+
 
 class AlfaFile(fileViewProvider: FileViewProvider) : PsiFileBase(fileViewProvider, AlfaLanguage.INSTANCE) {
     override fun getFileType(): FileType {
@@ -18,5 +22,9 @@ class AlfaFile(fileViewProvider: FileViewProvider) : PsiFileBase(fileViewProvide
 
     override fun getIcon(flags: Int): Icon? {
         return super.getIcon(flags)
+    }
+
+    override fun getReferences(): Array<PsiReference> {
+        return ReferenceProvidersRegistry.getReferencesFromProviders(this)
     }
 }

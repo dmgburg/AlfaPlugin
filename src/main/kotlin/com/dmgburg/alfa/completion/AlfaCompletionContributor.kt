@@ -21,10 +21,6 @@ class AlfaCompletionContributor : CompletionContributor() {
 
         // TODO move if to patterns
         extend(CompletionType.BASIC,
-                psiElement(IDENTIFIER).withLanguage(AlfaLanguage.INSTANCE),
-                PolicyRefCompletion
-        )
-        extend(CompletionType.BASIC,
                 psiElement(IDENTIFIER).afterSibling(psiElement(ON)).withLanguage(AlfaLanguage.INSTANCE),
                 EffectCompletion
         )

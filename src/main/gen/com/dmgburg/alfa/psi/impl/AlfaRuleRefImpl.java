@@ -10,6 +10,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.dmgburg.alfa.psi.AlfaTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.dmgburg.alfa.psi.*;
+import com.dmgburg.alfa.utils.ParserUtilsKt;
+import com.intellij.psi.PsiReference;
 
 public class AlfaRuleRefImpl extends ASTWrapperPsiElement implements AlfaRuleRef {
 
@@ -30,6 +32,16 @@ public class AlfaRuleRefImpl extends ASTWrapperPsiElement implements AlfaRuleRef
   @NotNull
   public AlfaRef getRef() {
     return findNotNullChildByClass(AlfaRef.class);
+  }
+
+  @NotNull
+  public PsiReference[] getReferences() {
+    return ParserUtilsKt.getReferences(this);
+  }
+
+  @Nullable
+  public PsiReference getReference() {
+    return ParserUtilsKt.getReference(this);
   }
 
 }

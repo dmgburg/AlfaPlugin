@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.dmgburg.alfa.psi.AlfaTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.dmgburg.alfa.psi.*;
+import com.dmgburg.alfa.utils.ParserUtilsKt;
 
 public class AlfaImportNameImpl extends ASTWrapperPsiElement implements AlfaImportName {
 

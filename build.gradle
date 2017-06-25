@@ -37,7 +37,7 @@ sourceSets {
     }
 }
 
-def ideaVersion = '172.3095.12'
+def ideaVersion = '2017.1'
 
 intellij {
     version "IC-$ideaVersion"
@@ -82,7 +82,7 @@ task generateLexer(type: JavaExec) {
     args "-d", "$projectDir/src/main/gen/com/dmgburg/alfa/psi/parser", "--skel", "$projectDir/grammarKit/idea-flex.skeleton",  "$projectDir/src/main/AlfaLexer.flex"
 }
 
-compileJava{
-    dependsOn generateLexer
-    dependsOn generateParser
-}
+//compileJava{
+//    dependsOn generateLexer
+//    dependsOn generateParser
+//}

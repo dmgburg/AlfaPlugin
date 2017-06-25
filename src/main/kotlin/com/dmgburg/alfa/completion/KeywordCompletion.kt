@@ -31,16 +31,6 @@ object EffectCompletion : CompletionProvider<CompletionParameters>() {
     }
 }
 
-object PolicyRefCompletion : CompletionProvider<CompletionParameters>() {
-    override fun addCompletions(parameters: CompletionParameters, context: ProcessingContext?, result: CompletionResultSet) {
-        val body = parameters.position.closestBody()
-        if (body is AlfaPolicySetBody){
-            findAllPolicySet(body.project).map {it.policySetName?.qualifiedName?.text }.forEach{result.addElement(it)}
-            findAllPolicy(body.project).map {it.policyName?.idDeclaration?.identifier?.text }.forEach{result.addElement(it)}
-        }
-    }
-}
-
 object RuleBodyCompletion : CompletionProvider<CompletionParameters>() {
     override fun addCompletions(parameters: CompletionParameters, context: ProcessingContext?, result: CompletionResultSet) {
         result.addAllElements(listOf(PERMIT, DENY))

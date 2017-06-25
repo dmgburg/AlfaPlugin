@@ -4,6 +4,7 @@ package com.dmgburg.alfa.psi;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiElement;
+import com.dmgburg.alfa.reference.AlfaNamedElement;
 
 public class AlfaVisitor extends PsiElementVisitor {
 
@@ -284,7 +285,7 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitPolicyEntry(@NotNull AlfaPolicyEntry o) {
-    visitPsiElement(o);
+    visitNamedElement(o);
   }
 
   public void visitPolicyName(@NotNull AlfaPolicyName o) {
@@ -300,7 +301,7 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitPolicySetEntry(@NotNull AlfaPolicySetEntry o) {
-    visitPsiElement(o);
+    visitNamedElement(o);
   }
 
   public void visitPolicySetName(@NotNull AlfaPolicySetName o) {
@@ -328,7 +329,7 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitRuleEntry(@NotNull AlfaRuleEntry o) {
-    visitPsiElement(o);
+    visitNamedElement(o);
   }
 
   public void visitRuleName(@NotNull AlfaRuleName o) {
@@ -372,6 +373,10 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitXacmlDeclaration(@NotNull AlfaXacmlDeclaration o) {
+    visitPsiElement(o);
+  }
+
+  public void visitNamedElement(@NotNull AlfaNamedElement o) {
     visitPsiElement(o);
   }
 

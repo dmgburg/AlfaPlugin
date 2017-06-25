@@ -8,10 +8,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.dmgburg.alfa.psi.AlfaTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.dmgburg.alfa.reference.AlfaNamedRule;
 import com.dmgburg.alfa.psi.*;
+import com.dmgburg.alfa.utils.ParserUtilsKt;
 
-public class AlfaRuleEntryImpl extends ASTWrapperPsiElement implements AlfaRuleEntry {
+public class AlfaRuleEntryImpl extends AlfaNamedRule implements AlfaRuleEntry {
 
   public AlfaRuleEntryImpl(ASTNode node) {
     super(node);
@@ -48,6 +49,21 @@ public class AlfaRuleEntryImpl extends ASTWrapperPsiElement implements AlfaRuleE
   @Nullable
   public AlfaRuleName getRuleName() {
     return findChildByClass(AlfaRuleName.class);
+  }
+
+  @NotNull
+  public String getName() {
+    return ParserUtilsKt.getName(this);
+  }
+
+  @NotNull
+  public PsiElement setName(String newName) {
+    return ParserUtilsKt.setName(this, newName);
+  }
+
+  @Nullable
+  public PsiElement getNameIdentifier() {
+    return ParserUtilsKt.getNameIdentifier(this);
   }
 
 }

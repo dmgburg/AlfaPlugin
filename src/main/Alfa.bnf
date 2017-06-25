@@ -1,6 +1,6 @@
 {
   parserClass="com.dmgburg.alfa.psi.parser.AlfaParser"
-//  parserUtilClass="com.dmgburg.alfa.psi.parser.AlfaParserUtil"
+  psiImplUtilClass="com.dmgburg.alfa.utils.ParserUtilsKt"
 
   extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
@@ -39,7 +39,7 @@
     ]
 }
 
-root ::= namespaceEntry+
+alfaFile ::= namespaceEntry+
 
 namespaceEntry ::= namespace namespaceName '{' namespaceBody* '}' { pin=3}
 
@@ -64,7 +64,9 @@ namespaceBody ::= (
     categoryDeclaration
     )
 
-policySetEntry ::= policyset policySetName? description? '{' policySetBody* '}' {pin=4}
+policySetEntry ::= policyset policySetName? description? '{' policySetBody* '}' {pin=4 mixin="com.dmgburg.alfa.reference.AlfaNamedPolicySet"
+                                                                                    implements="com.dmgburg.alfa.reference.AlfaNamedElement"
+                                                                                    methods=[getName setName getNameIdentifier]}
 
 policySetName ::= qualifiedName
 
@@ -75,7 +77,9 @@ policySetBody ::= combinationAlgorithmRef|
         policyEntry|
         policySetEntry
 
-policyEntry ::= policy policyName? description? '{' policyBody* '}' { pin=4 }
+policyEntry ::= policy policyName? description? '{' policyBody* '}' { pin=4 mixin="com.dmgburg.alfa.reference.AlfaNamedPolicy"
+                                                                              implements="com.dmgburg.alfa.reference.AlfaNamedElement"
+                                                                              methods=[getName setName getNameIdentifier]}
 
 policyBody ::= targetEntry|
         combinationAlgorithmRef|
@@ -83,8 +87,8 @@ policyBody ::= targetEntry|
         ruleRef|
         ruleEntry
 
-policyOrPolicySetRef ::= ref
-ruleRef ::= ref
+policyOrPolicySetRef ::= ref {methods=[getReferences getReference]}
+ruleRef ::= ref {methods=[getReferences getReference]}
 
 policyName ::= idDeclaration
 
@@ -116,7 +120,7 @@ clauseOperator ::= IDENTIFIER
 
 clauseOperand ::= attributeRef | constant
 
-attributeRef ::= ref attributeDesignator?
+attributeRef ::= ref attributeDesignator? {methods=[getReferences getReference]}
 
 attributeDesignator ::= '[' attributeDesignatorMustBePresent? attributeDesignatorIssuer? ']'
 
@@ -128,7 +132,9 @@ ref ::= qualifiedName
 
 combinationAlgorithmRef ::= apply ref
 
-ruleEntry ::= rule ruleName? description? '{' effect ruleBody* '}' {pin=4}
+ruleEntry ::= rule ruleName? description? '{' effect ruleBody* '}' {pin=4 mixin="com.dmgburg.alfa.reference.AlfaNamedRule"
+                                                                          implements="com.dmgburg.alfa.reference.AlfaNamedElement"
+                                                                          methods=[getName setName getNameIdentifier]}
 
 description ::= STRING_LITERAL
 

@@ -25,6 +25,10 @@
 
         <!--Completion-->
         <completion.contributor language="Alfa" implementationClass="com.dmgburg.alfa.completion.AlfaCompletionContributor"/>
+
+        <!--Reference-->
+        <psi.referenceContributor implementation="com.dmgburg.alfa.reference.AlfaReferenceContributor"/>
+        <!--<psi.referenceContributor implementation="com.simpleplugin.SimpleReferenceContributor"/>-->
     </extensions>
 
 </idea-plugin>

@@ -44,6 +44,17 @@ fun findAllPolicy(project: Project) : Collection<AlfaPolicyEntry> {
     return alfaFiles(project).flatMap { dfs(it, AlfaPolicyEntry::class.java) }
 }
 
+fun findRule(project: Project, name: String) : AlfaRuleEntry?{
+    return findAllRules(project).find {
+        val identifier = it.getIdentifier()
+        return@find identifier != null && identifier.matches(name.split('.'))
+    }
+}
+
+fun findAllRules(project: Project) : Collection<AlfaRuleEntry> {
+    return alfaFiles(project).flatMap { dfs(it, AlfaRuleEntry::class.java) }
+}
+
 private fun <T> dfs(psiElement: PsiElement, clazz: Class<T>) : Collection<T>{
     return dfs(hashSetOf(),psiElement,clazz)
 }
