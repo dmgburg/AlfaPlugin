@@ -30,6 +30,7 @@
 
         <!--Formatting-->
         <lang.formatter language="Alfa" implementationClass="com.dmgburg.alfa.formatting.AlfaFormattingModelBuilder"/>
+        <lang.commenter language="Alfa" implementationClass="com.dmgburg.alfa.comment.AlfaCommenter"/>
     </extensions>
 
 </idea-plugin>
