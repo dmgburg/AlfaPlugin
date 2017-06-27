@@ -11,6 +11,7 @@ import static com.dmgburg.alfa.psi.AlfaTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.dmgburg.alfa.psi.*;
 import com.dmgburg.alfa.utils.ParserUtilsKt;
+import com.intellij.psi.PsiReference;
 
 public class AlfaOperatorImpl extends ASTWrapperPsiElement implements AlfaOperator {
 
@@ -25,6 +26,16 @@ public class AlfaOperatorImpl extends ASTWrapperPsiElement implements AlfaOperat
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof AlfaVisitor) accept((AlfaVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @NotNull
+  public PsiReference[] getReferences() {
+    return ParserUtilsKt.getReferences(this);
+  }
+
+  @Nullable
+  public PsiReference getReference() {
+    return ParserUtilsKt.getReference(this);
   }
 
 }

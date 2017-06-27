@@ -45,7 +45,7 @@ namespaceEntry ::= namespace namespaceName '{' namespaceBody* '}' { pin=3}
 
 namespaceName ::= qualifiedName
 
-qualifiedName ::= IDENTIFIER ['.' IDENTIFIER]
+qualifiedName ::= IDENTIFIER ('.' IDENTIFIER)*
 
 namespaceBody ::= (
     namespaceEntry|
@@ -110,7 +110,7 @@ functionClauseArgument ::= attributeRef | constant
 
 singleClauseExpression ::= leftClauseOperand operator rightClauseOperand
 
-operator ::= '&&' | '||' | '<=' | '>=' | '<' | '>' | '+' | '-' | '*' | '/' | '=='
+operator ::= '&&' | '||' | '<=' | '>=' | '<' | '>' | '+' | '-' | '*' | '/' | '==' {methods=[getReferences getReference]}
 
 leftClauseOperand ::= clauseOperand
 
@@ -249,7 +249,10 @@ functionType ::= function
 
 // operators
 
-operatorDeclaration ::= infix operatorFeature* '(' operator ')' '=' '{' operatorDeclarationBody+ '}' operatorInvrese?
+operatorDeclaration ::= infix operatorFeature* '(' operator ')' '=' '{' operatorDeclarationBody+ '}' operatorInvrese? {mixin="com.dmgburg.alfa.reference.AlfaNamedPolicy"
+                                                                                                                       implements="com.dmgburg.alfa.reference.AlfaNamedElement"
+                                                                                                                       methods=[getName setName getNameIdentifier]}
+
 
 operatorFeature ::= comm | allowbags
 

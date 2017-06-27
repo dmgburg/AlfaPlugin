@@ -5,12 +5,14 @@ package com.dmgburg.alfa.utils
 import com.dmgburg.alfa.domain.Identifier
 import com.dmgburg.alfa.psi.*
 import com.dmgburg.alfa.reference.AlfaAttributeReference
+import com.dmgburg.alfa.reference.AlfaOperatorReference
 import com.dmgburg.alfa.reference.AlfaPolicyOrSetReference
 import com.dmgburg.alfa.reference.AlfaRuleReference
 import com.dmgburg.alfa.utils.Util.noNameElementPlaceholder
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiReference
+import org.jaxen.saxpath.Operator
 
 fun AlfaPolicySetEntry.getIdentifier(): Identifier? {
     val name = this.policySetName ?: return null
@@ -76,7 +78,8 @@ fun getReferences(psiElement: PsiElement): Array<PsiReference> {
     return when (psiElement) {
         is AlfaPolicyOrPolicySetRef -> arrayOf(AlfaPolicyOrSetReference(psiElement, TextRange(0, psiElement.getTextLength())))
         is AlfaRuleRef-> arrayOf(AlfaRuleReference(psiElement, TextRange(0, psiElement.getTextLength())))
-        is AlfaAttributeRef-> arrayOf(AlfaAttributeReference(psiElement, TextRange(0, psiElement.getTextLength())))
+        is AlfaAttributeRef -> arrayOf(AlfaAttributeReference(psiElement, TextRange(0, psiElement.getTextLength())))
+        is AlfaOperator -> arrayOf(AlfaOperatorReference(psiElement,TextRange(0, psiElement.getTextLength())))
         else -> emptyArray()
     }
 }
@@ -166,6 +169,31 @@ fun getNameIdentifier(element: AlfaRuleEntry): PsiElement? {
     }
 }
 
+//Operator
+
+fun AlfaOperatorDeclaration.getName(): String {
+    return this.text ?: noNameElementPlaceholder
+}
+
+fun setName(element: AlfaOperatorDeclaration, newName: String): PsiElement {
+    val nameNode = element.getNode().findChildByType(AlfaTypes.POLICY_SET_NAME)
+    if (nameNode != null) {
+        throw RuntimeException("keynode is null")
+//        val property = AlfaElementFactory.createProperty(element.getProject(), newName)
+//        val newKeyNode = property.getFirstChild().getNode()
+//        element.getNode().replaceChild(nameNode, newKeyNode)
+    }
+    return element
+}
+
+fun getNameIdentifier(element: AlfaOperatorDeclaration): PsiElement? {
+    val keyNode = element.getNode().firstChildNode
+    if (keyNode != null) {
+        return keyNode.getPsi()
+    } else {
+        return null
+    }
+}
 
 object Util {
     val noNameElementPlaceholder = "NoNameElementPlaceholder"

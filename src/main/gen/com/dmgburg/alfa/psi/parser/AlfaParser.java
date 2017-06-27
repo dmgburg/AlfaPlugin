@@ -1682,7 +1682,7 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENTIFIER ['.' IDENTIFIER]
+  // IDENTIFIER ('.' IDENTIFIER)*
   public static boolean qualifiedName(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "qualifiedName")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
@@ -1694,11 +1694,26 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // ['.' IDENTIFIER]
+  // ('.' IDENTIFIER)*
   private static boolean qualifiedName_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "qualifiedName_1")) return false;
-    parseTokens(b, 0, DOT, IDENTIFIER);
+    int c = current_position_(b);
+    while (true) {
+      if (!qualifiedName_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "qualifiedName_1", c)) break;
+      c = current_position_(b);
+    }
     return true;
+  }
+
+  // '.' IDENTIFIER
+  private static boolean qualifiedName_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "qualifiedName_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, DOT, IDENTIFIER);
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   /* ********************************************************** */

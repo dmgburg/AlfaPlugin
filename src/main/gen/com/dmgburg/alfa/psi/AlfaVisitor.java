@@ -261,7 +261,7 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitOperatorDeclaration(@NotNull AlfaOperatorDeclaration o) {
-    visitPsiElement(o);
+    visitNamedElement(o);
   }
 
   public void visitOperatorDeclarationBody(@NotNull AlfaOperatorDeclarationBody o) {

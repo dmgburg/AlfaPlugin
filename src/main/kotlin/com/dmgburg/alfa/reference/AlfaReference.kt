@@ -118,3 +118,35 @@ class AlfaAttributeReference(psiElement: PsiElement, textRange: TextRange) : Psi
 
     }
 }
+
+class AlfaOperatorReference(psiElement: PsiElement, textRange: TextRange) : PsiReferenceBase<PsiElement>(psiElement, textRange), PsiPolyVariantReference {
+    private val key: String = element.text.substring(textRange.getStartOffset(), textRange.getEndOffset())
+
+    override fun resolve(): PsiElement? {
+        val resolveResults = multiResolve(false)
+        return if (resolveResults.size == 1) resolveResults[0].element else null
+    }
+
+    override fun getVariants(): Array<Any> {
+        val project = myElement.project
+        val operators = findAllOperators(project)
+        val variants = ArrayList<LookupElement>()
+        for (operator in operators) {
+            if (operator.text.isNotEmpty()) {
+                variants.add(LookupElementBuilder.create(operator).withIcon(AlfaIcons.FILE).withTypeText(operator.getContainingFile().getName()))
+            }
+        }
+        return variants.toTypedArray()
+
+    }
+
+    override fun multiResolve(incompleteCode: Boolean): Array<ResolveResult> {
+        val results = ArrayList<ResolveResult>()
+        val operator = findOperator(element.project, key)
+        if (operator != null) {
+            results.add(PsiElementResolveResult(operator))
+        }
+        return results.toTypedArray()
+
+    }
+}

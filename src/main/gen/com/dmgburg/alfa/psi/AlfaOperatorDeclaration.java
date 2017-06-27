@@ -4,8 +4,9 @@ package com.dmgburg.alfa.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import com.dmgburg.alfa.reference.AlfaNamedElement;
 
-public interface AlfaOperatorDeclaration extends PsiElement {
+public interface AlfaOperatorDeclaration extends AlfaNamedElement {
 
   @NotNull
   AlfaOperator getOperator();
@@ -18,5 +19,14 @@ public interface AlfaOperatorDeclaration extends PsiElement {
 
   @Nullable
   AlfaOperatorInvrese getOperatorInvrese();
+
+  @NotNull
+  String getName();
+
+  @NotNull
+  PsiElement setName(String newName);
+
+  @Nullable
+  PsiElement getNameIdentifier();
 
 }

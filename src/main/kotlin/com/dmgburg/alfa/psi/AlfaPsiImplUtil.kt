@@ -71,6 +71,18 @@ fun findAttribute(project: Project, name: String) : AlfaAttributeDeclaration? {
     }
 }
 
+fun findAllOperators(project: Project): Collection<AlfaOperatorDeclaration> {
+    return alfaFiles(project).flatMap { dfs(it, AlfaOperatorDeclaration::class.java) }
+}
+
+
+fun findOperator(project: Project, name: String) : AlfaOperatorDeclaration? {
+    return findAllOperators(project).find {
+        val symbol = it.operator.text
+        return@find symbol == name
+    }
+}
+
 private fun <T> dfs(set: MutableSet<T>, psiElement: PsiElement, clazz: Class<T>): Collection<T>{
     psiElement.children.forEach {
         if (clazz.isInstance(it)){
