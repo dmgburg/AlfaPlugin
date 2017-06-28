@@ -8,11 +8,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.dmgburg.alfa.psi.AlfaTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.dmgburg.alfa.reference.AlfaNamedRule;
 import com.dmgburg.alfa.psi.*;
 import com.dmgburg.alfa.utils.ParserUtilsKt;
 
-public class AlfaAttributeDeclarationImpl extends ASTWrapperPsiElement implements AlfaAttributeDeclaration {
+public class AlfaAttributeDeclarationImpl extends AlfaNamedRule implements AlfaAttributeDeclaration {
 
   public AlfaAttributeDeclarationImpl(ASTNode node) {
     super(node);
@@ -28,15 +28,30 @@ public class AlfaAttributeDeclarationImpl extends ASTWrapperPsiElement implement
   }
 
   @Override
-  @NotNull
+  @Nullable
   public AlfaAttributeBody getAttributeBody() {
-    return findNotNullChildByClass(AlfaAttributeBody.class);
+    return findChildByClass(AlfaAttributeBody.class);
   }
 
   @Override
   @NotNull
   public AlfaAttributeName getAttributeName() {
     return findNotNullChildByClass(AlfaAttributeName.class);
+  }
+
+  @NotNull
+  public String getName() {
+    return ParserUtilsKt.getName(this);
+  }
+
+  @NotNull
+  public PsiElement setName(String newName) {
+    return ParserUtilsKt.setName(this, newName);
+  }
+
+  @Nullable
+  public PsiElement getNameIdentifier() {
+    return ParserUtilsKt.getNameIdentifier(this);
   }
 
 }

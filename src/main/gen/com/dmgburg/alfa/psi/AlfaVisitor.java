@@ -53,7 +53,7 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitAttributeDeclaration(@NotNull AlfaAttributeDeclaration o) {
-    visitPsiElement(o);
+    visitNamedElement(o);
   }
 
   public void visitAttributeDesignator(@NotNull AlfaAttributeDesignator o) {

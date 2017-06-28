@@ -191,7 +191,9 @@ obligationDeclaration ::= obligation idDeclaration
 adviceDeclaration ::= advice idDeclaration
 
 //Attributes
-attributeDeclaration ::= attribute attributeName '{' attributeBody '}'
+attributeDeclaration ::= attribute attributeName '{' attributeBody '}' {pin=3 mixin="com.dmgburg.alfa.reference.AlfaNamedRule"
+                                                                        implements="com.dmgburg.alfa.reference.AlfaNamedElement"
+                                                                        methods=[getName setName getNameIdentifier]}
 
 attributeName ::= IDENTIFIER
 

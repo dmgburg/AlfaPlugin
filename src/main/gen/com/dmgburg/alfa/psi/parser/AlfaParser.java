@@ -501,15 +501,16 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   public static boolean attributeDeclaration(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "attributeDeclaration")) return false;
     if (!nextTokenIs(b, ATTRIBUTE)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, ATTRIBUTE_DECLARATION, null);
     r = consumeToken(b, ATTRIBUTE);
     r = r && attributeName(b, l + 1);
     r = r && consumeToken(b, CURVE1);
-    r = r && attributeBody(b, l + 1);
-    r = r && consumeToken(b, CURVE2);
-    exit_section_(b, m, ATTRIBUTE_DECLARATION, r);
-    return r;
+    p = r; // pin = 3
+    r = r && report_error_(b, attributeBody(b, l + 1));
+    r = p && consumeToken(b, CURVE2) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */

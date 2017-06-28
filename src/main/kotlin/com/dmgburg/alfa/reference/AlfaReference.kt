@@ -2,6 +2,7 @@ package com.dmgburg.alfa.reference
 
 import com.dmgburg.alfa.AlfaIcons
 import com.dmgburg.alfa.psi.*
+import com.dmgburg.alfa.utils.getNamespace
 import com.intellij.codeInsight.lookup.LookupElement
 import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.extapi.psi.ASTWrapperPsiElement
@@ -18,7 +19,7 @@ abstract class AlfaNamedPolicySet(astNode: ASTNode) : ASTWrapperPsiElement(astNo
 abstract class AlfaNamedRule(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElement
 
 class AlfaPolicyOrSetReference(psiElement: PsiElement, textRange: TextRange) : PsiReferenceBase<PsiElement>(psiElement, textRange), PsiPolyVariantReference {
-    private val key: String = element.text.substring(textRange.getStartOffset(), textRange.getEndOffset())
+    private val key: String = element.text.substring(textRange.startOffset, textRange.endOffset)
 
     override fun resolve(): PsiElement? {
         val resolveResults = multiResolve(false)
@@ -30,14 +31,14 @@ class AlfaPolicyOrSetReference(psiElement: PsiElement, textRange: TextRange) : P
         val policies = findAllPolicy(project)
         val policySets = findAllPolicySet(project)
         val variants = ArrayList<LookupElement>()
-        for (policy in policies) {
+        policies.forEach { policy ->
             if (policy.name.isNotEmpty()) {
-                variants.add(LookupElementBuilder.create(policy).withIcon(AlfaIcons.FILE).withTypeText(policy.getContainingFile().getName()))
+                variants.add(LookupElementBuilder.create(policy).withIcon(AlfaIcons.FILE).withTypeText(policy.containingFile.name))
             }
         }
-        for (policySet in policySets) {
+        policySets.forEach { policySet ->
             if (policySet.name.isNotEmpty()) {
-                variants.add(LookupElementBuilder.create(policySet).withIcon(AlfaIcons.FILE).withTypeText(policySet.getContainingFile().getName()))
+                variants.add(LookupElementBuilder.create(policySet).withIcon(AlfaIcons.FILE).withTypeText(policySet.containingFile.name))
             }
         }
         return variants.toTypedArray()
@@ -56,7 +57,7 @@ class AlfaPolicyOrSetReference(psiElement: PsiElement, textRange: TextRange) : P
 }
 
 class AlfaRuleReference(psiElement: PsiElement, textRange: TextRange) : PsiReferenceBase<PsiElement>(psiElement, textRange), PsiPolyVariantReference {
-    private val key: String = element.text.substring(textRange.getStartOffset(), textRange.getEndOffset())
+    private val key: String = element.text.substring(textRange.startOffset, textRange.endOffset)
 
     override fun resolve(): PsiElement? {
         val resolveResults = multiResolve(false)
@@ -67,9 +68,9 @@ class AlfaRuleReference(psiElement: PsiElement, textRange: TextRange) : PsiRefer
         val project = myElement.project
         val rules = findAllRules(project)
         val variants = ArrayList<LookupElement>()
-        for (rule in rules) {
+        rules.forEach { rule ->
             if (rule.name.isNotEmpty()) {
-                variants.add(LookupElementBuilder.create(rule).withIcon(AlfaIcons.FILE).withTypeText(rule.getContainingFile().getName()))
+                variants.add(LookupElementBuilder.create(rule).withIcon(AlfaIcons.FILE).withTypeText(rule.containingFile.name))
             }
         }
         return variants.toTypedArray()
@@ -88,7 +89,7 @@ class AlfaRuleReference(psiElement: PsiElement, textRange: TextRange) : PsiRefer
 }
 
 class AlfaAttributeReference(psiElement: PsiElement, textRange: TextRange) : PsiReferenceBase<PsiElement>(psiElement, textRange), PsiPolyVariantReference {
-    private val key: String = element.text.substring(textRange.getStartOffset(), textRange.getEndOffset())
+    private val key: String = element.text.substring(textRange.startOffset, textRange.endOffset)
 
     override fun resolve(): PsiElement? {
         val resolveResults = multiResolve(false)
@@ -101,7 +102,18 @@ class AlfaAttributeReference(psiElement: PsiElement, textRange: TextRange) : Psi
         val variants = ArrayList<LookupElement>()
         for (attribute in attributes) {
             if (attribute.attributeName.text.isNotEmpty()) {
-                variants.add(LookupElementBuilder.create(attribute).withIcon(AlfaIcons.FILE).withTypeText(attribute.getContainingFile().getName()))
+                val namespace = attribute.getNamespace()
+                for (i in (0..namespace.size - 1)) {
+                    var variant = namespace[i]
+                    for (j in (i+1..namespace.size - 1)) {
+                        variant += "."
+                        variant += namespace[j]
+                    }
+                    variant += "."
+                    variant += attribute.name
+                    variants.add(LookupElementBuilder.create(variant).withIcon(AlfaIcons.FILE).withTypeText(attribute.containingFile.name))
+                }
+                variants.add(LookupElementBuilder.create(attribute).withIcon(AlfaIcons.FILE).withTypeText(attribute.containingFile.name))
             }
         }
         return variants.toTypedArray()
@@ -120,7 +132,7 @@ class AlfaAttributeReference(psiElement: PsiElement, textRange: TextRange) : Psi
 }
 
 class AlfaOperatorReference(psiElement: PsiElement, textRange: TextRange) : PsiReferenceBase<PsiElement>(psiElement, textRange), PsiPolyVariantReference {
-    private val key: String = element.text.substring(textRange.getStartOffset(), textRange.getEndOffset())
+    private val key: String = element.text.substring(textRange.startOffset, textRange.endOffset)
 
     override fun resolve(): PsiElement? {
         val resolveResults = multiResolve(false)
@@ -131,9 +143,9 @@ class AlfaOperatorReference(psiElement: PsiElement, textRange: TextRange) : PsiR
         val project = myElement.project
         val operators = findAllOperators(project)
         val variants = ArrayList<LookupElement>()
-        for (operator in operators) {
+        operators.forEach { operator ->
             if (operator.text.isNotEmpty()) {
-                variants.add(LookupElementBuilder.create(operator).withIcon(AlfaIcons.FILE).withTypeText(operator.getContainingFile().getName()))
+                variants.add(LookupElementBuilder.create(operator).withIcon(AlfaIcons.FILE).withTypeText(operator.containingFile.name))
             }
         }
         return variants.toTypedArray()

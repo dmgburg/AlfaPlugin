@@ -118,6 +118,31 @@ fun AlfaPolicyEntry.getNameIdentifier(): PsiElement? {
     }
 }
 
+//Attribute
+fun AlfaAttributeDeclaration.getName(): String {
+    return this.attributeName?.text ?: noNameElementPlaceholder
+}
+
+fun AlfaAttributeDeclaration.setName(newName: String): PsiElement {
+    val nameNode = this.getNode().findChildByType(AlfaTypes.ATTRIBUTE_NAME)
+    if (nameNode != null) {
+        throw RuntimeException("keynode is null")
+//        val property = AlfaElementFactory.createProperty(element.getProject(), newName)
+//        val newKeyNode = property.getFirstChild().getNode()
+//        element.getNode().replaceChild(nameNode, newKeyNode)
+    }
+    return this
+}
+
+fun AlfaAttributeDeclaration.getNameIdentifier(): PsiElement? {
+    val keyNode = this.getNode().findChildByType(AlfaTypes.ATTRIBUTE_NAME)
+    if (keyNode != null) {
+        return keyNode.getPsi()
+    } else {
+        return null
+    }
+}
+
 //Policy set
 fun AlfaPolicySetEntry.getName(): String {
     return this.policySetName?.text ?: noNameElementPlaceholder
