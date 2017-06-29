@@ -1,6 +1,7 @@
 package com.dmgburg.alfa.reference
 
 import com.dmgburg.alfa.AlfaIcons
+import com.dmgburg.alfa.domain.Identifier
 import com.dmgburg.alfa.psi.*
 import com.dmgburg.alfa.utils.getNamespace
 import com.intellij.codeInsight.lookup.LookupElement
@@ -13,10 +14,14 @@ import java.util.*
 
 
 interface AlfaNamedElement : PsiNameIdentifierOwner
+interface AlfaNamedElementWithIdentifier : AlfaNamedElement {
+    fun getIdentifier() : Identifier
+}
 
-abstract class AlfaNamedPolicy(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElement
-abstract class AlfaNamedPolicySet(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElement
-abstract class AlfaNamedRule(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElement
+abstract class AlfaNamedPolicy(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElementWithIdentifier
+abstract class AlfaNamedPolicySet(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElementWithIdentifier
+abstract class AlfaNamedRule(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElementWithIdentifier
+abstract class AlfaNamedOperator(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElement
 
 class AlfaPolicyOrSetReference(psiElement: PsiElement, textRange: TextRange) : PsiReferenceBase<PsiElement>(psiElement, textRange), PsiPolyVariantReference {
     private val key: String = element.text.substring(textRange.startOffset, textRange.endOffset)
@@ -28,8 +33,8 @@ class AlfaPolicyOrSetReference(psiElement: PsiElement, textRange: TextRange) : P
 
     override fun getVariants(): Array<Any> {
         val project = myElement.project
-        val policies = findAllPolicy(project)
-        val policySets = findAllPolicySet(project)
+        val policies = findAllElements<AlfaPolicyEntry>(project)
+        val policySets = findAllElements<AlfaPolicySetEntry>(project)
         val variants = ArrayList<LookupElement>()
         policies.forEach { policy ->
             if (policy.name.isNotEmpty()) {
@@ -47,7 +52,7 @@ class AlfaPolicyOrSetReference(psiElement: PsiElement, textRange: TextRange) : P
 
     override fun multiResolve(incompleteCode: Boolean): Array<ResolveResult> {
         val results = ArrayList<ResolveResult>()
-        val policy = findPolicy(element.project, key)
+        val policy = findElement<AlfaPolicyEntry>(element.project, key)
         if (policy != null) {
             results.add(PsiElementResolveResult(policy))
         }
@@ -66,7 +71,7 @@ class AlfaRuleReference(psiElement: PsiElement, textRange: TextRange) : PsiRefer
 
     override fun getVariants(): Array<Any> {
         val project = myElement.project
-        val rules = findAllRules(project)
+        val rules = findAllElements<AlfaRuleEntry>(project)
         val variants = ArrayList<LookupElement>()
         rules.forEach { rule ->
             if (rule.name.isNotEmpty()) {
@@ -79,7 +84,7 @@ class AlfaRuleReference(psiElement: PsiElement, textRange: TextRange) : PsiRefer
 
     override fun multiResolve(incompleteCode: Boolean): Array<ResolveResult> {
         val results = ArrayList<ResolveResult>()
-        val policy = findRule(element.project, key)
+        val policy = findElement<AlfaRuleEntry>(element.project, key)
         if (policy != null) {
             results.add(PsiElementResolveResult(policy))
         }
@@ -98,7 +103,7 @@ class AlfaAttributeReference(psiElement: PsiElement, textRange: TextRange) : Psi
 
     override fun getVariants(): Array<Any> {
         val project = myElement.project
-        val attributes = findAllAttributes(project)
+        val attributes = findAllElements<AlfaAttributeDeclaration>(project)
         val variants = ArrayList<LookupElement>()
         for (attribute in attributes) {
             if (attribute.attributeName.text.isNotEmpty()) {
@@ -122,7 +127,7 @@ class AlfaAttributeReference(psiElement: PsiElement, textRange: TextRange) : Psi
 
     override fun multiResolve(incompleteCode: Boolean): Array<ResolveResult> {
         val results = ArrayList<ResolveResult>()
-        val attribute = findAttribute(element.project, key)
+        val attribute = findElement<AlfaAttributeDeclaration>(element.project, key)
         if (attribute != null) {
             results.add(PsiElementResolveResult(attribute))
         }

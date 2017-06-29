@@ -65,8 +65,8 @@ namespaceBody ::= (
     )
 
 policySetEntry ::= policyset policySetName? description? '{' policySetBody* '}' {pin=4 mixin="com.dmgburg.alfa.reference.AlfaNamedPolicySet"
-                                                                                    implements="com.dmgburg.alfa.reference.AlfaNamedElement"
-                                                                                    methods=[getName setName getNameIdentifier]}
+                                                                                    implements="com.dmgburg.alfa.reference.AlfaNamedElementWithIdentifier"
+                                                                                    methods=[getName setName getNameIdentifier getIdentifier]}
 
 policySetName ::= qualifiedName
 
@@ -78,8 +78,8 @@ policySetBody ::= combinationAlgorithmRef|
         policySetEntry
 
 policyEntry ::= policy policyName? description? '{' policyBody* '}' { pin=4 mixin="com.dmgburg.alfa.reference.AlfaNamedPolicy"
-                                                                              implements="com.dmgburg.alfa.reference.AlfaNamedElement"
-                                                                              methods=[getName setName getNameIdentifier]}
+                                                                              implements="com.dmgburg.alfa.reference.AlfaNamedElementWithIdentifier"
+                                                                              methods=[getName setName getNameIdentifier getIdentifier]}
 
 policyBody ::= targetEntry|
         combinationAlgorithmRef|
@@ -133,8 +133,8 @@ ref ::= qualifiedName
 combinationAlgorithmRef ::= apply ref
 
 ruleEntry ::= rule ruleName? description? '{' ruleBody '}' {pin=4 mixin="com.dmgburg.alfa.reference.AlfaNamedRule"
-                                                                          implements="com.dmgburg.alfa.reference.AlfaNamedElement"
-                                                                          methods=[getName setName getNameIdentifier]}
+                                                                          implements="com.dmgburg.alfa.reference.AlfaNamedElementWithIdentifier"
+                                                                          methods=[getName setName getNameIdentifier getIdentifier]}
 
 description ::= STRING_LITERAL
 
@@ -192,8 +192,8 @@ adviceDeclaration ::= advice idDeclaration
 
 //Attributes
 attributeDeclaration ::= attribute attributeName '{' attributeBody '}' {pin=3 mixin="com.dmgburg.alfa.reference.AlfaNamedRule"
-                                                                        implements="com.dmgburg.alfa.reference.AlfaNamedElement"
-                                                                        methods=[getName setName getNameIdentifier]}
+                                                                        implements="com.dmgburg.alfa.reference.AlfaNamedElementWithIdentifier"
+                                                                        methods=[getName setName getNameIdentifier getIdentifier]}
 
 attributeName ::= IDENTIFIER
 
@@ -273,8 +273,8 @@ importEverything ::= '.' '*'
 // constants
 
 constant ::= integerLiteral|
-    STRING_LITERAL
-//    booleanLiteral|
+    STRING_LITERAL|
+    booleanLiteral
 //    floatingPointLiteral|
 //    ipAddressLiteral
 
@@ -282,5 +282,7 @@ constant ::= integerLiteral|
 integerLiteral ::= Sign? DecimalIntegerLiteral
 
 Sign ::= '+'|'-'
+
+booleanLiteral ::= true | false
 
 // DecimalIntegerLiteral ::=

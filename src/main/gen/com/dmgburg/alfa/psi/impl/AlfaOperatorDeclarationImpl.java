@@ -2,6 +2,8 @@
 package com.dmgburg.alfa.psi.impl;
 
 import java.util.List;
+
+import com.dmgburg.alfa.reference.AlfaNamedOperator;
 import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
@@ -12,7 +14,7 @@ import com.dmgburg.alfa.reference.AlfaNamedPolicy;
 import com.dmgburg.alfa.psi.*;
 import com.dmgburg.alfa.utils.ParserUtilsKt;
 
-public class AlfaOperatorDeclarationImpl extends AlfaNamedPolicy implements AlfaOperatorDeclaration {
+public class AlfaOperatorDeclarationImpl extends AlfaNamedOperator implements AlfaOperatorDeclaration {
 
   public AlfaOperatorDeclarationImpl(ASTNode node) {
     super(node);

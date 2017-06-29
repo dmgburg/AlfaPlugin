@@ -11,6 +11,7 @@ import static com.dmgburg.alfa.psi.AlfaTypes.*;
 import com.dmgburg.alfa.reference.AlfaNamedPolicySet;
 import com.dmgburg.alfa.psi.*;
 import com.dmgburg.alfa.utils.ParserUtilsKt;
+import com.dmgburg.alfa.domain.Identifier;
 
 public class AlfaPolicySetEntryImpl extends AlfaNamedPolicySet implements AlfaPolicySetEntry {
 
@@ -58,6 +59,11 @@ public class AlfaPolicySetEntryImpl extends AlfaNamedPolicySet implements AlfaPo
   @Nullable
   public PsiElement getNameIdentifier() {
     return ParserUtilsKt.getNameIdentifier(this);
+  }
+
+  @Nullable
+  public Identifier getIdentifier() {
+    return ParserUtilsKt.getIdentifier(this);
   }
 
 }

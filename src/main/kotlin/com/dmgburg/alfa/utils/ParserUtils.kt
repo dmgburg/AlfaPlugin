@@ -101,10 +101,9 @@ fun AlfaPolicyEntry.getName(): String {
 fun AlfaPolicyEntry.setName(newName: String): PsiElement {
     val nameNode = this.getNode().findChildByType(AlfaTypes.POLICY_NAME)
     if (nameNode != null) {
-        throw RuntimeException("keynode is null")
-//        val property = AlfaElementFactory.createProperty(element.getProject(), newName)
-//        val newKeyNode = property.getFirstChild().getNode()
-//        element.getNode().replaceChild(nameNode, newKeyNode)
+        val name = createPolicyName(this.getProject(), newName)
+        val newKeyNode = name.getNode()
+        this.getNode().replaceChild(nameNode, newKeyNode)
     }
     return this
 }
@@ -126,10 +125,9 @@ fun AlfaAttributeDeclaration.getName(): String {
 fun AlfaAttributeDeclaration.setName(newName: String): PsiElement {
     val nameNode = this.getNode().findChildByType(AlfaTypes.ATTRIBUTE_NAME)
     if (nameNode != null) {
-        throw RuntimeException("keynode is null")
-//        val property = AlfaElementFactory.createProperty(element.getProject(), newName)
-//        val newKeyNode = property.getFirstChild().getNode()
-//        element.getNode().replaceChild(nameNode, newKeyNode)
+        val name = createAttributeName(this.getProject(), newName)
+        val newKeyNode = name.getFirstChild().getNode()
+        this.getNode().replaceChild(nameNode, newKeyNode)
     }
     return this
 }

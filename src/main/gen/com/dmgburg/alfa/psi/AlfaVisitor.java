@@ -4,6 +4,7 @@ package com.dmgburg.alfa.psi;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiElement;
+import com.dmgburg.alfa.reference.AlfaNamedElementWithIdentifier;
 import com.dmgburg.alfa.reference.AlfaNamedElement;
 
 public class AlfaVisitor extends PsiElementVisitor {
@@ -53,7 +54,7 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitAttributeDeclaration(@NotNull AlfaAttributeDeclaration o) {
-    visitNamedElement(o);
+    visitNamedElementWithIdentifier(o);
   }
 
   public void visitAttributeDesignator(@NotNull AlfaAttributeDesignator o) {
@@ -81,6 +82,10 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitAttributeType(@NotNull AlfaAttributeType o) {
+    visitPsiElement(o);
+  }
+
+  public void visitBooleanLiteral(@NotNull AlfaBooleanLiteral o) {
     visitPsiElement(o);
   }
 
@@ -285,7 +290,7 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitPolicyEntry(@NotNull AlfaPolicyEntry o) {
-    visitNamedElement(o);
+    visitNamedElementWithIdentifier(o);
   }
 
   public void visitPolicyName(@NotNull AlfaPolicyName o) {
@@ -301,7 +306,7 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitPolicySetEntry(@NotNull AlfaPolicySetEntry o) {
-    visitNamedElement(o);
+    visitNamedElementWithIdentifier(o);
   }
 
   public void visitPolicySetName(@NotNull AlfaPolicySetName o) {
@@ -333,7 +338,7 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitRuleEntry(@NotNull AlfaRuleEntry o) {
-    visitNamedElement(o);
+    visitNamedElementWithIdentifier(o);
   }
 
   public void visitRuleName(@NotNull AlfaRuleName o) {
@@ -381,6 +386,10 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitNamedElement(@NotNull AlfaNamedElement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitNamedElementWithIdentifier(@NotNull AlfaNamedElementWithIdentifier o) {
     visitPsiElement(o);
   }
 

@@ -4,9 +4,10 @@ package com.dmgburg.alfa.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import com.dmgburg.alfa.reference.AlfaNamedElement;
+import com.dmgburg.alfa.reference.AlfaNamedElementWithIdentifier;
+import com.dmgburg.alfa.domain.Identifier;
 
-public interface AlfaAttributeDeclaration extends AlfaNamedElement {
+public interface AlfaAttributeDeclaration extends AlfaNamedElementWithIdentifier {
 
   @Nullable
   AlfaAttributeBody getAttributeBody();
@@ -22,5 +23,8 @@ public interface AlfaAttributeDeclaration extends AlfaNamedElement {
 
   @Nullable
   PsiElement getNameIdentifier();
+
+  @Nullable
+  Identifier getIdentifier();
 
 }

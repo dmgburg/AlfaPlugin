@@ -26,6 +26,7 @@ public interface AlfaTypes {
   IElementType ATTRIBUTE_NAME = new AlfaElementType("ATTRIBUTE_NAME");
   IElementType ATTRIBUTE_REF = new AlfaElementType("ATTRIBUTE_REF");
   IElementType ATTRIBUTE_TYPE = new AlfaElementType("ATTRIBUTE_TYPE");
+  IElementType BOOLEAN_LITERAL = new AlfaElementType("BOOLEAN_LITERAL");
   IElementType CATEGORY_DECLARATION = new AlfaElementType("CATEGORY_DECLARATION");
   IElementType CATEGORY_NAME = new AlfaElementType("CATEGORY_NAME");
   IElementType CLAUSE_ADDIN = new AlfaElementType("CLAUSE_ADDIN");
@@ -124,6 +125,7 @@ public interface AlfaTypes {
   IElementType DIVIDE = new AlfaTokenType("/");
   IElementType DOT = new AlfaTokenType(".");
   IElementType EQUAL = new AlfaTokenType("==");
+  IElementType FALSE = new AlfaTokenType("false");
   IElementType FUNCTION = new AlfaTokenType("function");
   IElementType ID = new AlfaTokenType("id");
   IElementType IDENTIFIER = new AlfaTokenType("IDENTIFIER");
@@ -152,6 +154,7 @@ public interface AlfaTypes {
   IElementType RULECOMBINATOR = new AlfaTokenType("ruleCombinator");
   IElementType STRING_LITERAL = new AlfaTokenType("STRING_LITERAL");
   IElementType TARGET = new AlfaTokenType("target");
+  IElementType TRUE = new AlfaTokenType("true");
   IElementType TYPE = new AlfaTokenType("type");
 
   class Factory {
@@ -210,6 +213,9 @@ public interface AlfaTypes {
       }
       else if (type == ATTRIBUTE_TYPE) {
         return new AlfaAttributeTypeImpl(node);
+      }
+      else if (type == BOOLEAN_LITERAL) {
+        return new AlfaBooleanLiteralImpl(node);
       }
       else if (type == CATEGORY_DECLARATION) {
         return new AlfaCategoryDeclarationImpl(node);

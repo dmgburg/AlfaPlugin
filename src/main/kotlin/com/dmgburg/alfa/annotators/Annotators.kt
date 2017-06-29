@@ -1,7 +1,6 @@
 package com.dmgburg.alfa.annotators
 
 import com.dmgburg.alfa.psi.*
-import com.dmgburg.alfa.utils.getNamespace
 import com.intellij.lang.annotation.*
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.*
@@ -11,8 +10,8 @@ class RefAnnotator : Annotator {
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
         if (element is AlfaPolicyOrPolicySetRef) {
             val elementText = element.text
-            val policySet = findPolicySet(element.project, elementText)
-            val policy = findPolicy(element.project, elementText)
+            val policySet = findElement<AlfaPolicySetEntry>(element.project, elementText)
+            val policy = findElement<AlfaPolicyEntry>(element.project, elementText)
             if (policy == null && policySet == null){
                 val range = TextRange(element.textRange.startOffset, element.textRange.endOffset);
                 val annotation = holder.createInfoAnnotation(range, "No policy or policySet with name '$elementText' found")
@@ -22,7 +21,7 @@ class RefAnnotator : Annotator {
 
         if (element is AlfaAttributeRef) {
             val elementText = element.text
-            val attribute = findAttribute(element.project, elementText)
+            val attribute = findElement<AlfaAttributeDeclaration>(element.project, elementText)
             if (attribute == null){
                 val range = TextRange(element.textRange.startOffset, element.textRange.endOffset);
                 val annotation = holder.createInfoAnnotation(range, "No attribute with name '$elementText' found")

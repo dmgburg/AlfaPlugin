@@ -80,6 +80,9 @@ public class AlfaParser implements PsiParser, LightPsiParser {
     else if (t == ATTRIBUTE_TYPE) {
       r = attributeType(b, 0);
     }
+    else if (t == BOOLEAN_LITERAL) {
+      r = booleanLiteral(b, 0);
+    }
     else if (t == CATEGORY_DECLARATION) {
       r = categoryDeclaration(b, 0);
     }
@@ -624,6 +627,19 @@ public class AlfaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // true | false
+  public static boolean booleanLiteral(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "booleanLiteral")) return false;
+    if (!nextTokenIs(b, "<boolean literal>", FALSE, TRUE)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, BOOLEAN_LITERAL, "<boolean literal>");
+    r = consumeToken(b, TRUE);
+    if (!r) r = consumeToken(b, FALSE);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // category categoryName '=' xacmlDeclaration
   public static boolean categoryDeclaration(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "categoryDeclaration")) return false;
@@ -765,13 +781,15 @@ public class AlfaParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // integerLiteral|
-  //     STRING_LITERAL
+  //     STRING_LITERAL|
+  //     booleanLiteral
   public static boolean constant(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "constant")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, CONSTANT, "<constant>");
     r = integerLiteral(b, l + 1);
     if (!r) r = consumeToken(b, STRING_LITERAL);
+    if (!r) r = booleanLiteral(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

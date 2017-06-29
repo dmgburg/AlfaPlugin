@@ -82,6 +82,8 @@ BLOCK_COMMENT="/"\*(.|\n)*?\*"/"
   "inv"                      { return INV; }
   "import"                   { return IMPORT; }
   "DecimalIntegerLiteral"    { return DECIMALINTEGERLITERAL; }
+  "true"                     { return TRUE; }
+  "false"                    { return FALSE; }
 
   {IDENTIFIER}               { return IDENTIFIER; }
   {WHITE_SPACE}              { return WHITE_SPACE; }

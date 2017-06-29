@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface AlfaConstant extends PsiElement {
 
   @Nullable
+  AlfaBooleanLiteral getBooleanLiteral();
+
+  @Nullable
   AlfaIntegerLiteral getIntegerLiteral();
 
 }
