@@ -30,13 +30,13 @@ public class AlfaAttributeDesignatorImpl extends ASTWrapperPsiElement implements
   @Override
   @Nullable
   public AlfaAttributeDesignatorIssuer getAttributeDesignatorIssuer() {
-    return findChildByClass(AlfaAttributeDesignatorIssuer.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaAttributeDesignatorIssuer.class);
   }
 
   @Override
   @Nullable
   public AlfaAttributeDesignatorMustBePresent getAttributeDesignatorMustBePresent() {
-    return findChildByClass(AlfaAttributeDesignatorMustBePresent.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaAttributeDesignatorMustBePresent.class);
   }
 
 }

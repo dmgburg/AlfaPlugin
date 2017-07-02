@@ -30,7 +30,7 @@ public class AlfaIntegerLiteralImpl extends ASTWrapperPsiElement implements Alfa
   @Override
   @Nullable
   public AlfaSign getSign() {
-    return findChildByClass(AlfaSign.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaSign.class);
   }
 
 }

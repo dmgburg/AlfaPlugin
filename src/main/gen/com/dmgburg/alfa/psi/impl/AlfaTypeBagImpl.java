@@ -30,13 +30,13 @@ public class AlfaTypeBagImpl extends ASTWrapperPsiElement implements AlfaTypeBag
   @Override
   @Nullable
   public AlfaAnyAtomicType getAnyAtomicType() {
-    return findChildByClass(AlfaAnyAtomicType.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaAnyAtomicType.class);
   }
 
   @Override
   @Nullable
   public AlfaTypeRef getTypeRef() {
-    return findChildByClass(AlfaTypeRef.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaTypeRef.class);
   }
 
 }

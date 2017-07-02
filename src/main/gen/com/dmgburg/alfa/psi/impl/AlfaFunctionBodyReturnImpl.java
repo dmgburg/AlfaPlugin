@@ -30,19 +30,19 @@ public class AlfaFunctionBodyReturnImpl extends ASTWrapperPsiElement implements 
   @Override
   @Nullable
   public AlfaAnyAtomicType getAnyAtomicType() {
-    return findChildByClass(AlfaAnyAtomicType.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaAnyAtomicType.class);
   }
 
   @Override
   @Nullable
   public AlfaTypeBag getTypeBag() {
-    return findChildByClass(AlfaTypeBag.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaTypeBag.class);
   }
 
   @Override
   @Nullable
   public AlfaTypeRef getTypeRef() {
-    return findChildByClass(AlfaTypeRef.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaTypeRef.class);
   }
 
 }

@@ -30,19 +30,19 @@ public class AlfaSingleClauseExpressionImpl extends ASTWrapperPsiElement impleme
   @Override
   @NotNull
   public AlfaLeftClauseOperand getLeftClauseOperand() {
-    return findNotNullChildByClass(AlfaLeftClauseOperand.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaLeftClauseOperand.class));
   }
 
   @Override
   @NotNull
   public AlfaOperator getOperator() {
-    return findNotNullChildByClass(AlfaOperator.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaOperator.class));
   }
 
   @Override
   @NotNull
   public AlfaRightClauseOperand getRightClauseOperand() {
-    return findNotNullChildByClass(AlfaRightClauseOperand.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaRightClauseOperand.class));
   }
 
 }

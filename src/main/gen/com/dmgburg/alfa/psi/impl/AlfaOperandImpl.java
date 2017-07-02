@@ -30,25 +30,25 @@ public class AlfaOperandImpl extends ASTWrapperPsiElement implements AlfaOperand
   @Override
   @Nullable
   public AlfaAttributeRef getAttributeRef() {
-    return findChildByClass(AlfaAttributeRef.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaAttributeRef.class);
   }
 
   @Override
   @Nullable
   public AlfaConstant getConstant() {
-    return findChildByClass(AlfaConstant.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaConstant.class);
   }
 
   @Override
   @Nullable
   public AlfaFunctionEntry getFunctionEntry() {
-    return findChildByClass(AlfaFunctionEntry.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaFunctionEntry.class);
   }
 
   @Override
   @Nullable
   public AlfaWrappedExpressions getWrappedExpressions() {
-    return findChildByClass(AlfaWrappedExpressions.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaWrappedExpressions.class);
   }
 
 }

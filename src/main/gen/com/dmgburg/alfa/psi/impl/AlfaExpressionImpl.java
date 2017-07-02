@@ -30,13 +30,13 @@ public class AlfaExpressionImpl extends ASTWrapperPsiElement implements AlfaExpr
   @Override
   @Nullable
   public AlfaOperand getOperand() {
-    return findChildByClass(AlfaOperand.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaOperand.class);
   }
 
   @Override
   @Nullable
   public AlfaWrappedExpressions getWrappedExpressions() {
-    return findChildByClass(AlfaWrappedExpressions.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaWrappedExpressions.class);
   }
 
 }

@@ -30,7 +30,7 @@ public class AlfaAttributeTypeImpl extends ASTWrapperPsiElement implements AlfaA
   @Override
   @NotNull
   public AlfaRef getRef() {
-    return findNotNullChildByClass(AlfaRef.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaRef.class));
   }
 
 }

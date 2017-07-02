@@ -4,7 +4,7 @@ package com.dmgburg.alfa.psi;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiElement;
-import com.dmgburg.alfa.reference.AlfaNamedElementWithIdentifier;
+import com.dmgburg.alfa.reference.AlfaElementWithIdentifier;
 import com.dmgburg.alfa.reference.AlfaNamedElement;
 
 public class AlfaVisitor extends PsiElementVisitor {
@@ -54,7 +54,7 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitAttributeDeclaration(@NotNull AlfaAttributeDeclaration o) {
-    visitNamedElementWithIdentifier(o);
+    visitStubElementWithIdentifier(o);
   }
 
   public void visitAttributeDesignator(@NotNull AlfaAttributeDesignator o) {
@@ -290,7 +290,7 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitPolicyEntry(@NotNull AlfaPolicyEntry o) {
-    visitNamedElementWithIdentifier(o);
+    visitStubElementWithIdentifier(o);
   }
 
   public void visitPolicyName(@NotNull AlfaPolicyName o) {
@@ -306,7 +306,7 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitPolicySetEntry(@NotNull AlfaPolicySetEntry o) {
-    visitNamedElementWithIdentifier(o);
+    visitStubElementWithIdentifier(o);
   }
 
   public void visitPolicySetName(@NotNull AlfaPolicySetName o) {
@@ -338,7 +338,7 @@ public class AlfaVisitor extends PsiElementVisitor {
   }
 
   public void visitRuleEntry(@NotNull AlfaRuleEntry o) {
-    visitNamedElementWithIdentifier(o);
+    visitStubElementWithIdentifier(o);
   }
 
   public void visitRuleName(@NotNull AlfaRuleName o) {
@@ -389,7 +389,7 @@ public class AlfaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitNamedElementWithIdentifier(@NotNull AlfaNamedElementWithIdentifier o) {
+  public void visitStubElementWithIdentifier(@NotNull AlfaElementWithIdentifier o) {
     visitPsiElement(o);
   }
 

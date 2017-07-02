@@ -30,7 +30,7 @@ public class AlfaFunctionNameImpl extends ASTWrapperPsiElement implements AlfaFu
   @Override
   @NotNull
   public PsiElement getIdentifier() {
-    return findNotNullChildByType(IDENTIFIER);
+    return notNullChild(findChildByType(IDENTIFIER));
   }
 
 }

@@ -195,7 +195,7 @@ fun getNameIdentifier(element: AlfaRuleEntry): PsiElement? {
 //Operator
 
 fun AlfaOperatorDeclaration.getName(): String {
-    return this.text ?: noNameElementPlaceholder
+    return this.operator.text ?: noNameElementPlaceholder
 }
 
 fun setName(element: AlfaOperatorDeclaration, newName: String): PsiElement {

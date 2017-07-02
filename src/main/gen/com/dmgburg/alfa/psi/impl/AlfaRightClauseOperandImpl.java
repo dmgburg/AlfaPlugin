@@ -30,7 +30,7 @@ public class AlfaRightClauseOperandImpl extends ASTWrapperPsiElement implements 
   @Override
   @NotNull
   public AlfaClauseOperand getClauseOperand() {
-    return findNotNullChildByClass(AlfaClauseOperand.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaClauseOperand.class));
   }
 
 }

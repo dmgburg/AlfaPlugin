@@ -12,11 +12,17 @@ import com.dmgburg.alfa.reference.AlfaNamedPolicySet;
 import com.dmgburg.alfa.psi.*;
 import com.dmgburg.alfa.utils.ParserUtilsKt;
 import com.dmgburg.alfa.domain.Identifier;
+import com.dmgburg.alfa.stubs.PolicySetEntryStub;
+import com.intellij.psi.stubs.IStubElementType;
 
 public class AlfaPolicySetEntryImpl extends AlfaNamedPolicySet implements AlfaPolicySetEntry {
 
   public AlfaPolicySetEntryImpl(ASTNode node) {
     super(node);
+  }
+
+  public AlfaPolicySetEntryImpl(PolicySetEntryStub stub, IStubElementType<?, ?> type) {
+    super(stub, type);
   }
 
   public void accept(@NotNull AlfaVisitor visitor) {
@@ -31,7 +37,7 @@ public class AlfaPolicySetEntryImpl extends AlfaNamedPolicySet implements AlfaPo
   @Override
   @Nullable
   public AlfaDescription getDescription() {
-    return findChildByClass(AlfaDescription.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaDescription.class);
   }
 
   @Override
@@ -43,7 +49,7 @@ public class AlfaPolicySetEntryImpl extends AlfaNamedPolicySet implements AlfaPo
   @Override
   @Nullable
   public AlfaPolicySetName getPolicySetName() {
-    return findChildByClass(AlfaPolicySetName.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaPolicySetName.class);
   }
 
   @NotNull

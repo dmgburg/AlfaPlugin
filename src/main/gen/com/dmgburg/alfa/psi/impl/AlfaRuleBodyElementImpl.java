@@ -30,19 +30,19 @@ public class AlfaRuleBodyElementImpl extends ASTWrapperPsiElement implements Alf
   @Override
   @Nullable
   public AlfaConditionEntry getConditionEntry() {
-    return findChildByClass(AlfaConditionEntry.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaConditionEntry.class);
   }
 
   @Override
   @Nullable
   public AlfaOnEffect getOnEffect() {
-    return findChildByClass(AlfaOnEffect.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaOnEffect.class);
   }
 
   @Override
   @Nullable
   public AlfaTargetEntry getTargetEntry() {
-    return findChildByClass(AlfaTargetEntry.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaTargetEntry.class);
   }
 
 }

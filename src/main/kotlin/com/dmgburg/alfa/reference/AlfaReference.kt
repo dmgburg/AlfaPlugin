@@ -1,35 +1,13 @@
 package com.dmgburg.alfa.reference
 
 import com.dmgburg.alfa.AlfaIcons
-import com.dmgburg.alfa.domain.Identifier
 import com.dmgburg.alfa.psi.*
-import com.dmgburg.alfa.stubs.AttributeDeclarationStub
 import com.dmgburg.alfa.utils.getNamespace
 import com.intellij.codeInsight.lookup.LookupElement
 import com.intellij.codeInsight.lookup.LookupElementBuilder
-import com.intellij.extapi.psi.ASTWrapperPsiElement
-import com.intellij.extapi.psi.StubBasedPsiElementBase
-import com.intellij.lang.ASTNode
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.*
-import com.intellij.psi.stubs.IStubElementType
-import com.intellij.psi.stubs.StubElement
 import java.util.*
-
-
-interface AlfaNamedElement : PsiNameIdentifierOwner
-interface AlfaNamedElementWithIdentifier : AlfaNamedElement {
-    fun getIdentifier() : Identifier
-}
-
-abstract class AlfaNamedPolicy(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElementWithIdentifier
-abstract class AlfaNamedPolicySet(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElementWithIdentifier
-abstract class AlfaNamedRule(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElementWithIdentifier
-abstract class AlfaNamedAttribute : StubBasedPsiElementBase<AttributeDeclarationStub>, AlfaNamedElementWithIdentifier{
-    constructor(astNode: ASTNode): super(astNode);
-    constructor(stub: AttributeDeclarationStub , type: IStubElementType<*, *>) : super(stub,type)
-}
-abstract class AlfaNamedOperator(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElement
 
 class AlfaPolicyOrSetReference(psiElement: PsiElement, textRange: TextRange) : PsiReferenceBase<PsiElement>(psiElement, textRange), PsiPolyVariantReference {
     private val key: String = element.text.substring(textRange.startOffset, textRange.endOffset)
@@ -111,14 +89,14 @@ class AlfaAttributeReference(psiElement: PsiElement, textRange: TextRange) : Psi
 
     override fun getVariants(): Array<Any> {
         val project = myElement.project
-        val attributes = findAllElementsFromIndex<AlfaAttributeDeclaration>(project)
+        val attributes = findAllElements<AlfaAttributeDeclaration>(project)
         val variants = ArrayList<LookupElement>()
         for (attribute in attributes) {
             if (attribute.attributeName.text.isNotEmpty()) {
                 val namespace = attribute.getNamespace()
                 for (i in (0..namespace.size - 1)) {
                     var variant = namespace[i]
-                    for (j in (i+1..namespace.size - 1)) {
+                    for (j in (i + 1..namespace.size - 1)) {
                         variant += "."
                         variant += namespace[j]
                     }
@@ -135,7 +113,7 @@ class AlfaAttributeReference(psiElement: PsiElement, textRange: TextRange) : Psi
 
     override fun multiResolve(incompleteCode: Boolean): Array<ResolveResult> {
         val results = ArrayList<ResolveResult>()
-        val attribute = findElementFromIndex<AlfaAttributeDeclaration>(element.project, key)
+        val attribute = findElement<AlfaAttributeDeclaration>(element.project, key)
         if (attribute != null) {
             results.add(PsiElementResolveResult(attribute))
         }
@@ -154,7 +132,7 @@ class AlfaOperatorReference(psiElement: PsiElement, textRange: TextRange) : PsiR
 
     override fun getVariants(): Array<Any> {
         val project = myElement.project
-        val operators = findAllOperators(project)
+        val operators = findAllElements<AlfaOperatorDeclaration>(project)
         val variants = ArrayList<LookupElement>()
         operators.forEach { operator ->
             if (operator.text.isNotEmpty()) {
@@ -167,7 +145,7 @@ class AlfaOperatorReference(psiElement: PsiElement, textRange: TextRange) : PsiR
 
     override fun multiResolve(incompleteCode: Boolean): Array<ResolveResult> {
         val results = ArrayList<ResolveResult>()
-        val operator = findOperator(element.project, key)
+        val operator = findElement<AlfaOperatorDeclaration>(element.project, key)
         if (operator != null) {
             results.add(PsiElementResolveResult(operator))
         }

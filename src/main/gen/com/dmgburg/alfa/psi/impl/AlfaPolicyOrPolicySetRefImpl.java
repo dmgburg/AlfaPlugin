@@ -31,7 +31,7 @@ public class AlfaPolicyOrPolicySetRefImpl extends ASTWrapperPsiElement implement
   @Override
   @NotNull
   public AlfaRef getRef() {
-    return findNotNullChildByClass(AlfaRef.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaRef.class));
   }
 
   @NotNull

@@ -30,13 +30,13 @@ public class AlfaImportNameImpl extends ASTWrapperPsiElement implements AlfaImpo
   @Override
   @Nullable
   public AlfaImportEverything getImportEverything() {
-    return findChildByClass(AlfaImportEverything.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaImportEverything.class);
   }
 
   @Override
   @NotNull
   public AlfaQualifiedName getQualifiedName() {
-    return findNotNullChildByClass(AlfaQualifiedName.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaQualifiedName.class));
   }
 
 }

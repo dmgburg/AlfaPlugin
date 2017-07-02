@@ -30,7 +30,7 @@ public class AlfaOperatorInvreseImpl extends ASTWrapperPsiElement implements Alf
   @Override
   @NotNull
   public AlfaOperator getOperator() {
-    return findNotNullChildByClass(AlfaOperator.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaOperator.class));
   }
 
 }

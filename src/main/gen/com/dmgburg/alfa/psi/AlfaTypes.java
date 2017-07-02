@@ -1,12 +1,14 @@
 // This is a generated file. Not intended for manual editing.
 package com.dmgburg.alfa.psi;
 
-import com.dmgburg.alfa.stubs.AlfaAttributeStubElementType;
-import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.stubs.StubElementTypeHolderEP;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.PsiElement;
 import com.intellij.lang.ASTNode;
+import com.dmgburg.alfa.stubs.AlfaAttributeStubElementType;
+import com.dmgburg.alfa.stubs.OperatorStubElementType;
+import com.dmgburg.alfa.stubs.PolicyStubElementType;
+import com.dmgburg.alfa.stubs.PolicySetStubElementType;
+import com.dmgburg.alfa.stubs.RuleStubElementType;
 import com.dmgburg.alfa.psi.impl.*;
 
 public interface AlfaTypes {
@@ -21,7 +23,7 @@ public interface AlfaTypes {
   IElementType ATTRIBUTE_ASSIGN_BODY = new AlfaElementType("ATTRIBUTE_ASSIGN_BODY");
   IElementType ATTRIBUTE_BODY = new AlfaElementType("ATTRIBUTE_BODY");
   IElementType ATTRIBUTE_CATEGORY = new AlfaElementType("ATTRIBUTE_CATEGORY");
-  IStubElementType ATTRIBUTE_DECLARATION = new AlfaAttributeStubElementType("ATTRIBUTE_DECLARATION");
+  IElementType ATTRIBUTE_DECLARATION = new AlfaAttributeStubElementType("ATTRIBUTE_DECLARATION");
   IElementType ATTRIBUTE_DESIGNATOR = new AlfaElementType("ATTRIBUTE_DESIGNATOR");
   IElementType ATTRIBUTE_DESIGNATOR_ISSUER = new AlfaElementType("ATTRIBUTE_DESIGNATOR_ISSUER");
   IElementType ATTRIBUTE_DESIGNATOR_MUST_BE_PRESENT = new AlfaElementType("ATTRIBUTE_DESIGNATOR_MUST_BE_PRESENT");
@@ -74,17 +76,17 @@ public interface AlfaTypes {
   IElementType ON_EFFECT = new AlfaElementType("ON_EFFECT");
   IElementType OPERAND = new AlfaElementType("OPERAND");
   IElementType OPERATOR = new AlfaElementType("OPERATOR");
-  IElementType OPERATOR_DECLARATION = new AlfaElementType("OPERATOR_DECLARATION");
+  IElementType OPERATOR_DECLARATION = new OperatorStubElementType("OPERATOR_DECLARATION");
   IElementType OPERATOR_DECLARATION_BODY = new AlfaElementType("OPERATOR_DECLARATION_BODY");
   IElementType OPERATOR_FEATURE = new AlfaElementType("OPERATOR_FEATURE");
   IElementType OPERATOR_INVRESE = new AlfaElementType("OPERATOR_INVRESE");
   IElementType POLICY_BODY = new AlfaElementType("POLICY_BODY");
   IElementType POLICY_COMBINATOR_DECLARATION = new AlfaElementType("POLICY_COMBINATOR_DECLARATION");
-  IElementType POLICY_ENTRY = new AlfaElementType("POLICY_ENTRY");
+  IElementType POLICY_ENTRY = new PolicyStubElementType("POLICY_ENTRY");
   IElementType POLICY_NAME = new AlfaElementType("POLICY_NAME");
   IElementType POLICY_OR_POLICY_SET_REF = new AlfaElementType("POLICY_OR_POLICY_SET_REF");
   IElementType POLICY_SET_BODY = new AlfaElementType("POLICY_SET_BODY");
-  IElementType POLICY_SET_ENTRY = new AlfaElementType("POLICY_SET_ENTRY");
+  IElementType POLICY_SET_ENTRY = new PolicySetStubElementType("POLICY_SET_ENTRY");
   IElementType POLICY_SET_NAME = new AlfaElementType("POLICY_SET_NAME");
   IElementType QUALIFIED_NAME = new AlfaElementType("QUALIFIED_NAME");
   IElementType REF = new AlfaElementType("REF");
@@ -92,7 +94,7 @@ public interface AlfaTypes {
   IElementType RULE_BODY = new AlfaElementType("RULE_BODY");
   IElementType RULE_BODY_ELEMENT = new AlfaElementType("RULE_BODY_ELEMENT");
   IElementType RULE_COMBINATOR_DECLARATION = new AlfaElementType("RULE_COMBINATOR_DECLARATION");
-  IElementType RULE_ENTRY = new AlfaElementType("RULE_ENTRY");
+  IElementType RULE_ENTRY = new RuleStubElementType("RULE_ENTRY");
   IElementType RULE_NAME = new AlfaElementType("RULE_NAME");
   IElementType RULE_REF = new AlfaElementType("RULE_REF");
   IElementType SIGN = new AlfaElementType("SIGN");

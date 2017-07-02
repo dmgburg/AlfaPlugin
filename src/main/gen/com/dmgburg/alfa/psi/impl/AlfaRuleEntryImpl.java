@@ -12,11 +12,17 @@ import com.dmgburg.alfa.reference.AlfaNamedRule;
 import com.dmgburg.alfa.psi.*;
 import com.dmgburg.alfa.utils.ParserUtilsKt;
 import com.dmgburg.alfa.domain.Identifier;
+import com.dmgburg.alfa.stubs.RuleEntryStub;
+import com.intellij.psi.stubs.IStubElementType;
 
 public class AlfaRuleEntryImpl extends AlfaNamedRule implements AlfaRuleEntry {
 
   public AlfaRuleEntryImpl(ASTNode node) {
     super(node);
+  }
+
+  public AlfaRuleEntryImpl(RuleEntryStub stub, IStubElementType<?, ?> type) {
+    super(stub, type);
   }
 
   public void accept(@NotNull AlfaVisitor visitor) {
@@ -31,19 +37,19 @@ public class AlfaRuleEntryImpl extends AlfaNamedRule implements AlfaRuleEntry {
   @Override
   @Nullable
   public AlfaDescription getDescription() {
-    return findChildByClass(AlfaDescription.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaDescription.class);
   }
 
   @Override
   @Nullable
   public AlfaRuleBody getRuleBody() {
-    return findChildByClass(AlfaRuleBody.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaRuleBody.class);
   }
 
   @Override
   @Nullable
   public AlfaRuleName getRuleName() {
-    return findChildByClass(AlfaRuleName.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaRuleName.class);
   }
 
   @NotNull

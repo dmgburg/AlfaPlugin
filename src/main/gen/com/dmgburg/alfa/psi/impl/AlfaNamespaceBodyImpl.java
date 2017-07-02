@@ -30,85 +30,85 @@ public class AlfaNamespaceBodyImpl extends ASTWrapperPsiElement implements AlfaN
   @Override
   @Nullable
   public AlfaAdviceDeclaration getAdviceDeclaration() {
-    return findChildByClass(AlfaAdviceDeclaration.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaAdviceDeclaration.class);
   }
 
   @Override
   @Nullable
   public AlfaAttributeDeclaration getAttributeDeclaration() {
-    return findChildByClass(AlfaAttributeDeclaration.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaAttributeDeclaration.class);
   }
 
   @Override
   @Nullable
   public AlfaCategoryDeclaration getCategoryDeclaration() {
-    return findChildByClass(AlfaCategoryDeclaration.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaCategoryDeclaration.class);
   }
 
   @Override
   @Nullable
   public AlfaFunctionDeclaration getFunctionDeclaration() {
-    return findChildByClass(AlfaFunctionDeclaration.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaFunctionDeclaration.class);
   }
 
   @Override
   @Nullable
   public AlfaImportDeclaration getImportDeclaration() {
-    return findChildByClass(AlfaImportDeclaration.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaImportDeclaration.class);
   }
 
   @Override
   @Nullable
   public AlfaNamespaceEntry getNamespaceEntry() {
-    return findChildByClass(AlfaNamespaceEntry.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaNamespaceEntry.class);
   }
 
   @Override
   @Nullable
   public AlfaObligationDeclaration getObligationDeclaration() {
-    return findChildByClass(AlfaObligationDeclaration.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaObligationDeclaration.class);
   }
 
   @Override
   @Nullable
   public AlfaOperatorDeclaration getOperatorDeclaration() {
-    return findChildByClass(AlfaOperatorDeclaration.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaOperatorDeclaration.class);
   }
 
   @Override
   @Nullable
   public AlfaPolicyCombinatorDeclaration getPolicyCombinatorDeclaration() {
-    return findChildByClass(AlfaPolicyCombinatorDeclaration.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaPolicyCombinatorDeclaration.class);
   }
 
   @Override
   @Nullable
   public AlfaPolicyEntry getPolicyEntry() {
-    return findChildByClass(AlfaPolicyEntry.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaPolicyEntry.class);
   }
 
   @Override
   @Nullable
   public AlfaPolicySetEntry getPolicySetEntry() {
-    return findChildByClass(AlfaPolicySetEntry.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaPolicySetEntry.class);
   }
 
   @Override
   @Nullable
   public AlfaRuleCombinatorDeclaration getRuleCombinatorDeclaration() {
-    return findChildByClass(AlfaRuleCombinatorDeclaration.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaRuleCombinatorDeclaration.class);
   }
 
   @Override
   @Nullable
   public AlfaRuleEntry getRuleEntry() {
-    return findChildByClass(AlfaRuleEntry.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaRuleEntry.class);
   }
 
   @Override
   @Nullable
   public AlfaTypeDeclaration getTypeDeclaration() {
-    return findChildByClass(AlfaTypeDeclaration.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaTypeDeclaration.class);
   }
 
 }

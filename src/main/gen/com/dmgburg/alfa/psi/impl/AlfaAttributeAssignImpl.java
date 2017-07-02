@@ -30,13 +30,13 @@ public class AlfaAttributeAssignImpl extends ASTWrapperPsiElement implements Alf
   @Override
   @NotNull
   public AlfaAttributeRef getAttributeRef() {
-    return findNotNullChildByClass(AlfaAttributeRef.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaAttributeRef.class));
   }
 
   @Override
   @NotNull
   public AlfaExpression getExpression() {
-    return findNotNullChildByClass(AlfaExpression.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaExpression.class));
   }
 
 }

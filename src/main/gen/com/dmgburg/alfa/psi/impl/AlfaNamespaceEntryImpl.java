@@ -36,7 +36,7 @@ public class AlfaNamespaceEntryImpl extends ASTWrapperPsiElement implements Alfa
   @Override
   @NotNull
   public AlfaNamespaceName getNamespaceName() {
-    return findNotNullChildByClass(AlfaNamespaceName.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaNamespaceName.class));
   }
 
 }

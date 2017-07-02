@@ -30,7 +30,7 @@ public class AlfaOnEffectImpl extends ASTWrapperPsiElement implements AlfaOnEffe
   @Override
   @NotNull
   public AlfaEffect getEffect() {
-    return findNotNullChildByClass(AlfaEffect.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaEffect.class));
   }
 
   @Override

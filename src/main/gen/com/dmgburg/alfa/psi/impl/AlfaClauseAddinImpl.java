@@ -30,13 +30,13 @@ public class AlfaClauseAddinImpl extends ASTWrapperPsiElement implements AlfaCla
   @Override
   @NotNull
   public AlfaClauseExpression getClauseExpression() {
-    return findNotNullChildByClass(AlfaClauseExpression.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaClauseExpression.class));
   }
 
   @Override
   @NotNull
   public AlfaClauseOperator getClauseOperator() {
-    return findNotNullChildByClass(AlfaClauseOperator.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaClauseOperator.class));
   }
 
 }

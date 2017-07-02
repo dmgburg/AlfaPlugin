@@ -30,7 +30,7 @@ public class AlfaTypeNameImpl extends ASTWrapperPsiElement implements AlfaTypeNa
   @Override
   @NotNull
   public PsiElement getIdentifier() {
-    return findNotNullChildByType(IDENTIFIER);
+    return notNullChild(findChildByType(IDENTIFIER));
   }
 
 }

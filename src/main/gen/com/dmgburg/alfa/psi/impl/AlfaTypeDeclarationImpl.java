@@ -30,13 +30,13 @@ public class AlfaTypeDeclarationImpl extends ASTWrapperPsiElement implements Alf
   @Override
   @NotNull
   public AlfaTypeName getTypeName() {
-    return findNotNullChildByClass(AlfaTypeName.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaTypeName.class));
   }
 
   @Override
   @NotNull
   public AlfaXacmlDeclaration getXacmlDeclaration() {
-    return findNotNullChildByClass(AlfaXacmlDeclaration.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaXacmlDeclaration.class));
   }
 
 }

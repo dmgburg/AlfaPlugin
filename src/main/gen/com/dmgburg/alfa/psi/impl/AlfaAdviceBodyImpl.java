@@ -30,13 +30,13 @@ public class AlfaAdviceBodyImpl extends ASTWrapperPsiElement implements AlfaAdvi
   @Override
   @NotNull
   public AlfaAdviceRef getAdviceRef() {
-    return findNotNullChildByClass(AlfaAdviceRef.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaAdviceRef.class));
   }
 
   @Override
   @Nullable
   public AlfaAttributeAssignBody getAttributeAssignBody() {
-    return findChildByClass(AlfaAttributeAssignBody.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaAttributeAssignBody.class);
   }
 
 }

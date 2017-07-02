@@ -30,7 +30,7 @@ public class AlfaClauseOperatorImpl extends ASTWrapperPsiElement implements Alfa
   @Override
   @NotNull
   public PsiElement getIdentifier() {
-    return findNotNullChildByType(IDENTIFIER);
+    return notNullChild(findChildByType(IDENTIFIER));
   }
 
 }

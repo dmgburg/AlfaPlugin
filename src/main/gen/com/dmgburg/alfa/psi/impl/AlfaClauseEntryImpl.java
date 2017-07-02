@@ -36,7 +36,7 @@ public class AlfaClauseEntryImpl extends ASTWrapperPsiElement implements AlfaCla
   @Override
   @NotNull
   public AlfaClauseExpression getClauseExpression() {
-    return findNotNullChildByClass(AlfaClauseExpression.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaClauseExpression.class));
   }
 
 }

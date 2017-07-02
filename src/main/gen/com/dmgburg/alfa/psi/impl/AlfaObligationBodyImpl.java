@@ -30,13 +30,13 @@ public class AlfaObligationBodyImpl extends ASTWrapperPsiElement implements Alfa
   @Override
   @Nullable
   public AlfaAttributeAssignBody getAttributeAssignBody() {
-    return findChildByClass(AlfaAttributeAssignBody.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaAttributeAssignBody.class);
   }
 
   @Override
   @NotNull
   public AlfaObligationRef getObligationRef() {
-    return findNotNullChildByClass(AlfaObligationRef.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaObligationRef.class));
   }
 
 }

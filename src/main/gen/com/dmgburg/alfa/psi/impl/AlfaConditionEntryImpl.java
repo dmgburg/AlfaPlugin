@@ -30,7 +30,7 @@ public class AlfaConditionEntryImpl extends ASTWrapperPsiElement implements Alfa
   @Override
   @NotNull
   public AlfaConditionBody getConditionBody() {
-    return findNotNullChildByClass(AlfaConditionBody.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaConditionBody.class));
   }
 
 }

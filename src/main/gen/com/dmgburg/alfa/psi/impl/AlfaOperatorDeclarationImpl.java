@@ -2,22 +2,26 @@
 package com.dmgburg.alfa.psi.impl;
 
 import java.util.List;
-
-import com.dmgburg.alfa.reference.AlfaNamedOperator;
 import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.dmgburg.alfa.psi.AlfaTypes.*;
-import com.dmgburg.alfa.reference.AlfaNamedPolicy;
+import com.dmgburg.alfa.reference.AlfaNamedOperator;
 import com.dmgburg.alfa.psi.*;
 import com.dmgburg.alfa.utils.ParserUtilsKt;
+import com.dmgburg.alfa.stubs.OperatorDeclarationStub;
+import com.intellij.psi.stubs.IStubElementType;
 
 public class AlfaOperatorDeclarationImpl extends AlfaNamedOperator implements AlfaOperatorDeclaration {
 
   public AlfaOperatorDeclarationImpl(ASTNode node) {
     super(node);
+  }
+
+  public AlfaOperatorDeclarationImpl(OperatorDeclarationStub stub, IStubElementType<?, ?> type) {
+    super(stub, type);
   }
 
   public void accept(@NotNull AlfaVisitor visitor) {
@@ -32,7 +36,7 @@ public class AlfaOperatorDeclarationImpl extends AlfaNamedOperator implements Al
   @Override
   @NotNull
   public AlfaOperator getOperator() {
-    return findNotNullChildByClass(AlfaOperator.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaOperator.class));
   }
 
   @Override
@@ -50,7 +54,7 @@ public class AlfaOperatorDeclarationImpl extends AlfaNamedOperator implements Al
   @Override
   @Nullable
   public AlfaOperatorInvrese getOperatorInvrese() {
-    return findChildByClass(AlfaOperatorInvrese.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaOperatorInvrese.class);
   }
 
   @NotNull

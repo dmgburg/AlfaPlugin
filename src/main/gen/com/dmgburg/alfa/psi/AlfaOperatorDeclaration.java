@@ -5,8 +5,10 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.dmgburg.alfa.reference.AlfaNamedElement;
+import com.intellij.psi.StubBasedPsiElement;
+import com.dmgburg.alfa.stubs.OperatorDeclarationStub;
 
-public interface AlfaOperatorDeclaration extends AlfaNamedElement {
+public interface AlfaOperatorDeclaration extends AlfaNamedElement, StubBasedPsiElement<OperatorDeclarationStub> {
 
   @NotNull
   AlfaOperator getOperator();

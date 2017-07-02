@@ -30,13 +30,13 @@ public class AlfaObligationOrAdviceBodyImpl extends ASTWrapperPsiElement impleme
   @Override
   @Nullable
   public AlfaAdviceBody getAdviceBody() {
-    return findChildByClass(AlfaAdviceBody.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaAdviceBody.class);
   }
 
   @Override
   @Nullable
   public AlfaObligationBody getObligationBody() {
-    return findChildByClass(AlfaObligationBody.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaObligationBody.class);
   }
 
 }

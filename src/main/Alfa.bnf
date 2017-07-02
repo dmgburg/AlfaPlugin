@@ -13,6 +13,12 @@
   elementTypeClass="com.dmgburg.alfa.psi.AlfaElementType"
   tokenTypeClass="com.dmgburg.alfa.psi.AlfaTokenType"
 
+  elementTypeClass("attributeDeclaration")="com.dmgburg.alfa.stubs.AlfaAttributeStubElementType"
+  elementTypeClass("policySetEntry")="com.dmgburg.alfa.stubs.PolicySetStubElementType"
+  elementTypeClass("policyEntry")="com.dmgburg.alfa.stubs.PolicyStubElementType"
+  elementTypeClass("ruleEntry")="com.dmgburg.alfa.stubs.RuleStubElementType"
+  elementTypeClass("operatorDeclaration")="com.dmgburg.alfa.stubs.OperatorStubElementType"
+
   tokens = [
       dot='.'
       curve1='{'
@@ -65,8 +71,9 @@ namespaceBody ::= (
     )
 
 policySetEntry ::= policyset policySetName? description? '{' policySetBody* '}' {pin=4 mixin="com.dmgburg.alfa.reference.AlfaNamedPolicySet"
-                                                                                    implements="com.dmgburg.alfa.reference.AlfaNamedElementWithIdentifier"
-                                                                                    stubClass=
+                                                                                    implements="com.dmgburg.alfa.reference.AlfaElementWithIdentifier"
+                                                                                    extends="com.intellij.psi.StubBasedPsiElement"
+                                                                                    stubClass="com.dmgburg.alfa.stubs.PolicySetEntryStub"
                                                                                     methods=[getName setName getNameIdentifier getIdentifier]}
 
 policySetName ::= qualifiedName
@@ -79,7 +86,9 @@ policySetBody ::= combinationAlgorithmRef|
         policySetEntry
 
 policyEntry ::= policy policyName? description? '{' policyBody* '}' { pin=4 mixin="com.dmgburg.alfa.reference.AlfaNamedPolicy"
-                                                                              implements="com.dmgburg.alfa.reference.AlfaNamedElementWithIdentifier"
+                                                                              implements="com.dmgburg.alfa.reference.AlfaElementWithIdentifier"
+                                                                              extends="com.intellij.psi.StubBasedPsiElement"
+                                                                              stubClass="com.dmgburg.alfa.stubs.PolicyEntryStub"
                                                                               methods=[getName setName getNameIdentifier getIdentifier]}
 
 policyBody ::= targetEntry|
@@ -134,7 +143,9 @@ ref ::= qualifiedName
 combinationAlgorithmRef ::= apply ref
 
 ruleEntry ::= rule ruleName? description? '{' ruleBody '}' {pin=4 mixin="com.dmgburg.alfa.reference.AlfaNamedRule"
-                                                                          implements="com.dmgburg.alfa.reference.AlfaNamedElementWithIdentifier"
+                                                                          implements="com.dmgburg.alfa.reference.AlfaElementWithIdentifier"
+                                                                          extends="com.intellij.psi.StubBasedPsiElement"
+                                                                          stubClass="com.dmgburg.alfa.stubs.RuleEntryStub"
                                                                           methods=[getName setName getNameIdentifier getIdentifier]}
 
 description ::= STRING_LITERAL
@@ -192,8 +203,11 @@ obligationDeclaration ::= obligation idDeclaration
 adviceDeclaration ::= advice idDeclaration
 
 //Attributes
-attributeDeclaration ::= attribute attributeName '{' attributeBody '}' {pin=3 mixin="com.dmgburg.alfa.reference.AlfaNamedRule"
-                                                                        implements="com.dmgburg.alfa.reference.AlfaNamedElementWithIdentifier"
+attributeDeclaration ::= attribute attributeName '{' attributeBody '}' {pin=3
+                                                                        mixin="com.dmgburg.alfa.reference.AlfaNamedAttribute"
+                                                                        implements="com.dmgburg.alfa.reference.AlfaElementWithIdentifier"
+                                                                        extends="com.intellij.psi.StubBasedPsiElement"
+                                                                        stubClass="com.dmgburg.alfa.stubs.AttributeDeclarationStub"
                                                                         methods=[getName setName getNameIdentifier getIdentifier]}
 
 attributeName ::= IDENTIFIER
@@ -252,8 +266,10 @@ functionType ::= function
 
 // operators
 
-operatorDeclaration ::= infix operatorFeature* '(' operator ')' '=' '{' operatorDeclarationBody+ '}' operatorInvrese? {mixin="com.dmgburg.alfa.reference.AlfaNamedPolicy"
+operatorDeclaration ::= infix operatorFeature* '(' operator ')' '=' '{' operatorDeclarationBody+ '}' operatorInvrese? {mixin="com.dmgburg.alfa.reference.AlfaNamedOperator"
                                                                                                                        implements="com.dmgburg.alfa.reference.AlfaNamedElement"
+                                                                                                                       extends="com.intellij.psi.StubBasedPsiElement"
+                                                                                                                       stubClass="com.dmgburg.alfa.stubs.OperatorDeclarationStub"
                                                                                                                        methods=[getName setName getNameIdentifier]}
 
 

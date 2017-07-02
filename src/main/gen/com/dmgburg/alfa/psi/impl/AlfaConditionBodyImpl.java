@@ -30,13 +30,13 @@ public class AlfaConditionBodyImpl extends ASTWrapperPsiElement implements AlfaC
   @Override
   @Nullable
   public AlfaExpressions getExpressions() {
-    return findChildByClass(AlfaExpressions.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaExpressions.class);
   }
 
   @Override
   @Nullable
   public AlfaWrappedExpressions getWrappedExpressions() {
-    return findChildByClass(AlfaWrappedExpressions.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaWrappedExpressions.class);
   }
 
 }

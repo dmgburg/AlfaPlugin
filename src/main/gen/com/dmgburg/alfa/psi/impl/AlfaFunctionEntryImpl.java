@@ -36,7 +36,7 @@ public class AlfaFunctionEntryImpl extends ASTWrapperPsiElement implements AlfaF
   @Override
   @NotNull
   public AlfaFunctionRefName getFunctionRefName() {
-    return findNotNullChildByClass(AlfaFunctionRefName.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaFunctionRefName.class));
   }
 
 }

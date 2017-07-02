@@ -30,13 +30,13 @@ public class AlfaPolicyCombinatorDeclarationImpl extends ASTWrapperPsiElement im
   @Override
   @NotNull
   public AlfaAlgorithmName getAlgorithmName() {
-    return findNotNullChildByClass(AlfaAlgorithmName.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaAlgorithmName.class));
   }
 
   @Override
   @NotNull
   public AlfaXacmlDeclaration getXacmlDeclaration() {
-    return findNotNullChildByClass(AlfaXacmlDeclaration.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaXacmlDeclaration.class));
   }
 
 }

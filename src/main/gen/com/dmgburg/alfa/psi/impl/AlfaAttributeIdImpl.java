@@ -30,7 +30,7 @@ public class AlfaAttributeIdImpl extends ASTWrapperPsiElement implements AlfaAtt
   @Override
   @NotNull
   public AlfaXacmlDeclaration getXacmlDeclaration() {
-    return findNotNullChildByClass(AlfaXacmlDeclaration.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaXacmlDeclaration.class));
   }
 
 }

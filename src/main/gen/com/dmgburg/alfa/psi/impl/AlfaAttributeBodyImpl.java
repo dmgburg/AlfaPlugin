@@ -30,19 +30,19 @@ public class AlfaAttributeBodyImpl extends ASTWrapperPsiElement implements AlfaA
   @Override
   @NotNull
   public AlfaAttributeCategory getAttributeCategory() {
-    return findNotNullChildByClass(AlfaAttributeCategory.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaAttributeCategory.class));
   }
 
   @Override
   @NotNull
   public AlfaAttributeId getAttributeId() {
-    return findNotNullChildByClass(AlfaAttributeId.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaAttributeId.class));
   }
 
   @Override
   @NotNull
   public AlfaAttributeType getAttributeType() {
-    return findNotNullChildByClass(AlfaAttributeType.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaAttributeType.class));
   }
 
 }

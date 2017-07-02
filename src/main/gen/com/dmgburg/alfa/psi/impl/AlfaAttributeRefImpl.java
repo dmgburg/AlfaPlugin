@@ -31,13 +31,13 @@ public class AlfaAttributeRefImpl extends ASTWrapperPsiElement implements AlfaAt
   @Override
   @Nullable
   public AlfaAttributeDesignator getAttributeDesignator() {
-    return findChildByClass(AlfaAttributeDesignator.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaAttributeDesignator.class);
   }
 
   @Override
   @NotNull
   public AlfaRef getRef() {
-    return findNotNullChildByClass(AlfaRef.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaRef.class));
   }
 
   @NotNull

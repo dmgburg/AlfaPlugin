@@ -35,6 +35,10 @@
         <!--Indexing-->
         <stubElementTypeHolder class="com.dmgburg.alfa.psi.AlfaTypes"/>
         <stubIndex implementation="com.dmgburg.alfa.stubs.AttributeKeyIndex"/>
+        <stubIndex implementation="com.dmgburg.alfa.stubs.PolicyKeyIndex"/>
+        <stubIndex implementation="com.dmgburg.alfa.stubs.PolicySetKeyIndex"/>
+        <stubIndex implementation="com.dmgburg.alfa.stubs.OperatorKeyIndex"/>
+        <stubIndex implementation="com.dmgburg.alfa.stubs.RuleKeyIndex"/>
     </extensions>
 
 </idea-plugin>

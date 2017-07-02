@@ -30,7 +30,7 @@ public class AlfaImportDeclarationImpl extends ASTWrapperPsiElement implements A
   @Override
   @NotNull
   public AlfaImportName getImportName() {
-    return findNotNullChildByClass(AlfaImportName.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaImportName.class));
   }
 
 }

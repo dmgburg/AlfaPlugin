@@ -30,7 +30,7 @@ public class AlfaNamespaceNameImpl extends ASTWrapperPsiElement implements AlfaN
   @Override
   @NotNull
   public AlfaQualifiedName getQualifiedName() {
-    return findNotNullChildByClass(AlfaQualifiedName.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaQualifiedName.class));
   }
 
 }

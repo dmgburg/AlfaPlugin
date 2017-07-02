@@ -30,7 +30,7 @@ public class AlfaOperatorDeclarationBodyImpl extends ASTWrapperPsiElement implem
   @Override
   @NotNull
   public AlfaFunctionBody getFunctionBody() {
-    return findNotNullChildByClass(AlfaFunctionBody.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaFunctionBody.class));
   }
 
 }

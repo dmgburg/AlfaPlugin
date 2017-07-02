@@ -30,7 +30,7 @@ public class AlfaAdviceDeclarationImpl extends ASTWrapperPsiElement implements A
   @Override
   @NotNull
   public AlfaIdDeclaration getIdDeclaration() {
-    return findNotNullChildByClass(AlfaIdDeclaration.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaIdDeclaration.class));
   }
 
 }

@@ -30,13 +30,13 @@ public class AlfaClauseOperandImpl extends ASTWrapperPsiElement implements AlfaC
   @Override
   @Nullable
   public AlfaAttributeRef getAttributeRef() {
-    return findChildByClass(AlfaAttributeRef.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaAttributeRef.class);
   }
 
   @Override
   @Nullable
   public AlfaConstant getConstant() {
-    return findChildByClass(AlfaConstant.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaConstant.class);
   }
 
 }

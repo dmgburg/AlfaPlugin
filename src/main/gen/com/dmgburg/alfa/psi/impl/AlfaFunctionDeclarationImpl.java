@@ -30,13 +30,13 @@ public class AlfaFunctionDeclarationImpl extends ASTWrapperPsiElement implements
   @Override
   @NotNull
   public AlfaFunctionBody getFunctionBody() {
-    return findNotNullChildByClass(AlfaFunctionBody.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaFunctionBody.class));
   }
 
   @Override
   @NotNull
   public AlfaFunctionName getFunctionName() {
-    return findNotNullChildByClass(AlfaFunctionName.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaFunctionName.class));
   }
 
 }

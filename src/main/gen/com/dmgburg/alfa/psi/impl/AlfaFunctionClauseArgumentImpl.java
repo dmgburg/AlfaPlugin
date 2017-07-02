@@ -30,13 +30,13 @@ public class AlfaFunctionClauseArgumentImpl extends ASTWrapperPsiElement impleme
   @Override
   @Nullable
   public AlfaAttributeRef getAttributeRef() {
-    return findChildByClass(AlfaAttributeRef.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaAttributeRef.class);
   }
 
   @Override
   @Nullable
   public AlfaConstant getConstant() {
-    return findChildByClass(AlfaConstant.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaConstant.class);
   }
 
 }

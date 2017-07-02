@@ -30,7 +30,7 @@ public class AlfaPolicySetNameImpl extends ASTWrapperPsiElement implements AlfaP
   @Override
   @NotNull
   public AlfaQualifiedName getQualifiedName() {
-    return findNotNullChildByClass(AlfaQualifiedName.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaQualifiedName.class));
   }
 
 }

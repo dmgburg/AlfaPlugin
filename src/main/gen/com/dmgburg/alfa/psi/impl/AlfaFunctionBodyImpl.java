@@ -36,19 +36,19 @@ public class AlfaFunctionBodyImpl extends ASTWrapperPsiElement implements AlfaFu
   @Override
   @NotNull
   public AlfaFunctionBodyReturn getFunctionBodyReturn() {
-    return findNotNullChildByClass(AlfaFunctionBodyReturn.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaFunctionBodyReturn.class));
   }
 
   @Override
   @Nullable
   public AlfaVariableArguments getVariableArguments() {
-    return findChildByClass(AlfaVariableArguments.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaVariableArguments.class);
   }
 
   @Override
   @NotNull
   public AlfaXacmlDeclaration getXacmlDeclaration() {
-    return findNotNullChildByClass(AlfaXacmlDeclaration.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaXacmlDeclaration.class));
   }
 
 }

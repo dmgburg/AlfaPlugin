@@ -30,7 +30,7 @@ public class AlfaWrappedExpressionsImpl extends ASTWrapperPsiElement implements 
   @Override
   @NotNull
   public AlfaExpressions getExpressions() {
-    return findNotNullChildByClass(AlfaExpressions.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaExpressions.class));
   }
 
 }

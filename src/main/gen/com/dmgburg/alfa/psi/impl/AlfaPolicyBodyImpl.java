@@ -30,31 +30,31 @@ public class AlfaPolicyBodyImpl extends ASTWrapperPsiElement implements AlfaPoli
   @Override
   @Nullable
   public AlfaCombinationAlgorithmRef getCombinationAlgorithmRef() {
-    return findChildByClass(AlfaCombinationAlgorithmRef.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaCombinationAlgorithmRef.class);
   }
 
   @Override
   @Nullable
   public AlfaOnEffect getOnEffect() {
-    return findChildByClass(AlfaOnEffect.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaOnEffect.class);
   }
 
   @Override
   @Nullable
   public AlfaRuleEntry getRuleEntry() {
-    return findChildByClass(AlfaRuleEntry.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaRuleEntry.class);
   }
 
   @Override
   @Nullable
   public AlfaRuleRef getRuleRef() {
-    return findChildByClass(AlfaRuleRef.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaRuleRef.class);
   }
 
   @Override
   @Nullable
   public AlfaTargetEntry getTargetEntry() {
-    return findChildByClass(AlfaTargetEntry.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaTargetEntry.class);
   }
 
 }

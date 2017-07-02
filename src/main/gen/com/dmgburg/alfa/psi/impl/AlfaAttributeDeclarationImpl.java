@@ -1,20 +1,19 @@
 // This is a generated file. Not intended for manual editing.
 package com.dmgburg.alfa.psi.impl;
 
-import com.dmgburg.alfa.domain.Identifier;
-import com.dmgburg.alfa.psi.AlfaAttributeBody;
-import com.dmgburg.alfa.psi.AlfaAttributeDeclaration;
-import com.dmgburg.alfa.psi.AlfaAttributeName;
-import com.dmgburg.alfa.psi.AlfaVisitor;
-import com.dmgburg.alfa.reference.AlfaNamedAttribute;
-import com.dmgburg.alfa.stubs.AttributeDeclarationStub;
-import com.dmgburg.alfa.utils.ParserUtilsKt;
+import java.util.List;
+import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.util.PsiTreeUtil;
+import static com.dmgburg.alfa.psi.AlfaTypes.*;
+import com.dmgburg.alfa.reference.AlfaNamedAttribute;
+import com.dmgburg.alfa.psi.*;
+import com.dmgburg.alfa.utils.ParserUtilsKt;
+import com.dmgburg.alfa.domain.Identifier;
+import com.dmgburg.alfa.stubs.AttributeDeclarationStub;
 import com.intellij.psi.stubs.IStubElementType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class AlfaAttributeDeclarationImpl extends AlfaNamedAttribute implements AlfaAttributeDeclaration {
 
@@ -22,7 +21,7 @@ public class AlfaAttributeDeclarationImpl extends AlfaNamedAttribute implements 
     super(node);
   }
 
-  public AlfaAttributeDeclarationImpl(AttributeDeclarationStub stub, IStubElementType type) {
+  public AlfaAttributeDeclarationImpl(AttributeDeclarationStub stub, IStubElementType<?, ?> type) {
     super(stub, type);
   }
 
@@ -38,13 +37,13 @@ public class AlfaAttributeDeclarationImpl extends AlfaNamedAttribute implements 
   @Override
   @Nullable
   public AlfaAttributeBody getAttributeBody() {
-    return findChildByClass(AlfaAttributeBody.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaAttributeBody.class);
   }
 
   @Override
   @NotNull
   public AlfaAttributeName getAttributeName() {
-    return findNotNullChildByClass(AlfaAttributeName.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaAttributeName.class));
   }
 
   @NotNull

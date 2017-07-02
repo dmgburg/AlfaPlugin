@@ -30,7 +30,7 @@ public class AlfaRuleNameImpl extends ASTWrapperPsiElement implements AlfaRuleNa
   @Override
   @NotNull
   public AlfaIdDeclaration getIdDeclaration() {
-    return findNotNullChildByClass(AlfaIdDeclaration.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaIdDeclaration.class));
   }
 
 }

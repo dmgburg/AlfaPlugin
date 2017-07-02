@@ -30,13 +30,13 @@ public class AlfaClauseExpressionImpl extends ASTWrapperPsiElement implements Al
   @Override
   @Nullable
   public AlfaFunctionClause getFunctionClause() {
-    return findChildByClass(AlfaFunctionClause.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaFunctionClause.class);
   }
 
   @Override
   @Nullable
   public AlfaSingleClauseExpression getSingleClauseExpression() {
-    return findChildByClass(AlfaSingleClauseExpression.class);
+    return PsiTreeUtil.getChildOfType(this, AlfaSingleClauseExpression.class);
   }
 
 }

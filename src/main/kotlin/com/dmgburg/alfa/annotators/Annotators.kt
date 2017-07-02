@@ -21,7 +21,7 @@ class RefAnnotator : Annotator {
 
         if (element is AlfaAttributeRef) {
             val elementText = element.text
-            val attribute = findElementFromIndex<AlfaAttributeDeclaration>(element.project, elementText)
+            val attribute = findElement<AlfaAttributeDeclaration>(element.project, elementText)
             if (attribute == null){
                 val range = TextRange(element.textRange.startOffset, element.textRange.endOffset);
                 val annotation = holder.createInfoAnnotation(range, "No attribute with name '$elementText' found")

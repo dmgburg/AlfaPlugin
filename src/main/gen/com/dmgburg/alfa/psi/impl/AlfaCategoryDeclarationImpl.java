@@ -30,13 +30,13 @@ public class AlfaCategoryDeclarationImpl extends ASTWrapperPsiElement implements
   @Override
   @NotNull
   public AlfaCategoryName getCategoryName() {
-    return findNotNullChildByClass(AlfaCategoryName.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaCategoryName.class));
   }
 
   @Override
   @NotNull
   public AlfaXacmlDeclaration getXacmlDeclaration() {
-    return findNotNullChildByClass(AlfaXacmlDeclaration.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, AlfaXacmlDeclaration.class));
   }
 
 }
