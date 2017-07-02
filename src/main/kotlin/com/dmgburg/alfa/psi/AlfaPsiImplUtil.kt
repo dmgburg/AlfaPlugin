@@ -2,15 +2,14 @@ package com.dmgburg.alfa.psi
 
 import com.dmgburg.alfa.AlfaFileType
 import com.dmgburg.alfa.reference.AlfaNamedElementWithIdentifier
-import com.dmgburg.alfa.utils.getIdentifier
-import com.dmgburg.alfa.utils.getNamespace
-import com.intellij.openapi.diagnostic.logger
+import com.dmgburg.alfa.stubs.AttributeKeyIndex
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiManager
 import com.intellij.psi.search.*
 import com.intellij.psi.search.GlobalSearchScope.*
+import com.intellij.psi.stubs.StringStubIndexExtension
 import com.intellij.util.indexing.FileBasedIndex
 
 fun alfaFiles(project: Project): List<AlfaFile> {
@@ -31,6 +30,26 @@ inline fun <reified T : AlfaNamedElementWithIdentifier> findElement(project: Pro
 
 inline fun <reified T : AlfaNamedElementWithIdentifier> findAllElements(project: Project) : List<T> {
     return alfaFiles(project).flatMap { dfs(it, T::class.java) }
+}
+
+
+inline fun <reified T : AlfaNamedElementWithIdentifier> findElementFromIndex(project: Project, name: String): T? {
+    val results : MutableCollection<T> = getStubIndex<T>().get(name.split('.').last(), project, GlobalSearchScope.allScope(project))
+    return results.first()
+}
+
+inline fun <reified T : AlfaNamedElementWithIdentifier> findAllElementsFromIndex(project: Project): List<T> {
+    val results = getStubIndex<T>().getAllKeys(project).flatMap {
+        name ->  getStubIndex<T>().get(name.split('.').last(), project, GlobalSearchScope.allScope(project))
+    }
+    return results
+}
+
+inline fun <reified T : PsiElement> getStubIndex(): StringStubIndexExtension<T> {
+    return when (T::class.java) {
+        AlfaAttributeDeclaration::class.java -> AttributeKeyIndex as StringStubIndexExtension<T>
+        else -> throw IllegalArgumentException("Unexpetced type: ${T::class.java}")
+    }
 }
 
 fun <T> dfs(psiElement: PsiElement, clazz: Class<T>): Collection<T> {

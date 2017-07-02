@@ -8,8 +8,7 @@ import com.intellij.psi.FileViewProvider
 import javax.swing.Icon
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry
 import com.intellij.psi.PsiReference
-
-
+import com.intellij.psi.stubs.PsiFileStubImpl
 
 class AlfaFile(fileViewProvider: FileViewProvider) : PsiFileBase(fileViewProvider, AlfaLanguage.INSTANCE) {
     override fun getFileType(): FileType {
@@ -28,3 +27,5 @@ class AlfaFile(fileViewProvider: FileViewProvider) : PsiFileBase(fileViewProvide
         return ReferenceProvidersRegistry.getReferencesFromProviders(this)
     }
 }
+
+class AlfaStubFile(alfaFile: AlfaFile) : PsiFileStubImpl<AlfaFile>(alfaFile)

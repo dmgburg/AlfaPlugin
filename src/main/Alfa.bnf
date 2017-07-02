@@ -66,6 +66,7 @@ namespaceBody ::= (
 
 policySetEntry ::= policyset policySetName? description? '{' policySetBody* '}' {pin=4 mixin="com.dmgburg.alfa.reference.AlfaNamedPolicySet"
                                                                                     implements="com.dmgburg.alfa.reference.AlfaNamedElementWithIdentifier"
+                                                                                    stubClass=
                                                                                     methods=[getName setName getNameIdentifier getIdentifier]}
 
 policySetName ::= qualifiedName

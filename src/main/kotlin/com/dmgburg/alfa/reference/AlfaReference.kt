@@ -3,13 +3,17 @@ package com.dmgburg.alfa.reference
 import com.dmgburg.alfa.AlfaIcons
 import com.dmgburg.alfa.domain.Identifier
 import com.dmgburg.alfa.psi.*
+import com.dmgburg.alfa.stubs.AttributeDeclarationStub
 import com.dmgburg.alfa.utils.getNamespace
 import com.intellij.codeInsight.lookup.LookupElement
 import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.extapi.psi.ASTWrapperPsiElement
+import com.intellij.extapi.psi.StubBasedPsiElementBase
 import com.intellij.lang.ASTNode
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.*
+import com.intellij.psi.stubs.IStubElementType
+import com.intellij.psi.stubs.StubElement
 import java.util.*
 
 
@@ -21,6 +25,10 @@ interface AlfaNamedElementWithIdentifier : AlfaNamedElement {
 abstract class AlfaNamedPolicy(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElementWithIdentifier
 abstract class AlfaNamedPolicySet(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElementWithIdentifier
 abstract class AlfaNamedRule(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElementWithIdentifier
+abstract class AlfaNamedAttribute : StubBasedPsiElementBase<AttributeDeclarationStub>, AlfaNamedElementWithIdentifier{
+    constructor(astNode: ASTNode): super(astNode);
+    constructor(stub: AttributeDeclarationStub , type: IStubElementType<*, *>) : super(stub,type)
+}
 abstract class AlfaNamedOperator(astNode: ASTNode) : ASTWrapperPsiElement(astNode), AlfaNamedElement
 
 class AlfaPolicyOrSetReference(psiElement: PsiElement, textRange: TextRange) : PsiReferenceBase<PsiElement>(psiElement, textRange), PsiPolyVariantReference {
@@ -103,7 +111,7 @@ class AlfaAttributeReference(psiElement: PsiElement, textRange: TextRange) : Psi
 
     override fun getVariants(): Array<Any> {
         val project = myElement.project
-        val attributes = findAllElements<AlfaAttributeDeclaration>(project)
+        val attributes = findAllElementsFromIndex<AlfaAttributeDeclaration>(project)
         val variants = ArrayList<LookupElement>()
         for (attribute in attributes) {
             if (attribute.attributeName.text.isNotEmpty()) {
@@ -127,7 +135,7 @@ class AlfaAttributeReference(psiElement: PsiElement, textRange: TextRange) : Psi
 
     override fun multiResolve(incompleteCode: Boolean): Array<ResolveResult> {
         val results = ArrayList<ResolveResult>()
-        val attribute = findElement<AlfaAttributeDeclaration>(element.project, key)
+        val attribute = findElementFromIndex<AlfaAttributeDeclaration>(element.project, key)
         if (attribute != null) {
             results.add(PsiElementResolveResult(attribute))
         }

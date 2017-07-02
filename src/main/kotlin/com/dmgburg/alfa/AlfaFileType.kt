@@ -1,5 +1,7 @@
 package com.dmgburg.alfa
 
+import com.intellij.openapi.fileTypes.FileTypeConsumer
+import com.intellij.openapi.fileTypes.FileTypeFactory
 import com.intellij.openapi.fileTypes.LanguageFileType
 import com.intellij.openapi.util.IconLoader
 import org.jetbrains.annotations.*
@@ -28,4 +30,11 @@ class AlfaFileType private constructor() : LanguageFileType(AlfaLanguage.INSTANC
     companion object {
         val INSTANCE = AlfaFileType()
     }
+}
+
+class AlfaFileTypeFactory : FileTypeFactory() {
+    override fun createFileTypes(consumer: FileTypeConsumer) {
+        consumer.consume(AlfaFileType.INSTANCE, "alfa")
+    }
+
 }

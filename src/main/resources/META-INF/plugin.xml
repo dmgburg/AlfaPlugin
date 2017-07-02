@@ -2,7 +2,7 @@
 <idea-plugin url="http://www.jetbrains.com/idea">
 
     <name>AlfaPlugin</name>
-    <id>AlfaPlugin</id>
+    <id>com.dmgburg.alfa</id>
 
     <description>Alfa integration plugin</description>
 
@@ -31,6 +31,10 @@
         <!--Formatting-->
         <lang.formatter language="Alfa" implementationClass="com.dmgburg.alfa.formatting.AlfaFormattingModelBuilder"/>
         <lang.commenter language="Alfa" implementationClass="com.dmgburg.alfa.comment.AlfaCommenter"/>
+
+        <!--Indexing-->
+        <stubElementTypeHolder class="com.dmgburg.alfa.psi.AlfaTypes"/>
+        <stubIndex implementation="com.dmgburg.alfa.stubs.AttributeKeyIndex"/>
     </extensions>
 
 </idea-plugin>

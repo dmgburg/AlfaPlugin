@@ -1,6 +1,9 @@
 // This is a generated file. Not intended for manual editing.
 package com.dmgburg.alfa.psi;
 
+import com.dmgburg.alfa.stubs.AlfaAttributeStubElementType;
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubElementTypeHolderEP;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.PsiElement;
 import com.intellij.lang.ASTNode;
@@ -18,7 +21,7 @@ public interface AlfaTypes {
   IElementType ATTRIBUTE_ASSIGN_BODY = new AlfaElementType("ATTRIBUTE_ASSIGN_BODY");
   IElementType ATTRIBUTE_BODY = new AlfaElementType("ATTRIBUTE_BODY");
   IElementType ATTRIBUTE_CATEGORY = new AlfaElementType("ATTRIBUTE_CATEGORY");
-  IElementType ATTRIBUTE_DECLARATION = new AlfaElementType("ATTRIBUTE_DECLARATION");
+  IStubElementType ATTRIBUTE_DECLARATION = new AlfaAttributeStubElementType("ATTRIBUTE_DECLARATION");
   IElementType ATTRIBUTE_DESIGNATOR = new AlfaElementType("ATTRIBUTE_DESIGNATOR");
   IElementType ATTRIBUTE_DESIGNATOR_ISSUER = new AlfaElementType("ATTRIBUTE_DESIGNATOR_ISSUER");
   IElementType ATTRIBUTE_DESIGNATOR_MUST_BE_PRESENT = new AlfaElementType("ATTRIBUTE_DESIGNATOR_MUST_BE_PRESENT");

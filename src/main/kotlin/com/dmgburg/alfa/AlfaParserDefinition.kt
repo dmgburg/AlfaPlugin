@@ -1,6 +1,7 @@
 package com.dmgburg.alfa
 
 import com.dmgburg.alfa.psi.AlfaFile
+import com.dmgburg.alfa.psi.AlfaStubFile
 import com.dmgburg.alfa.psi.AlfaTypes
 import com.dmgburg.alfa.psi.parser.AlfaParser
 import com.intellij.lang.ASTNode
@@ -15,6 +16,7 @@ import com.intellij.lang.ParserDefinition
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.project.Project
 import com.intellij.psi.TokenType
+import com.intellij.psi.tree.IStubFileElementType
 
 
 class AlfaParserDefinition : ParserDefinition {
@@ -59,6 +61,6 @@ class AlfaParserDefinition : ParserDefinition {
         val WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE)
         val COMMENTS = TokenSet.create(AlfaTypes.LINE_COMMENT, AlfaTypes.BLOCK_COMMENT)
 
-        val FILE = IFileElementType(AlfaLanguage.INSTANCE)
+        val FILE = IStubFileElementType<AlfaStubFile>(AlfaLanguage.INSTANCE)
     }
 }
