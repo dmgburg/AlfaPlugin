@@ -39,8 +39,12 @@ class AlfaPolicyOrSetReference(psiElement: PsiElement, textRange: TextRange) : P
     override fun multiResolve(incompleteCode: Boolean): Array<ResolveResult> {
         val results = ArrayList<ResolveResult>()
         val policy = findElement<AlfaPolicyEntry>(element.project, key)
+        val policySet = findElement<AlfaPolicySetEntry>(element.project, key)
         if (policy != null) {
             results.add(PsiElementResolveResult(policy))
+        }
+        if (policySet != null) {
+            results.add(PsiElementResolveResult(policySet))
         }
         return results.toTypedArray()
 
